@@ -145,7 +145,7 @@
                 </Grid>
                 <ListView ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,50" Foreground="#FF1C6CCD" Height="612">
 
-                    <ListViewItem x:Name="btnDashboard" Height="50" MouseLeftButtonUp="btnDashboard_MouseLeftButtonUp">
+                    <ListViewItem x:Name="btnDashboard" Height="50" MouseLeftButtonUp="btnDashboard_MouseLeftButtonUp" Selected="BtnDashboard_Selected">
                         <StackPanel Orientation="Horizontal">
                             <iconPacks:PackIconJamIcons x:Name="dshIcn" Kind="SettingsAlt" Width="22" Height="22" Margin="11,0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" />
                             <TextBlock x:Name="dshText" Text="Home" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>

@@ -132,6 +132,7 @@ namespace WpfPosApp
         }
 
  
+        
         private void usernameGotFocus(object sender, RoutedEventArgs e)
         {
             if (txtUsername.Text == "Username")
@@ -148,9 +149,23 @@ namespace WpfPosApp
             }
         }
 
+        int passwordClick = 0;
         private void passwordFocus(object sender, RoutedEventArgs e)
         {
-            
+            txtPassword.SelectAll();
+            if (passwordClick == 0 || txtPassword.Password == "********")
+            {
+                passwordClick++;
+                txtPassword.Password = "";
+            }
+        }
+
+        private void passwordLostFocus(object sender, RoutedEventArgs e)
+        {
+            if (txtPassword.Password == "" || txtPassword.Password == null)
+            {
+                txtPassword.Password = "********";
+            }
         }
     }
 

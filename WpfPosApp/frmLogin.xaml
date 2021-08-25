@@ -75,7 +75,7 @@
                          HorizontalContentAlignment="Left"
                          Opacity="0.5"
                          Height="27"
-                         Margin="9,3,35,3" GotFocus="passwordFocus"  />
+                         Margin="9,3,35,3" GotFocus="passwordFocus" LostFocus="passwordLostFocus"  />
                         
                        
                     </Grid>

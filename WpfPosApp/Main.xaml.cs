@@ -266,5 +266,12 @@ namespace WpfPosApp
             pnlMain.Children.Clear();
             pnlMain.Children.Add(bar);
         }
+
+        private void BtnDashboard_Selected(object sender, RoutedEventArgs e)
+        {
+            frmCshdb csd = new frmCshdb();
+            pnlMain.Children.Clear();
+            pnlMain.Children.Add(csd);
+        }
     }
 }
