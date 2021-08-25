@@ -1,0 +1,24 @@
+﻿<UserControl x:Class="WpfPosApp.usrBarcode"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d1="http://schemas.mibordecrosoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPosApp"
+        xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d1 d"
+        Height="600" Width="904.136" Loaded="Window_Loaded">
+    <Grid Background="Transparent" Margin="0,0,2,-150">
+        <Border Margin="-32,27,-28,141" CornerRadius="20" Background="White" BorderThickness="1" BorderBrush="#33D6D6D6">
+            <Border.Effect>
+                <DropShadowEffect Direction="-90" Opacity="0.1"/>
+            </Border.Effect>
+        </Border>
+
+        <Grid x:Name="gridLoad" Margin="0,88,0,175"/>
+
+        <Custom:PackIconFontAwesome Kind="BarcodeSolid" x:Name="brcdLabel" Width="30" Height="29" Margin="10,39,0,693" VerticalAlignment="Center" Foreground="#FF5F8DF7"/>
+        <Label Content="Print Barcode Labels" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,35,0,0" FontSize="14" FontWeight="Bold" Foreground="#FF5D9DFF"/>
+
+    </Grid>
+</UserControl>

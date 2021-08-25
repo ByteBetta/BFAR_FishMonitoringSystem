@@ -1,0 +1,90 @@
+﻿<UserControl x:Class="WpfPosApp.frmTransactions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPosApp"
+             xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+             mc:Ignorable="d"
+        Height="435" Width="743" Loaded="Window_Loaded">
+    <Grid Background="LightGray" Margin="0,90,0,-90">
+        <Border Margin="-32,-8,-28,-60" CornerRadius="20" Background="White" BorderThickness="1" BorderBrush="#33D6D6D6">
+            <Border.Effect>
+                <DropShadowEffect Direction="-90" Opacity="0.1"/>
+            </Border.Effect>
+        </Border>
+        <Label Content="Transactions" Margin="58,7,594,402" Foreground="#FF5E89FA" FontSize="14" FontWeight="Bold"/>
+
+        <Border Margin="175,40,252,367" Background="#FF5F8DF7" CornerRadius="7">
+            <ComboBox x:Name="cmbTransactions" Margin="8,-1,0,0" VerticalAlignment="Top" Width="299" Height="25" BorderThickness="0" HorizontalAlignment="Left" SelectionChanged="cmbTransactions_SelectionChanged" Foreground="White" BorderBrush="White">
+                <ComboBoxItem Content="Sale"/>
+                <ComboBoxItem Content="Purchase"/>
+            </ComboBox>
+        </Border>
+
+        <Label x:Name="lblTransactions" Content="Filter By Transaction Type" Margin="30,44,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+        <Button x:Name="btnPrintFiltered" Content="     Print Filtered" Margin="612,79,0,0" VerticalAlignment="Top" Width="120" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnPrintFiltered_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <iconPacks:PackIconMaterial Margin="12,-35,100,0" Kind="Account"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 Foreground="Gray" Width="14" Height="14" RenderTransformOrigin="0.5,0.5"/>
+
+        <Button x:Name="btnShowAll" Content="Show All" Margin="507,41,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnShowAll_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <DataGrid x:Name="gridTransaction" HorizontalAlignment="Left" Margin="0,124,0,-25" VerticalAlignment="Top" Height="336" Width="743" BorderBrush="#00000000" Background="White" />
+        <Label x:Name="lblFilterByDate" Content="Filter By Date(From - To)" Margin="30,82,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148"/>
+        <Border Margin="175,79,413,328" Background="#FF5F8DF7" CornerRadius="7"/>
+        <Border Margin="335,79,253,328" Background="#FF5F8DF7" CornerRadius="7"/>
+        <DatePicker x:Name="dtpPicker1" x:FieldModifier="public" HorizontalAlignment="Left" Margin="183,79,0,0" VerticalAlignment="Top" Width="137" FirstDayOfWeek="Monday" BorderBrush="White"/>
+        <DatePicker x:Name="dtpPicker2" x:FieldModifier="public" HorizontalAlignment="Left" Margin="345,79,0,0" VerticalAlignment="Top" Width="137" FirstDayOfWeek="Monday" BorderBrush="White"/>
+        <Button x:Name="btnLoad" Content="Load" Margin="507,79,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="BtnLoad_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <iconPacks:PackIconMaterial Margin="19,7,699,402" Kind="CashRegister"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Foreground="#FF5E89FA" Width="23" Height="23" RenderTransformOrigin="0.462,0.385"/>
+        <Button x:Name="btnPrint_All" Content="    Print Report" Margin="612,41,0,0" VerticalAlignment="Top" Width="120" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnPrint_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <iconPacks:PackIconMaterial Margin="624,50,107,372" Kind="Printer"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385"/>
+        <iconPacks:PackIconMaterial Margin="624,87,107,335" Kind="Printer"
+            VerticalAlignment="Center"
+            HorizontalAlignment="Center"
+            Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385"/>
+
+    </Grid>
+</UserControl>
+

@@ -1,0 +1,160 @@
+﻿<UserControl
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfPosApp"
+        xmlns:Custom="http://metro.mahapps.com/winfx/xaml/iconpacks" x:Class="WpfPosApp.frmUserSettings"
+        mc:Ignorable="d"
+        Height="450" Width="600">
+    <Grid Margin="0,37,0,-37" Background="#00000000">
+        <Border Margin="46,90,47,119" CornerRadius="20" BorderThickness="1" BorderBrush="#33D6D6D6" Background="#FF6B7FFF">
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="30" Direction="-90" Color="Black" ShadowDepth="100" Opacity="0.3"/>
+            </Border.Effect>
+        </Border>
+        <Button x:Name="btnSaveChanges" Content="     Save Changes" Margin="244,288,236,129" Background="#00BD1717" Foreground="White" Click="BtnSaveChanges_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="btnClose" Content="" Margin="523,101,54,326" Background="#00BD1717" Foreground="White" Click="BtnClose_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="20" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Label x:Name="lblUserID" Content="User ID" HorizontalAlignment="Left" Height="25" Margin="70,113,0,0" VerticalAlignment="Top" Width="110" Foreground="#00000000"/>
+        <Label Content="UserName" HorizontalAlignment="Left" Height="25" Margin="70,155,0,0" VerticalAlignment="Top" Width="110" Foreground="#DDFFFFFF"/>
+        <TextBox x:Name="txtUsername" HorizontalAlignment="Left" Height="30" TextWrapping="Wrap" BorderThickness="1" Text="" VerticalAlignment="Top" Width="290" BorderBrush="White" Margin="222,154,0,0" Background="#19FFFFFF" TextChanged="TxtUsername_TextChanged">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <CheckBox x:Name="chkBox1" Content="isActive" HorizontalAlignment="Left" Height="33" Margin="222,189,0,0" VerticalAlignment="Top" Width="93" Foreground="White" BorderBrush="White" Background="White">
+            <CheckBox.Template>
+                <ControlTemplate TargetType="{x:Type CheckBox}">
+                    <ControlTemplate.Resources>
+                        <Storyboard x:Key="Click">
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="48"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="48"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-24"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-24"/>
+                            </DoubleAnimationUsingKeyFrames>
+                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="InteractionEllipse">
+                                <EasingDoubleKeyFrame KeyTime="0" Value="0.3"/>
+                                <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                            </DoubleAnimationUsingKeyFrames>
+                        </Storyboard>
+                    </ControlTemplate.Resources>
+                    <Grid x:Name="templateRoot" Background="Transparent" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Viewbox FlowDirection="LeftToRight" Height="18" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Width="18" OpacityMask="White" >
+                            <Canvas Height="24" Width="24" Background="{x:Null}">
+                                <Path x:Name="Graphic" Data="M19,3L5,3C3.89,3,3,3.89,3,5L3,19A2,2,0,0,0,5,21L19,21A2,2,0,0,0,21,19L21,5C21,3.89,20.1,3,19,3 M19,5L19,19 5,19 5,5 19,5z" Fill="{DynamicResource {x:Static SystemColors.DesktopBrushKey}}"/>
+                                <Ellipse x:Name="InteractionEllipse" Fill="White" Height="0" IsHitTestVisible="False" Canvas.Left="12" Opacity="0" RenderTransformOrigin="0.5,0.5" Canvas.Top="12" Width="0">
+                                    <Ellipse.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Ellipse.RenderTransform>
+                                </Ellipse>
+                            </Canvas>
+                        </Viewbox>
+                        <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="ButtonBase.Click">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="InteractionEllipse">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="48"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Height)" Storyboard.TargetName="InteractionEllipse">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="48"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="InteractionEllipse">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-24"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="InteractionEllipse">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="-24"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="InteractionEllipse">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0.3"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="0"/>
+                                    </DoubleAnimationUsingKeyFrames>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <Trigger Property="HasContent" Value="True">
+                            <Setter Property="FocusVisualStyle">
+                                <Setter.Value>
+                                    <Style>
+                                        <Setter Property="Control.Template">
+                                            <Setter.Value>
+                                                <ControlTemplate>
+                                                    <Rectangle Margin="14,0,0,0" SnapsToDevicePixels="True" Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2"/>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </Setter.Value>
+                            </Setter>
+                            <Setter Property="Padding" Value="4,2,0,0"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True"/>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Data" TargetName="Graphic" Value="M10,17L5,12 6.41,10.58 10,14.17 17.59,6.58 19,8 M19,3L5,3C3.89,3,3,3.89,3,5L3,19A2,2,0,0,0,5,21L19,21A2,2,0,0,0,21,19L21,5C21,3.89,20.1,3,19,3z"/>
+                            <Setter Property="Fill" TargetName="Graphic" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Fill" TargetName="Graphic" Value="{DynamicResource MaterialDesignCheckBoxDisabled}"/>
+                            <Setter Property="Opacity" Value="0.56"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter Property="Data" TargetName="Graphic" Value="M6,13L6,11 18,11 18,13 M19,3L5,3C3.89,3,3,3.89,3,5L3,19A2,2,0,0,0,5,21L19,21A2,2,0,0,0,21,19L21,5C21,3.89,20.1,3,19,3z"/>
+                            <Setter Property="Fill" TargetName="Graphic" Value="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}"/>
+                        </Trigger>
+                        <Trigger Property="Validation.HasError" Value="True">
+                            <Setter Property="Fill" TargetName="Graphic" Value="{DynamicResource ValidationErrorBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{DynamicResource ValidationErrorBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </CheckBox.Template>
+        </CheckBox>
+
+        <Custom:PackIconMaterial  Kind="ContentSaveAll" Foreground="White" Width="14" Height="14" Margin="255,299,0,0"/>
+        <Custom:PackIconMaterial  Kind="CloseCircle" Foreground="White" Width="15" Height="15" Margin="527,105,0,0" MouseLeftButtonUp="BtnClose_Click"/>
+    </Grid>
+</UserControl>
