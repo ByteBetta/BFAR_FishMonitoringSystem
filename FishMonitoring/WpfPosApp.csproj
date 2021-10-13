@@ -1,0 +1,661 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{31771691-E0A5-4042-B719-669FCAFA05E3}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WpfPosApp</RootNamespace>
+    <AssemblyName>WpfPosApp</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>D:\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <AutorunEnabled>true</AutorunEnabled>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Windows.Forms, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FlashControlV71, Version=1.0.3187.32366, Culture=neutral, PublicKeyToken=692fbea5521e1304" />
+    <Reference Include="LiveCharts, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.0.9.7\lib\net45\LiveCharts.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="LiveCharts.WinForms">
+      <HintPath>..\..\..\..\..\..\Downloads\livecharts.winforms.0.9.7.1\lib\net45\LiveCharts.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="LiveCharts.Wpf, Version=0.9.7.0, Culture=neutral, PublicKeyToken=0bc1f845d1ebb8df, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiveCharts.Wpf.0.9.7\lib\net45\LiveCharts.Wpf.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.BoxIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.BoxIcons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Entypo, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Entypo.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.EvaIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.EvaIcons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.FeatherIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.FeatherIcons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.FontAwesome, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.FontAwesome.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Ionicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Ionicons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.JamIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.JamIcons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Material, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Material.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.MaterialDesign, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.MaterialDesign.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.MaterialLight, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.MaterialLight.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Microns, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Microns.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Modern, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Modern.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Octicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Octicons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.PicolIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.PicolIcons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.RPGAwesome, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.RPGAwesome.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.SimpleIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.SimpleIcons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Typicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Typicons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Unicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Unicons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.WeatherIcons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.WeatherIcons.dll</HintPath>
+    </Reference>
+    <Reference Include="MahApps.Metro.IconPacks.Zondicons, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0c0d510f9915137a, processorArchitecture=MSIL">
+      <HintPath>..\packages\MahApps.Metro.IconPacks.4.3.0\lib\net47\MahApps.Metro.IconPacks.Zondicons.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignColors, Version=1.2.2.920, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.2.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    </Reference>
+    <Reference Include="MaterialDesignThemes.Wpf, Version=3.0.1.920, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignThemes.3.0.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1404.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.DataVisualization" />
+    <Reference Include="System.Web.DataVisualization.Design" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WindowsInput, Version=1.0.4.0, Culture=neutral, PublicKeyToken=9b287f7dc5073cad, processorArchitecture=MSIL">
+      <HintPath>..\packages\InputSimulator.1.0.4.0\lib\net20\WindowsInput.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="BLL\CategoriesBLL.cs" />
+    <Compile Include="BLL\DealCustBLL.cs" />
+    <Compile Include="BLL\DealersBLL.cs" />
+    <Compile Include="BLL\loginBLL.cs" />
+    <Compile Include="BLL\FishBLL.cs" />
+    <Compile Include="BLL\TransactionBLL.cs" />
+    <Compile Include="BLL\TransDetailsBLL.cs" />
+    <Compile Include="BLL\UserBLL.cs" />
+    <Compile Include="BLL\VesselBLL.cs" />
+    <Compile Include="chart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="chart.Designer.cs">
+      <DependentUpon>chart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DAL\CategoriesDAL.cs" />
+    <Compile Include="DAL\DealCustDAL.cs" />
+    <Compile Include="DAL\DealersDAL.cs" />
+    <Compile Include="DAL\loginDAL.cs" />
+    <Compile Include="DAL\FISHDAL.cs" />
+    <Compile Include="DAL\TransactionDAL.cs" />
+    <Compile Include="DAL\TransDetailsDAL.cs" />
+    <Compile Include="DAL\userDAL.cs" />
+    <Compile Include="DAL\VesselDAL.cs" />
+    <Compile Include="DataSet1.cs">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="DataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="fBarcode.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="fBarcode.Designer.cs">
+      <DependentUpon>fBarcode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmCshdb.xaml.cs">
+      <DependentUpon>frmCshdb.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmDataReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmDataReport.Designer.cs">
+      <DependentUpon>frmDataReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmVessels.xaml.cs">
+      <DependentUpon>frmVessels.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmFisherman.xaml.cs">
+      <DependentUpon>frmFisherman.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmDealersandCustomers.xaml.cs">
+      <DependentUpon>frmDealersandCustomers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmEmployee.xaml.cs">
+      <DependentUpon>frmEmployee.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventory.xaml.cs">
+      <DependentUpon>frmInventory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmInventroyReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmInventroyReport.Designer.cs">
+      <DependentUpon>frmInventroyReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmLogin.xaml.cs">
+      <DependentUpon>frmLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmFishDetails.xaml.cs">
+      <DependentUpon>frmFishDetails.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmProfile.xaml.cs">
+      <DependentUpon>frmProfile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmPurchase.xaml.cs">
+      <DependentUpon>frmPurchase.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmSale.xaml.cs">
+      <DependentUpon>frmSale.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmRec.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRec.Designer.cs">
+      <DependentUpon>frmRec.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmRecords.xaml.cs">
+      <DependentUpon>frmRecords.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmRecordsReport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRecordsReport.Designer.cs">
+      <DependentUpon>frmRecordsReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReportTrans.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReportTrans.Designer.cs">
+      <DependentUpon>frmReportTrans.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSaleReceipt.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSaleReceipt.Designer.cs">
+      <DependentUpon>frmSaleReceipt.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettings.xaml.cs">
+      <DependentUpon>frmSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmSettingsM.xaml.cs">
+      <DependentUpon>frmSettingsM.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmSoldItemsChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmSoldItemsChart.Designer.cs">
+      <DependentUpon>frmSoldItemsChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTopItemsChart.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmTopItemsChart.Designer.cs">
+      <DependentUpon>frmTopItemsChart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmTransactions.xaml.cs">
+      <DependentUpon>frmTransactions.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmUser.xaml.cs">
+      <DependentUpon>frmUser.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserChangePassword.xaml.cs">
+      <DependentUpon>frmUserChangePassword.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmUserSettings.xaml.cs">
+      <DependentUpon>frmUserSettings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Main.xaml.cs">
+      <DependentUpon>Main.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MyConnection.cs" />
+    <Compile Include="frmCategories.xaml.cs">
+      <DependentUpon>frmCategories.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Product.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="rptBarcode.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>rptBarcode.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <Compile Include="Splash.xaml.cs">
+      <DependentUpon>Splash.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
+    <Compile Include="usrBarcode.xaml.cs">
+      <DependentUpon>usrBarcode.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="frmCashierDashboard.xaml.cs">
+      <DependentUpon>frmCashierDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="chart.resx">
+      <DependentUpon>chart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="fBarcode.resx">
+      <DependentUpon>fBarcode.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmDataReport.resx">
+      <DependentUpon>frmDataReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmInventroyReport.resx">
+      <DependentUpon>frmInventroyReport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRec.resx">
+      <DependentUpon>frmRec.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRecordsReport.resx">
+      <DependentUpon>frmRecordsReport.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReportTrans.resx">
+      <DependentUpon>frmReportTrans.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSaleReceipt.resx">
+      <DependentUpon>frmSaleReceipt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmSoldItemsChart.resx">
+      <DependentUpon>frmSoldItemsChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmTopItemsChart.resx">
+      <DependentUpon>frmTopItemsChart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report2.rdlc" />
+    <EmbeddedResource Include="Report3.rdlc" />
+    <EmbeddedResource Include="Report4.rdlc" />
+    <EmbeddedResource Include="rptBarcode.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>rptBarcode.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptDealCust.rdlc" />
+    <EmbeddedResource Include="rptDealers.rdlc" />
+    <EmbeddedResource Include="rptEmployee.rdlc">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="rptProduct.rdlc" />
+    <EmbeddedResource Include="rptTop.rdlc" />
+    <EmbeddedResource Include="rptUser.rdlc" />
+    <None Include="DataSet1.xsc">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="DataSet1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="DataSet1.xss">
+      <DependentUpon>DataSet1.xsd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="frmCshdb.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmVessels.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="frmFisherman.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmDealersandCustomers.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmEmployee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmInventory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmLogin.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="frmFishDetails.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmPurchase.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmSale.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmRecords.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmSettingsM.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmTransactions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmUserChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmUserSettings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Main.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmCashierDashboard.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ModernButtonTheme.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmCategories.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Splash.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usrBarcode.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Fish.png" />
+    <Resource Include="Images\LoginLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\BFAR_bg.png" />
+    <Resource Include="Images\BFAR_Background.png" />
+    <Resource Include="Images\BFAR_Logo.png" />
+    <Resource Include="Images\BFAR_LOGO_TEXT.png" />
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WindowsInput.dll" />
+    <Resource Include="WindowsInput.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\MaterialDesignThemes.3.0.1\build\MaterialDesignThemes.targets'))" />
+  </Target>
+</Project>
