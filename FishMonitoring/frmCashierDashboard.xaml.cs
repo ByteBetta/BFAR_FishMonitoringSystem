@@ -106,16 +106,16 @@ namespace WpfPosApp
 
         private void btnPurchase_Click(object sender, MouseButtonEventArgs e)
         {
-            frmPurchase purchase = new frmPurchase(this, ma);
+            frmAddTransaction purchase = new frmAddTransaction(this, ma);
             pnlMain.Children.Clear();
             pnlMain.Children.Add(purchase);
         }
-
+            
         private void btnSale_Click(object sender, RoutedEventArgs e)
         {
-            frmSale sale = new frmSale(this, ma);
+            frmAddTransaction purchase = new frmAddTransaction(this, ma);
             pnlMain.Children.Clear();
-            pnlMain.Children.Add(sale);
+            pnlMain.Children.Add(purchase);
         }
 
        
@@ -144,9 +144,9 @@ namespace WpfPosApp
 
         private void btnCustomers(object sender, MouseButtonEventArgs e)
         {
-            frmDealersandCustomers dc = new frmDealersandCustomers();
+            frmRecords rec = new frmRecords();
             pnlMain.Children.Clear();
-            pnlMain.Children.Add(dc);
+            pnlMain.Children.Add(rec);
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -207,7 +207,7 @@ namespace WpfPosApp
 
         private void BtnPurchase_Click(object sender, RoutedEventArgs e)
         {
-            frmPurchase purchase = new frmPurchase(this, ma);
+            frmAddTransaction purchase = new frmAddTransaction(this, ma);
             pnlMain.Children.Clear();
             pnlMain.Children.Add(purchase);
         }

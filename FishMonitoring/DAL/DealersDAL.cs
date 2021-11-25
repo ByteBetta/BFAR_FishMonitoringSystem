@@ -1,4 +1,6 @@
-﻿using Project.BLL;
+﻿using Firebase.Storage;
+using Google.Cloud.Firestore;
+using Project.BLL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -16,6 +18,7 @@ namespace WpfPosApp.DAL
     class DealersDAL
     {
         MyConnection db = new MyConnection();
+        FirestoreDb firestoreDatabase;
 
         #region SELECT MEthod for Dealers
         public DataTable Select()
@@ -26,7 +29,7 @@ namespace WpfPosApp.DAL
             try
             {
                 //Write SQL Query to select all the data from database
-                string sql = "SELECT DealID, name [Company Name], person [Distributor], email [Email], contact [Mobile], address [Address], added_date [Added Time], added_by [Added By] FROM Dealers";
+                string sql = "SELECT DealID, name [Company Name], person , email [Email], contact [Mobile], address [Address], added_date [Added Time], added_by [Added By] FROM Dealers";
 
                 //Creating sql command to execute quer
                 SqlCommand cmd = new SqlCommand(sql, db.con);
@@ -337,5 +340,52 @@ namespace WpfPosApp.DAL
             return dt;
         }
         #endregion
+        public void ConnecttoFirebase()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"bfar-testproj.json";
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+
+            firestoreDatabase = FirestoreDb.Create("bfar-testproj");
+
+        }
+
+
+
+
+
+        public async void AddFishtoFirebaseAsync(DealersBLL fisherman)
+        {
+
+            try
+            {
+                DataTable vessels = GetVesselFromFisherman(fisherman.name);
+                string[] arrray = vessels.Rows.OfType<DataRow>().Select(k => k[0].ToString()).ToArray();
+                DocumentReference usercollection = firestoreDatabase.Collection("Fisherman").Document(fisherman.DealID.ToString());
+                Dictionary<string, object> userdata = new Dictionary<string, object>()
+            {
+                    { nameof(fisherman.DealID).ToString() , fisherman.DealID.ToString()},
+                    { nameof(fisherman.name).ToString() , fisherman.name.ToString()},
+                    { nameof(fisherman.person).ToString() , fisherman.person.ToString()},
+                    { nameof(fisherman.email).ToString() , fisherman.email.ToString()},
+                    { nameof(fisherman.address).ToString() , fisherman.address.ToString()},
+                    { nameof(fisherman.contact).ToString() , fisherman.contact.ToString()},
+                    { "Vessels", arrray }
+
+            };
+                Console.WriteLine(nameof(fisherman.DealID).ToString());
+                await usercollection.SetAsync(userdata);
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+        }
+
+
+
     }
+
 }

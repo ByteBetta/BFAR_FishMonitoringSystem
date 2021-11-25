@@ -7,6 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
         xmlns:lvc="clr-namespace:LiveCharts.Wpf;assembly=LiveCharts.Wpf"
+        xmlns:Custom="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Ionicons"
         mc:Ignorable="d"
         Title="Main" Height="737" Width="1366" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" Foreground="White" Loaded="Window_Loaded">
     <Window.Resources>
@@ -87,28 +88,9 @@
 
 
             <Label x:Name="label1" Content="" HorizontalAlignment="Left" Margin="406,10,0,0" VerticalAlignment="Top" Foreground="#00000000"/>
-            <Button Content="" HorizontalAlignment="Left" Margin="1172,8,0,0" VerticalAlignment="Top" Width="34" Background="Transparent" Height="35" Click="Button_Click" RenderTransformOrigin="0.388,0.514" BorderBrush="#00F0F0F0" BorderThickness="1" Foreground="#FF726868">
-                <Button.Template>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border BorderBrush="White" BorderThickness="0" Background="{TemplateBinding Background}" CornerRadius="60" UseLayoutRounding="True" d:DesignUseLayoutRounding="True" Margin="0,0,12,0">
-                            <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <iconPacks:PackIconMaterial Kind="BarcodeScan" Margin="1175,16,0,0" Width="29" Height="19" Foreground="#FF5E86DC" MouseLeftButtonDown="Button_Click" Visibility="Visible" />
+        
             <Border CornerRadius="60" BorderThickness="1" Width="35" Margin="1120,8,214,8" Background="Transparent" BorderBrush="#00F0F0F0"/>
-            <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="1108,1,0,0" Width="60" Foreground="White" Visibility="Visible">
-                <materialDesign:PopupBox.ToggleContent>
-                    <iconPacks:PackIconMaterial Margin="0, 0, 0, 0" Kind="PointOfSale" Width="29" Height="19" Foreground="#FF5E86DC" />
-                </materialDesign:PopupBox.ToggleContent>
-                <StackPanel Width="260" Background="White">
-                    <Button x:Name="btnPurchase" Content="Test" Height="50" Margin="54,2,115,0" Click="BtnPurchase_Click" FontSize="14"/>
-                    <iconPacks:PackIconMaterial Kind="CartArrowUp" Margin="145,-35,0,0" Width="30" Height="20" Foreground="#FF3C51D4" />
-                    <Button x:Name="btnSale" Content="Test" Height="50" Margin="182,-50,5,0" Click="BtnSale_Click" FontSize="14"/>
-                    <iconPacks:PackIconFontAwesome Kind="CartPlusSolid" Margin="15,-35,0,0" Width="25" Height="20" Foreground="#FF3C51D4" />
-                </StackPanel>
-            </materialDesign:PopupBox>
+            
             <Label x:Name="lblHeyLogged" Content="" Margin="1261,12,62,12" Foreground="#FF5E86DC" FontSize="13" FontWeight="Bold"/>
 
         </Grid>
@@ -118,7 +100,7 @@
                 <Grid x:Name="menuTopGrid" Height="50" Background="White">
                     <Border x:Name="logoBorder" HorizontalAlignment="Left" Visibility="Collapsed" VerticalAlignment="Bottom" Width="139"  Height="41" BorderBrush="#FFC7C7C7" BorderThickness="0" CornerRadius="0,0,0,0" Margin="16,0,0,5">
                         <Border.Background>
-                            <ImageBrush x:Name="logoBox" ImageSource="https://i.ibb.co/RzzKyDZ/Logo.png" Stretch="UniformToFill" />
+                            <ImageBrush x:Name="logoBox" Stretch="UniformToFill" />
                         </Border.Background>
                     </Border>
                     <Button x:Name="btnCloseMenu" Width="60" Height="50" Background="{x:Null}" BorderBrush="{x:Null}" VerticalAlignment="Top" HorizontalAlignment="Right" Visibility="Collapsed" Click="BtnCloseMenu_Click">
@@ -151,10 +133,10 @@
                             <TextBlock x:Name="dshText" Text="Dashboard" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="50">
-                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="frmEmployee_Click">
-                            <materialDesign:PackIcon x:Name="empIcn" Kind="UserGroup" Width="22" Height="22" Margin="11, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" Visibility="Hidden"/>
-                            <TextBlock x:Name="empTxt" Text="Employees" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
+                    <ListViewItem Height="50" Selected="ListViewItem_Selected_7">
+                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="frmAddTransactions">
+                            <materialDesign:PackIcon x:Name="empIcn" Kind="TransferDown" Width="22" Height="22" Margin="11, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" Visibility="Visible"/>
+                            <TextBlock x:Name="transtxt" Text="Add Transaction" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="50" Selected="ListViewItem_Selected">
@@ -166,25 +148,25 @@
                     <ListViewItem Height="50" Selected="ListViewItem_Selected_1">
                         <StackPanel x:Name="Fish" Orientation="Horizontal" MouseLeftButtonUp="frmFishDetails_MouseLeftButtonUp" IsEnabled="False">
                             <materialDesign:PackIcon x:Name="fishicn" Kind="Fish" Width="22" Height="21" Margin="11, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" Visibility="Visible"/>
-                            <TextBlock x:Name="prdTxt" Text="Products" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
+                            <TextBlock x:Name="prdTxt" Text="Fish List" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="50">
+                    <ListViewItem Height="50" Selected="ListViewItem_Selected_3">
                         <StackPanel x:Name="Categories" Orientation="Horizontal" MouseLeftButtonUp="BtnCtg_Click">
                             <iconPacks:PackIconFontAwesome Kind="BoxesSolid" x:Name="ctgIcn" Width="23" Height="22" Margin="10, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" />
                             <TextBlock x:Name="ctgTxt" Text="Categories" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="50">
+                    <ListViewItem Height="50" Selected="ListViewItem_Selected_4">
                         <StackPanel x:Name="Dealers" Orientation="Horizontal" MouseLeftButtonUp="frmDealers_Click">
-                            <iconPacks:PackIconFontAwesome Kind="TruckSolid" x:Name="dlrIcn"  Width="21" Height="21" Margin="11, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" />
+                            <Custom:PackIconIonicons  Kind="PeopleiOS"  x:Name="dlrIcn"  Width="21" Height="21" Margin="11, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" />
                             <TextBlock x:Name="dlrTxt" Text="Fisherman" FontSize="12" VerticalAlignment="Center" Margin="21 10" TextWrapping="WrapWithOverflow" Foreground="#FF7389C3" />
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="50" Selected="ListViewItem_Selected_2">
                         <StackPanel x:Name="Vessels" Orientation="Horizontal" MouseLeftButtonUp="frmCustomers_Click">
                             <iconPacks:PackIconIonicons Kind="BoatiOS" x:Name="cstmrIcn"  Width="21" Height="21" Margin="11, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" Visibility="Visible" />
-                            <TextBlock x:Name="cstmTxt" Text="Customers" FontSize="12" VerticalAlignment="Center" Margin="21 10" TextWrapping="WrapWithOverflow" Foreground="#FF7389C3" />
+                            <TextBlock x:Name="cstmTxt" Text="Vessels" FontSize="12" VerticalAlignment="Center" Margin="21 10" TextWrapping="WrapWithOverflow" Foreground="#FF7389C3" />
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="50">
@@ -193,15 +175,15 @@
                             <TextBlock x:Name="invTxt" Text=" Inventory" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="50">
+                    <ListViewItem Height="50" Selected="ListViewItem_Selected_5">
                         <StackPanel x:Name="Transactions" Orientation="Horizontal" MouseLeftButtonUp="frmTransactions_Click">
-                            <iconPacks:PackIconMaterial x:Name="trnIcn" Kind="CashRegister" Width="19" Height="19" Margin="12, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" Visibility="Hidden"/>
+                            <iconPacks:PackIconMaterial x:Name="trnIcn" Kind="CashRegister" Width="19" Height="19" Margin="12, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" Visibility="Visible"/>
                             <TextBlock x:Name="trnTxt" Text="Transactions" FontSize="12" VerticalAlignment="Center" Margin="21 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="50">
+                    <ListViewItem Height="50" Selected="ListViewItem_Selected_6">
                         <StackPanel x:Name="Records" Orientation="Horizontal" MouseLeftButtonUp="btnRecord_Click">
-                            <iconPacks:PackIconUnicons Kind="FileUploadAlt" x:Name="rcdIcn" Width="20" Height="20" Margin="12, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" Visibility="Hidden" />
+                            <iconPacks:PackIconUnicons Kind="FileUploadAlt" x:Name="rcdIcn" Width="20" Height="20" Margin="12, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" Visibility="Visible" />
                             <TextBlock x:Name="rcdTxt" Text="Records" FontSize="12" VerticalAlignment="Center" Margin="21 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>

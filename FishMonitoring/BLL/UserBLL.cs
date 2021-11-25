@@ -19,6 +19,7 @@ namespace WpfPosApp.BLL
         public string Img { get; set; }
         public DateTime Added_Date { get; set; }
         public int Added_By { get; set; }
+        public string IsActive { get; set; }
 
     }
 }

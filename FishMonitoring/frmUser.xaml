@@ -9,7 +9,11 @@
         mc:Ignorable="d d1"
         Height="415.442" Width="724.586">
     <Grid x:Name="gridUser" Background="#00D6D6D6" Margin="1,-22,-45,-108">
-        <Border Margin="-23,105,0,-74" CornerRadius="20" Background="White" BorderThickness="1" BorderBrush="#33D6D6D6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="273*"/>
+            <RowDefinition Height="272*"/>
+        </Grid.RowDefinitions>
+        <Border Margin="-23,105,0,-74" CornerRadius="20" Background="White" BorderThickness="1" BorderBrush="#33D6D6D6" Grid.RowSpan="2">
             <Border.Effect>
                 <DropShadowEffect Direction="-90" Opacity="0.1"/>
             </Border.Effect>
@@ -17,7 +21,7 @@
         <Label x:Name="lblName" Content="Name" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="8,155,0,0"/>
         <Label x:Name="lblSurname" Content="Surname" HorizontalAlignment="Left" Margin="364,156,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblUsername" Content="Username" HorizontalAlignment="Left" Margin="8,196,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.502,0.521"/>
-        <Label x:Name="lblDOB" Content="Date OF Birth" HorizontalAlignment="Left" Margin="3,288,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDOB" Content="Date OF Birth" HorizontalAlignment="Left" Margin="3,15,0,0" VerticalAlignment="Top" Grid.Row="1"/>
         <Label x:Name="lblPassword" Content="Password" HorizontalAlignment="Left" Margin="364,197,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblSex" Content="Sex" HorizontalAlignment="Left" Margin="194,242,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lblUserType" Content="User Type" HorizontalAlignment="Left" Margin="8,241,0,0" VerticalAlignment="Top"/>
@@ -49,11 +53,11 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Border Margin="83,238,580,277" Background="#FF5F8DF7" CornerRadius="5">
+        <Border Margin="83,238,580,5" Background="#FF5F8DF7" CornerRadius="5">
             <ComboBox x:Name="cmbUserType" HorizontalAlignment="Left" Margin="2,0,0,0" VerticalAlignment="Top" BorderThickness="0" Width="102" Height="30" BorderBrush="White" Background="Transparent"/>
         </Border>
-        <DataGrid x:Name="grid_User" HorizontalAlignment="Left" Height="226" Margin="1,331,0,-12" VerticalAlignment="Top" Width="743" BorderThickness="1" SelectionChanged="grid_User_SelectionChanged" BorderBrush="#00000000" Background="White"/>
-        <Button x:Name="btnSelect" Content="Select Image" HorizontalAlignment="Left" Height="30" Margin="435,255,0,0" VerticalAlignment="Top" Width="133" Foreground="White" Background="#FF428DFF" Click="btnSelect_Click" BorderBrush="White">
+        <DataGrid x:Name="grid_User" HorizontalAlignment="Left" Height="226" Margin="1,58,0,-12" VerticalAlignment="Top" Width="743" BorderThickness="1" SelectionChanged="grid_User_SelectionChanged" BorderBrush="#00000000" Background="White" Grid.Row="1"/>
+        <Button x:Name="btnSelect" Content="Select Image" HorizontalAlignment="Left" Height="30" Margin="435,255,0,0" VerticalAlignment="Top" Width="133" Foreground="White" Background="#FF428DFF" Click="btnSelect_Click" BorderBrush="White" Grid.RowSpan="2">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="#FFC3C3C3" BorderThickness="0" Background="{TemplateBinding Background}" CornerRadius="7" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
@@ -63,7 +67,7 @@
             </Button.Template>
         </Button>
 
-        <Button x:Name="btnInsert" Content="  Insert" HorizontalAlignment="Left" Height="35" Margin="197,567,0,-57" VerticalAlignment="Top" Width="110" Click="btnInsert_Click"  Background="#FF5E89FB">
+        <Button x:Name="btnInsert" Content="  Insert" HorizontalAlignment="Left" Height="35" Margin="197,294,0,-57" VerticalAlignment="Top" Width="110" Click="btnInsert_Click"  Background="#FF5E89FB" Grid.Row="1">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
@@ -72,7 +76,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="btnUpdate" Content="  Update" HorizontalAlignment="Left" Height="35" Margin="326,566,0,-56" VerticalAlignment="Top" Width="110" Click="btnUpdate_Click" Background="#FF5E89FA">
+        <Button x:Name="btnUpdate" Content="  Update" HorizontalAlignment="Left" Height="35" Margin="326,293,0,-56" VerticalAlignment="Top" Width="110" Click="btnUpdate_Click" Background="#FF5E89FA" Grid.Row="1">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
@@ -81,7 +85,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="btnDelete" Content="  Delete" HorizontalAlignment="Left" Height="35" Margin="454,566,0,-56" VerticalAlignment="Top" Width="110" Click="btnDelete_Click" Background="#FF5E89FB">
+        <Button x:Name="btnDelete" Content="  Delete" HorizontalAlignment="Left" Height="35" Margin="454,293,0,-56" VerticalAlignment="Top" Width="110" Click="btnDelete_Click" Background="#FF5E89FB" Grid.Row="1">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
@@ -99,29 +103,48 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <TextBox x:Name="txtAddedBy" HorizontalAlignment="Left" Margin="494,483,0,-113" TextWrapping="Wrap" Text="" Width="0"/>
+        <TextBox x:Name="txtAddedBy" HorizontalAlignment="Left" Margin="494,210,0,-113" TextWrapping="Wrap" Text="" Width="0" Grid.Row="1"/>
         <TextBox x:Name="txtUserID" HorizontalAlignment="Left" Height="26" Margin="704,234,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="22" Visibility="Hidden"/>
-        <Border HorizontalAlignment="Left" Margin="588,0,0,224" VerticalAlignment="Bottom" Width="90"  Height="90" BorderThickness="1" CornerRadius="100,100,100,100" BorderBrush="#FFD1D1D1">
+        <Border HorizontalAlignment="Left" Margin="588,0,0,224" VerticalAlignment="Bottom" Width="90"  Height="90" BorderThickness="1" CornerRadius="100,100,100,100" BorderBrush="#FFD1D1D1" Grid.RowSpan="2">
             <Border.Background>
                 <ImageBrush x:Name="imgBox" Stretch="UniformToFill" ImageSource="https://i.ibb.co/7VRH1Kc/user.png" />
             </Border.Background>
         </Border>
-        <Label x:Name="lblPassword_Copy" Content="Picture" HorizontalAlignment="Left" Margin="364,257,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDOB_Copy" HorizontalAlignment="Left" Margin="364,283,0,0" VerticalAlignment="Top"/>
-        <Border Margin="225,238,443,277" Background="#FF5F8DF7" CornerRadius="5">
+        <Label x:Name="lblPassword_Copy" Content="Picture" HorizontalAlignment="Left" Margin="364,257,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
+        <Label x:Name="lblDOB_Copy" HorizontalAlignment="Left" Margin="364,10,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Border Margin="225,238,443,5" Background="#FF5F8DF7" CornerRadius="5">
             <ComboBox x:Name="cmbSex" HorizontalAlignment="Left" Margin="10,0,0,0" VerticalAlignment="Top" BorderThickness="0" Width="86" Height="30" BorderBrush="White" Background="Transparent"/>
         </Border>
-        <Custom:PackIconMaterial  Kind="Image" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="446,263,0,0"/>
-        <Custom:PackIconMaterialDesign x:Name="usrsIcn" Kind="SettingsApplications" Width="18" Height="18" Margin="732,116,0,411" VerticalAlignment="Center" Foreground="#FF428DFF" MouseLeftButtonUp="UsrsIcn_MouseLeftButtonUp"/>
-        <Custom:PackIconMaterial x:Name="MainUsr" Kind="Account" Width="17" Height="17" Margin="10,116,0,411" VerticalAlignment="Center" Foreground="#FF428DFF"/>
+        <Custom:PackIconMaterial  Kind="Image" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="446,263,0,0" Grid.RowSpan="2"/>
+        <Custom:PackIconMaterialDesign x:Name="usrsIcn" Kind="SettingsApplications" Width="18" Height="18" Margin="732,116,0,139" VerticalAlignment="Center" Foreground="#FF428DFF" MouseLeftButtonUp="UsrsIcn_MouseLeftButtonUp"/>
+        <Custom:PackIconMaterial x:Name="MainUsr" Kind="Account" Width="17" Height="18" Margin="10,116,0,139" VerticalAlignment="Center" Foreground="#FF428DFF"/>
         <Label Content="Users" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="46,112,0,0" FontSize="14" FontWeight="Bold" Foreground="#FF5D9DFF"/>
         <Custom:PackIconMaterial  Kind="Printer" Foreground="#FFF9F9F9" Width="13" Height="13" Margin="650,119,0,0"/>
-        <Border Margin="83,286,443,229" Background="#FF5F8DF7" CornerRadius="5">
+        <Border Margin="83,13,443,229" Background="#FF5F8DF7" CornerRadius="5" Grid.Row="1">
             <DatePicker x:Name="dtpBirth" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="223" BorderThickness="0" BorderBrush="White" Margin="10,0,0,0" Background="White" Foreground="White"/>
         </Border>
-        <Custom:PackIconMaterial  Kind="PlusCircle" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="212,578,0,-47"/>
-        <Custom:PackIconMaterial  Kind="Update" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="341,577,0,-46"/>
-        <Custom:PackIconMaterial  Kind="Delete" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="467,577,0,-46"/>
+        <Custom:PackIconMaterial  Kind="PlusCircle" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="212,305,0,-47" Grid.Row="1"/>
+        <Custom:PackIconMaterial  Kind="Update" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="341,304,0,-46" Grid.Row="1"/>
+        <Custom:PackIconMaterial  Kind="Delete" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="467,304,0,-46" Grid.Row="1"/>
+        <Button x:Name="btnUploadd" Content=" Upload Live" HorizontalAlignment="Left" Height="35" Margin="0,293,0,-56" VerticalAlignment="Top" Width="126" Click="btnUpload_Click" Background="#FF5E89FB" Grid.Row="1">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d1:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Custom:PackIconMaterial  Kind="Upload" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="13,304,0,-46" Grid.Row="1"/>
+        <Button x:Name="testBTN" Content=" Test Live" HorizontalAlignment="Left" Height="35" Margin="618,296,0,-59" VerticalAlignment="Top" Width="126"  Background="#FF5E89FB" Grid.Row="1" Click="test">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d1:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
 
 

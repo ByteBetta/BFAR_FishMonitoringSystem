@@ -98,19 +98,7 @@
                     </ControlTemplate>
                 </Button.Template>
             </Button>
-            <iconPacks:PackIconMaterial Kind="BarcodeScan" Margin="1175,16,0,0" Width="29" Height="19" MouseLeftButtonUp="Button_Click" Foreground="#FF5E86DC" />
             <Border CornerRadius="60" BorderThickness="1" Width="35" Margin="1130,8,200,8" Background="#005E86DC" BorderBrush="Transparent"/>
-            <materialDesign:PopupBox PlacementMode="BottomAndAlignRightEdges" StaysOpen="False" Margin="1119,1,0,0" Width="60" Foreground="White">
-                <materialDesign:PopupBox.ToggleContent>
-                    <iconPacks:PackIconMaterial Margin="-2, 0, 0, 0" Kind="PointOfSale" Width="29" Height="19" Foreground="#FF5E86DC" />
-                </materialDesign:PopupBox.ToggleContent>
-                <StackPanel Width="260" Background="White">
-                    <Button x:Name="btnPurchase" Content="Purchase" Height="50" Margin="54,2,115,0" Click="BtnPurchase_Click" FontSize="14"/>
-                    <iconPacks:PackIconMaterial Kind="CartArrowUp" Margin="145,-35,0,0" Width="30" Height="20" Foreground="#FF3C51D4" />
-                    <Button x:Name="btnSale" Content="Sale" Height="50" Margin="182,-50,5,0" Click="BtnSale_Click_1" FontSize="14"/>
-                    <iconPacks:PackIconFontAwesome Kind="CartPlusSolid" Margin="15,-35,0,0" Width="25" Height="20" Foreground="#FF3C51D4" />
-                </StackPanel>
-            </materialDesign:PopupBox>
             <Label x:Name="lblHeyLogged" Content="" Margin="1261,12,62,12" Foreground="#FF5E86DC" FontSize="13" FontWeight="Bold"/>
         </Grid>
         <Grid x:Name="GridMenu" Width="60" HorizontalAlignment="Left" Background="White">
@@ -149,21 +137,16 @@
                             <TextBlock x:Name="dshText" Text="Home" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="50">
-                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="btnPurchase_Click">
-                            <materialDesign:PackIcon x:Name="icnPurchase" Foreground="#FF7389C3" Kind="CartAdd" Margin="11, 6, 0, 0" Width="22" Height="22"/>
-                            <TextBlock x:Name="txtPurchase" Text="Purchase" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
-                        </StackPanel>
-                    </ListViewItem>
+                   
                     <ListViewItem Height="50">
                         <StackPanel Orientation="Horizontal" MouseLeftButtonUp="btnSale_Click">
-                            <materialDesign:PackIcon x:Name="icnSale" Kind="Cart" Width="22" Height="22" Margin="11, 0, 0, 0" VerticalAlignment="Center" Foreground="#FF7389C3"/>
+                            <materialDesign:PackIcon x:Name="icnSale" Kind="Download" Width="22" Height="22" Margin="11, 0, 0, 0" VerticalAlignment="Center" Foreground="#FF7389C3"/>
                             <TextBlock Text="Sale" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="50">
                         <StackPanel x:Name="Customers" Orientation="Horizontal" MouseLeftButtonUp="btnCustomers">
-                            <iconPacks:PackIconFontAwesome Kind="HandshakeRegular" x:Name="icnCustomers" Width="22" Height="22" Margin="11, 0, 0, 0" VerticalAlignment="Center" Foreground="#FF7389C3" />
+                            <iconPacks:PackIconFontAwesome Kind="DatabaseSolid" x:Name="icnCustomers" Width="22" Height="22" Margin="11, 0, 0, 0" VerticalAlignment="Center" Foreground="#FF7389C3" />
                             <TextBlock Text="Customers" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>

@@ -41,12 +41,12 @@
                 </Style>
             </TabControl.Resources>
 
-            <TabItem Header="Top Selling" Margin="-2,1,-2,-6" BorderBrush="Transparent" BorderThickness="0" Background="White">
+            <TabItem Header="Most Catch Fish" Margin="-2,1,-2,-6" BorderBrush="Transparent" BorderThickness="0" Background="White">
                 <Grid Background="White" Margin="3,-3,4,-8">
                     <DataGrid x:Name="gridTopItems" HorizontalAlignment="Left" Margin="0,101,0,0" VerticalAlignment="Top" Height="373" Width="595" BorderBrush="White" Background="White"/>
                     <StackPanel HorizontalAlignment="Left" Height="34" Margin="0,16,0,0" VerticalAlignment="Top" Width="958" Background="White">
                         <materialDesign:PackIcon Kind="ArrowTopBoldCircle" Width="34" Height="30" Margin="10, 5, 0, 0" VerticalAlignment="Center" Foreground="#FF5B88FF"/>
-                        <Label x:Name="label" Content="Top10 Selling Items" FontSize="14" Margin="70,-35,515,0" FontWeight="Bold" Height="26" Background="White"/>
+                        <Label x:Name="label" Content="Top 20 Most Catch Fishes" FontSize="14" Margin="70,-35,515,0" FontWeight="Bold" Height="26" Background="White"/>
                     </StackPanel>
                     <Label x:Name="lblFilterByDate" Content="Filter By Date(From - To)" Margin="2,67,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148"/>
                     <Border Margin="155,66,665,385" Width="155" Background="#FF5F8DF7" CornerRadius="7"/>
@@ -54,7 +54,7 @@
                     <DatePicker x:Name="dtpPicker1" x:FieldModifier="public" HorizontalAlignment="Left" Margin="163,68,0,0" VerticalAlignment="Top" Width="137" FirstDayOfWeek="Monday" BorderBrush="White"/>
                     <DatePicker x:Name="dtpPicker2" x:FieldModifier="public" HorizontalAlignment="Left" Margin="328,68,0,0" VerticalAlignment="Top" Width="137" FirstDayOfWeek="Monday" BorderBrush="White"/>
 
-                    <Button x:Name="btnPrint_All" Content="    Load Data" Margin="702,65,0,0" VerticalAlignment="Top" Width="125" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnPrint_Click">
+                    <Button x:Name="btnPrint_All" Content="Load Data" Margin="702,65,0,0" VerticalAlignment="Top" Width="125" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnPrint_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
@@ -84,13 +84,13 @@
                         Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385"/>
                     <Border Margin="498,66,317,385" Background="#FF5F8DF7" CornerRadius="7">
                         <ComboBox x:Name="cmbTopSelect" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="138" Foreground="White" BorderBrush="White" BorderThickness="0" Margin="10,0,0,0">
-                            <ComboBoxItem Content="Sort BY QTY"/>
-                            <ComboBoxItem Content="Sort BY Total Amount"/>
+                            <ComboBoxItem Content="Sort BY Quantity"/>
+                            <ComboBoxItem Content="Sort BY Weight"/>
                         </ComboBox>
                     </Border>
                 </Grid>
             </TabItem>
-            <TabItem Header="Sold Items" Margin="-2,1,-2,-6" BorderThickness="0" BorderBrush="White" Background="White">
+            <TabItem Header="Sold Items" Margin="-2,1,-2,-6" BorderThickness="0" BorderBrush="White" Background="White" Visibility="Collapsed">
                 <Grid Background="Transparent" Margin="1,-3,-1,-8">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="39*"/>
@@ -101,6 +101,7 @@
                         <Label x:Name="label1" Content="Sold Items" FontSize="14" Margin="72,0,459,0" FontWeight="Bold" Height="26"/>
                         <materialDesign:PackIcon Kind="CartMinus" Width="34" Height="30" Margin="10, -24, 0, 0" VerticalAlignment="Center" Foreground="#FF5B88FF"/>
                     </StackPanel>
+
                     <Label x:Name="lblFilterByDate_Copy" Content="Filter By Date(From - To)" Margin="2,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.ColumnSpan="2"/>
                     <Border Margin="103,69,672,382" Width="155" Background="#FF5F8DF7" CornerRadius="7" Grid.Column="1"/>
                     <Border Margin="280,69,495,382" Width="155" Background="#FF5F8DF7" CornerRadius="7" Grid.Column="1"/>
@@ -139,6 +140,61 @@
                         HorizontalAlignment="Center"
                         Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385" Grid.Column="1"/>
                     <Label x:Name="lblTotalu" Content="Total Sales:" Grid.Column="1" HorizontalAlignment="Left" Margin="669,15,0,0" VerticalAlignment="Top" Width="86" FontSize="15" FontWeight="Bold"/>
+                </Grid>
+
+            </TabItem>
+            <TabItem Header="Fish Stat" Margin="-2,1,-2,-6" BorderThickness="0" BorderBrush="White" Background="White">
+                <Grid Background="Transparent" Margin="1,-3,-1,-8">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="39*"/>
+                        <ColumnDefinition Width="700*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel HorizontalAlignment="Left" Height="34" Margin="0,17,0,0" VerticalAlignment="Top" Width="972" Background="White" Grid.ColumnSpan="2">
+                        <Label x:Name="lbltest" Content="Fish Line Graph" FontSize="14" Margin="72,0,459,0" FontWeight="Bold" Height="26"/>
+                        <materialDesign:PackIcon Kind="Graph" Width="34" Height="30" Margin="10, -24, 0, 0" VerticalAlignment="Center" Foreground="#FF5B88FF"/>
+                    </StackPanel>
+                    <Label x:Name="lblblt" Content="Filter By Date(From - To)" Margin="2,71,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.ColumnSpan="2"/>
+                    <Border Margin="103,69,672,382" Width="155" Background="#FF5F8DF7" CornerRadius="7" Grid.Column="1"/>
+                    <Border Margin="280,69,495,382" Width="155" Background="#FF5F8DF7" CornerRadius="7" Grid.Column="1"/>
+                    <DatePicker x:Name="dateForFish1" x:FieldModifier="public" HorizontalAlignment="Left" Margin="111,71,0,0" VerticalAlignment="Top" Width="137" FirstDayOfWeek="Monday" BorderBrush="White" Grid.Column="1"/>
+                    <DatePicker x:Name="dateForFish2" x:FieldModifier="public" HorizontalAlignment="Left" Margin="286,71,0,0" VerticalAlignment="Top" Width="137" FirstDayOfWeek="Monday" BorderBrush="White" Grid.Column="1"/>
+                    <Button x:Name="testas" Content="  Load Data" Margin="649,68,0,0" VerticalAlignment="Top" Width="125" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnShowFishData" Grid.Column="1">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Border Margin="446,66,297,385" Background="#FF5F8DF7" CornerRadius="7" Grid.Column="1">
+                        <ComboBox x:Name="cmbSelectClass" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="167" Background="#FF5F8DF7"  Foreground="White" BorderBrush="White" BorderThickness="0" Margin="10,0,0,0">
+                           
+                        </ComboBox>
+                    </Border>
+                    <StackPanel x:Name="lineChart" HorizontalAlignment="Left" Height="374" Margin="26,101,0,0" VerticalAlignment="Top" Width="888" Background="White" Grid.Column="1"/>
+                    <Custom:PackIconMaterial Margin="461,58,227,426" Kind="DatabaseCheck"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385" Grid.Column="1"/>
+                    <Custom:PackIconMaterial Margin="663,77,255,389" Kind="DatabasePlus"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385" Grid.Column="1"/>
+                    <Button x:Name="print" Content="  Print Report" Margin="790,68,0,0" VerticalAlignment="Top" Width="125" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnPrintData_Click" Grid.Column="1">
+                        <Button.Template>
+                            <ControlTemplate TargetType="{x:Type Button}">
+                                <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                                    <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Custom:PackIconMaterial Margin="808,77,110,389" Kind="Printer"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385" Grid.Column="1"/>
+                    <Label x:Name="lblblt_Copy" Content="Species" Margin="460,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
                 </Grid>
 
             </TabItem>

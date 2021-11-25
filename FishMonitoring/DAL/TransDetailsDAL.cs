@@ -21,16 +21,20 @@ namespace Project.DAL
 
             try
             {
-                string sql = "INSERT INTO TransDetails (FishID, transno, weight, quantity, DealID, added_date) VALUES (@FishID, @transno, @weight, @quantity, @DealID, @added_date)";
+                string sql = "INSERT INTO TransDetails (Species, transno, weight, length, added_date, vessels, fisherman, quantity) VALUES ( @Species, @transno, @weight, @length, @added_date, @vessels, @fisherman, @quantity)";
 
                 SqlCommand cmd = new SqlCommand(sql, db.con);
 
-                cmd.Parameters.AddWithValue("@FishID", td.FishID);
+               
+                cmd.Parameters.AddWithValue("@Species", td.Species);
                 cmd.Parameters.AddWithValue("@transno", td.transno);
-                cmd.Parameters.AddWithValue("@weight", td.FishWeight);
-                cmd.Parameters.AddWithValue("@quantity", td.FishQuantity);
-                cmd.Parameters.AddWithValue("@DealID", td.DealID);
+                cmd.Parameters.AddWithValue("@weight", td.weight);
+                cmd.Parameters.AddWithValue("@length", td.length);
                 cmd.Parameters.AddWithValue("@added_date", td.added_date);
+                cmd.Parameters.AddWithValue("@DealID", td.DealID);
+                cmd.Parameters.AddWithValue("@vessels", td.vessels);
+                cmd.Parameters.AddWithValue("@fisherman", td.fisherman);
+                cmd.Parameters.AddWithValue("@quantity", td.quantity);
 
                 db.con.Open();
 
@@ -49,7 +53,6 @@ namespace Project.DAL
             catch(Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                Console.WriteLine("Error in TransDetails");
             }
             finally
             {

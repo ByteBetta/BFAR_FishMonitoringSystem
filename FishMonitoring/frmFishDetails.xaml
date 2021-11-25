@@ -14,117 +14,69 @@
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="328*"/>
-            <RowDefinition Height="359*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
-        <Border Margin="-200,9,-67,10" CornerRadius="20" Background="White" BorderThickness="1" BorderBrush="#33D6D6D6" Grid.RowSpan="2" Grid.ColumnSpan="2">
+        <Border Margin="-100,13,-149,6" CornerRadius="20" Background="White" BorderThickness="1" BorderBrush="#33D6D6D6" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <Border.Effect>
                 <DropShadowEffect Direction="-90" Opacity="0.1"/>
             </Border.Effect>
         </Border>
-        <TextBox x:Name="txtFishID" HorizontalAlignment="Left" Height="23" Margin="-121,116,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="13" RenderTransformOrigin="0.5,0.5" Grid.Row="1"
->
-            <TextBox.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleX="-1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBox.RenderTransform>
-        </TextBox>
-        <Label x:Name="lblManufactor" Content="Fish Name" HorizontalAlignment="Left" Margin="-148,51,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblName" Content="Scientific Name" HorizontalAlignment="Left" Margin="-148,94,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblPrice" Content="Max Length" HorizontalAlignment="Left" Margin="-148,140,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblPCode" Content="Common Length" HorizontalAlignment="Left" Margin="5,140,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDescription" Content="Remark" HorizontalAlignment="Left" Margin="-148,232,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblDealer" Content="Local Name" HorizontalAlignment="Left" Margin="335,140,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblSearch" Content="Search Fish" HorizontalAlignment="Left" Margin="-148,324,0,0" VerticalAlignment="Top" Grid.RowSpan="2"/>
-        <Label x:Name="lblModel" Content="Order Name" HorizontalAlignment="Left" Margin="334,51,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblCategory" Content="Family Name" HorizontalAlignment="Left" Margin="334,94,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblRelease" Content="Dorsal Spine" HorizontalAlignment="Left" Margin="-148,185,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblWarranty" Content="Salinity" HorizontalAlignment="Left" Margin="334,185,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="lblQuantity" Content="Occurrence" HorizontalAlignment="Left" Margin="528,185,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtFishName" HorizontalAlignment="Left" Height="30" Margin="-57,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <TextBox x:Name="txtFishID" TextAlignment="Center" HorizontalAlignment="Center" Height="23" Margin="153,265,-54,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="48" RenderTransformOrigin="0.5,0.5" Grid.Column="1"></TextBox>
+
+
+        <Label x:Name="lblManufactor" Content="Fish Name" HorizontalAlignment="Left" Margin="-66,55,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblName" Content="Species Name" HorizontalAlignment="Left" Margin="-66,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblDescription" Content="Short&#xD;&#xA;Description" HorizontalAlignment="Left" Margin="-66,256,0,0" VerticalAlignment="Top" Height="65" Width="74"/>
+        <Label x:Name="lblDealer" Content="Local Name" HorizontalAlignment="Left" Margin="417,144,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblSearch" Content="Search Fish" HorizontalAlignment="Left" Margin="-66,0,0,0" VerticalAlignment="Top" Grid.Row="1"/>
+        <Label x:Name="lblModel" Content="Order Name" HorizontalAlignment="Left" Margin="415,55,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblCategory" Content="Family Name" HorizontalAlignment="Left" Margin="415,98,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lblQuantity" Content="Occurrence" HorizontalAlignment="Left" Margin="415,186,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFishName" HorizontalAlignment="Left" Height="30" Margin="25,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <TextBox x:Name="txtScientificName" HorizontalAlignment="Left" Height="30" Margin="-57,91,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <TextBox x:Name="txtSpeciesName" HorizontalAlignment="Left" Height="30" Margin="25,95,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <TextBox x:Name="txtMaxLength" HorizontalAlignment="Left" Height="30" Margin="-57,140,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <TextBox x:Name="txtShortDescription" HorizontalAlignment="Left" Height="57" Margin="25,255,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <TextBox x:Name="txtCommonLength" HorizontalAlignment="Left" Height="30" Margin="107,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="48" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="25,324,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="770" TextChanged="txtSearch_TextChanged" BorderThickness="1" FontSize="11" BorderBrush="#33000000" Grid.RowSpan="2" Grid.ColumnSpan="2">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <TextBox x:Name="txtRemark" HorizontalAlignment="Left" Height="84" Margin="-57,231,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <TextBox x:Name="txtOrderName" HorizontalAlignment="Left" Height="30" Margin="498,52,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="297" BorderThickness="1" FontSize="11" BorderBrush="#33000000" Grid.ColumnSpan="2">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="-57,320,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="770" TextChanged="txtSearch_TextChanged" BorderThickness="1" FontSize="11" BorderBrush="#33000000" Grid.RowSpan="2">
+        <TextBox x:Name="txtOccurrence" HorizontalAlignment="Left" Height="30" Margin="498,186,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300" BorderThickness="1" FontSize="11" BorderBrush="#33000000" Grid.ColumnSpan="2">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <TextBox x:Name="txtOrderName" HorizontalAlignment="Left" Height="30" Margin="416,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="297" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        <TextBox x:Name="txtDorsalSpine" HorizontalAlignment="Left" Height="30" Margin="-57,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="49" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        <TextBox x:Name="txtSalinity" HorizontalAlignment="Left" Height="30" Margin="416,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="100" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        <TextBox x:Name="txtOccurrence" HorizontalAlignment="Left" Height="30" Margin="603,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="113" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        <DataGrid x:Name="grid_Product" Margin="-182,31,-35,0" VerticalAlignment="Top" Height="264" BorderThickness="1" SelectionChanged="grid_Product_SelectionChanged" BorderBrush="#00000000" Background="White" Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="100"  IsReadOnly="True" CanUserReorderColumns="False" HeadersVisibility="All"/>
-        <Label x:Name="lblReorder" Content="Location" HorizontalAlignment="Left" Margin="334,225,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TxtLocation" HorizontalAlignment="Left" Height="30" Margin="416,222,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="300" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
-            <TextBox.Resources>
-                <Style TargetType="{x:Type Border}">
-                    <Setter Property="CornerRadius" Value="4"/>
-                </Style>
-            </TextBox.Resources>
-        </TextBox>
-        <Button x:Name="btnInsert" Content="Insert"  RenderTransformOrigin="0.518,0.451" BorderThickness="1" Click="btnInsert_Click" Margin="168,304,457,20" Height="35" Width="110" Background="#FF5E89FB" Grid.Row="1">
+        <DataGrid x:Name="grid_Product" Margin="-74,35,-117,0" VerticalAlignment="Top" Height="264" BorderThickness="1" SelectionChanged="grid_Product_SelectionChanged" BorderBrush="#00000000" Background="White" Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="100"  IsReadOnly="True" CanUserReorderColumns="False" HeadersVisibility="All" RowHeight="100"/>
+        <Button x:Name="btnInsert" Content="Insert"  RenderTransformOrigin="0.518,0.451" BorderThickness="1" Click="btnInsert_Click" Margin="250,308,375,13" Height="35" Width="110" Background="#FF5E89FB" Grid.Row="1">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
@@ -133,7 +85,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="btn_ShowData" Content="  Show Data"   BorderThickness="1" Click="btnInsert_Click" Margin="53,305,572,19" Height="35" Width="110" Background="#FF5E89FB" Grid.Row="1">
+        <Button x:Name="btnUpdate" Content="Update" Margin="365,308,260,13" RenderTransformOrigin="0.5,0.5" Click="btnUpdate_Click" Width="110" Height="35" Background="#FF5E89FB" Grid.Row="1">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
@@ -142,16 +94,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="btnUpdate" Content="Update" Margin="283,304,342,20" RenderTransformOrigin="0.5,0.5" Click="btnUpdate_Click" Width="110" Height="35" Background="#FF5E89FB" Grid.Row="1">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
-                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d1:DesignUseLayoutRounding="True"/>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
-        <Button x:Name="btnDelete" Content="Delete" Margin="398,304,227,20" RenderTransformOrigin="0.518,0.451" Click="btnDelete_Click" Width="110" Height="35" Background="#FF5E89FB" Grid.Row="1">
+        <Button x:Name="btnDelete" Content="Delete" Margin="480,308,145,13" RenderTransformOrigin="0.518,0.451" Click="btnDelete_Click" Width="110" Height="35" Background="#FF5E89FB" Grid.Row="1">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
@@ -161,7 +104,7 @@
             </Button.Template>
         </Button>
 
-        <Button x:Name="btnSelect" Content="Select Image" HorizontalAlignment="Left" Height="32" Margin="416,265,0,0" VerticalAlignment="Top" Width="290" Foreground="White" Background="#FF5F8DF7" Click="btnSelect_Click" RenderTransformOrigin="0.492,0.543" BorderBrush="#FF5F8DF7">
+        <Button x:Name="btnSelect" Content="Select Image" HorizontalAlignment="Left" Height="32" Margin="498,269,0,0" VerticalAlignment="Top" Width="290" Foreground="White" Background="#FF5F8DF7" Click="btnSelect_Click" RenderTransformOrigin="0.492,0.543" BorderBrush="#FF5F8DF7" Grid.ColumnSpan="2">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="#FFC3C3C3" BorderThickness="0" Background="{TemplateBinding Background}" CornerRadius="7" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
@@ -171,18 +114,18 @@
             </Button.Template>
         </Button>
 
-        <Border HorizontalAlignment="Left" Margin="9,0,-35,79" VerticalAlignment="Bottom" Width="173"  Height="198" BorderThickness="1" CornerRadius="20,20,20,20" BorderBrush="#FFD1D1D1" Grid.Column="1">
+        <Border HorizontalAlignment="Left" Margin="85,0,-117,68" VerticalAlignment="Bottom" Width="179"  Height="226" BorderThickness="1" CornerRadius="20,20,20,20" BorderBrush="#FFD1D1D1" Grid.Column="1" RenderTransformOrigin="0.509,0.389">
             <Border.Background>
-                <ImageBrush x:Name="imgBox" ImageSource="https://i.ibb.co/w4kK8gp/laptop.png" Stretch="UniformToFill" />
+                <ImageBrush x:Name="imgBox" ImageSource="https://i.ibb.co/w4kK8gp/laptop.png" Stretch="Uniform" />
             </Border.Background>
         </Border>
-        <Label x:Name="lblImage" Content="Image" HorizontalAlignment="Left" Margin="335,269,0,0" VerticalAlignment="Top"/>
-        <Border Margin="416,94,22,207" Background="#FF5F8DF7" CornerRadius="5">
-            <ComboBox x:Name="cmbFamilyName" Margin="0,2,-12,0" VerticalAlignment="Stretch" BorderBrush="White" HorizontalAlignment="Left" Width="309" SelectionChanged="CmbFamilyName_SelectionChanged"/>
+        <Label x:Name="lblImage" Content="Image" HorizontalAlignment="Left" Margin="418,273,0,0" VerticalAlignment="Top"/>
+        <Border Margin="498,98,87,203" Background="#FF5F8DF7" CornerRadius="5" Grid.ColumnSpan="2">
+            <ComboBox x:Name="cmbFamilyName" Margin="5,2,0,0" VerticalAlignment="Stretch" BorderBrush="White" HorizontalAlignment="Left" Width="287" SelectionChanged="CmbFamilyName_SelectionChanged"/>
         </Border>
-        <materialDesign:PackIcon x:Name="MainUsr" Kind="Fish" Width="24" Height="24" Margin="-156,18,0,286" VerticalAlignment="Center" Foreground="#FF428DFF"/>
-        <Label Content="Fish Details" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-120,17,0,0" FontSize="14" FontWeight="Bold" Foreground="#FF5D9DFF"/>
-        <Button x:Name="btnPrint" Content="   Report" HorizontalAlignment="Left" Height="24" Margin="637,16,0,0" VerticalAlignment="Top" Width="76" Background="#FF5E89FB" Click="btnPrint_Click">
+        <materialDesign:PackIcon x:Name="MainUsr" Kind="Fish" Width="24" Height="24" Margin="-74,24,0,283" VerticalAlignment="Center" Foreground="#FF428DFF"/>
+        <Label Content="Fish Details" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="-38,21,0,0" FontSize="14" FontWeight="Bold" Foreground="#FF5D9DFF"/>
+        <Button x:Name="btnPrint" Content="   Report" HorizontalAlignment="Left" Height="24" Margin="719,20,0,0" VerticalAlignment="Top" Width="76" Background="#FF5E89FB" Click="btnPrint_Click" Grid.ColumnSpan="2">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="5" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
@@ -191,43 +134,62 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Custom:PackIconMaterial  Kind="Printer" Foreground="#FFF9F9F9" Width="13" Height="13" Margin="644,22,0,0"/>
-        <Custom:PackIconMaterial  Kind="Image" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="434,274,0,0"/>
-        <Custom:PackIconMaterial  Kind="PlusCircle" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="179,315,0,0" Grid.Row="1"/>
-        <Custom:PackIconMaterial  Kind="Update" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="300,315,0,0" Grid.Row="1"/>
-        <Custom:PackIconMaterial  Kind="Delete" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="416,315,0,0" Grid.Row="1"/>
-        <Custom:PackIconMaterial  Kind="ChartArc" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="61,315,0,0" Grid.Row="1"/>
-        <Label x:Name="lblBarcode" Content="Dorsal Soft Ray" HorizontalAlignment="Left" Margin="5,185,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtDorsalSoftray" HorizontalAlignment="Left" Height="30" Margin="107,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="48" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <Custom:PackIconMaterial  Kind="Printer" Foreground="#FFF9F9F9" Width="13" Height="13" Margin="726,26,0,0" Grid.ColumnSpan="2"/>
+        <Custom:PackIconMaterial  Kind="Image" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="516,278,0,0"/>
+        <Custom:PackIconMaterial  Kind="PlusCircle" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="261,319,0,0" Grid.Row="1"/>
+        <Custom:PackIconMaterial  Kind="Update" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="382,319,0,0" Grid.Row="1"/>
+        <Custom:PackIconMaterial  Kind="Delete" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="498,319,0,0" Grid.Row="1"/>
+        <Custom:PackIconMaterial  Kind="ChartArc" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="143,319,0,0" Grid.Row="1"/>
+        <TextBox x:Name="txtLocalName" HorizontalAlignment="Left" Height="30" Margin="498,142,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="297" BorderThickness="1" FontSize="11" BorderBrush="#33000000" Grid.ColumnSpan="2">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Label x:Name="lblPCode_Copy1" Content="Anal Spine" HorizontalAlignment="Left" Margin="160,140,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="txtAnalSpine" HorizontalAlignment="Left" Height="30" Margin="246,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="48" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <Label x:Name="lblDescription_Copy" Content="Measurement" HorizontalAlignment="Left" Margin="-66,172,0,0" VerticalAlignment="Top" Height="31" Width="83"/>
+        <TextBox x:Name="txtMeasurement" HorizontalAlignment="Left" Height="30" Margin="25,173,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Label x:Name="lblBarcode_Copy1" Content="Anal Soft Ray" HorizontalAlignment="Left" Margin="160,185,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="TxtAnalSoftRay" HorizontalAlignment="Left" Height="30" Margin="246,182,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="48" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <Label x:Name="lblDescription_Copy1" Content="Biology" HorizontalAlignment="Left" Margin="-66,133,0,0" VerticalAlignment="Top" Height="26" Width="74"/>
+        <TextBox x:Name="txtBiology" HorizontalAlignment="Left" Height="36" Margin="25,132,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <TextBox x:Name="txtLocalName" HorizontalAlignment="Left" Height="30" Margin="416,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="297" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <Label x:Name="lblDescription_Copy2" Content="Distribution" HorizontalAlignment="Left" Margin="-66,213,0,0" VerticalAlignment="Top" Height="31" Width="83"/>
+        <TextBox x:Name="txtDistribution" HorizontalAlignment="Left" Height="30" Margin="25,214,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
                 </Style>
             </TextBox.Resources>
         </TextBox>
+        <Label x:Name="lblDescription_Copy3" Content="Environment" HorizontalAlignment="Left" Margin="412,232,0,0" VerticalAlignment="Top" Height="31" Width="75" RenderTransformOrigin="0.92,0.516"/>
+        <TextBox x:Name="txtEnvironment" HorizontalAlignment="Left" Height="30" Margin="495,228,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="303" BorderThickness="1" FontSize="11" BorderBrush="#33000000" Grid.ColumnSpan="2">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="4"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Button x:Name="btnUploadLive" Content="Upload Live"  RenderTransformOrigin="0.518,0.451" BorderThickness="1" Click="btnUpload_Click" Margin="147,304,-123,17" Height="35" Background="#FF5E89FB" Grid.Row="1" Grid.Column="1">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d1:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Custom:PackIconMaterial  Kind="Upload" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="161,316,-28,0" Grid.Row="1" Grid.Column="1"/>
 
 
     </Grid>

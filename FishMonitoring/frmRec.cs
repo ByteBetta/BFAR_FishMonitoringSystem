@@ -19,11 +19,11 @@ namespace WpfPosApp
         SqlCommand cm = new SqlCommand();
         MyConnection dbcon = new MyConnection();
         SqlDataReader dr;
-        frmPurchase purchase;
+        frmAddTransaction purchase;
         string store = "PekrxProd Shop";
         string address = "Tbilisi, Georgia";
 
-        public frmRec(frmPurchase frm2)
+        public frmRec(frmAddTransaction frm2)
         {
             InitializeComponent();
             cn = new SqlConnection(dbcon.MyCon());

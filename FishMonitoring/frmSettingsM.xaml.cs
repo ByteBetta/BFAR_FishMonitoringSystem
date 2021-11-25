@@ -42,7 +42,7 @@ namespace WpfPosApp
             m.dshIcn.Foreground = pbrush;
             m.dshText.Foreground = pbrush;
             m.empIcn.Foreground = pbrush;
-            m.empTxt.Foreground = pbrush;
+            m.transtxt.Foreground = pbrush;
             m.usrIcn.Foreground = pbrush;
             m.usrTxt.Foreground = pbrush;
             m.ctgIcn.Foreground = pbrush;
@@ -70,7 +70,7 @@ namespace WpfPosApp
             m.dshIcn.Foreground = pbrush;
             m.dshText.Foreground = pbrush;
             m.empIcn.Foreground = pbrush;
-            m.empTxt.Foreground = pbrush;
+            m.transtxt.Foreground = pbrush;
             m.usrIcn.Foreground = pbrush;
             m.usrTxt.Foreground = pbrush;
             m.ctgIcn.Foreground = pbrush;

@@ -10,13 +10,20 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using WpfPosApp;
-
+using Google.Cloud.Firestore;
+using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
+using Firebase.Storage;
+using Image = System.Drawing.Image;
 
 namespace Fish.DAL
 {
     class FishDAL
     {
         MyConnection db = new MyConnection();
+        FirestoreDb firestoreDatabase;
+
         #region Select Method for Product Module
         public DataTable Select()
         {
@@ -24,7 +31,7 @@ namespace Fish.DAL
             DataTable dt = new DataTable();
             try
             {
-                String sql = "select FishID [FishID], ScientificName [Scientific Name], OrderName [Order Name], FamilyName [Family Name], LocalName [Local Name], FishName [Fish Name], MaxLength [Max Length], CommonLength [Common Length], AnalSpine [Anal Spine], AnalSoftRay [Anal Soft Ray], DorsalSpine [Dorsal Spine], DorsalSoftRay [Dorsal Soft Ray], Remark,  Salinity, Location, Occurance, Img,  added_time [Added Time], added_by [Added By]  from FishDetails";
+                String sql = "select FishID [FishID], Species [Species], OrderName [Order Name], FamilyName [Family Name], LocalName [Local Name], FishBaseName [Fish Name], ShortDescription [Description], Biology [Biology], Measurement [Measurement], Distribution [Distribution], Environment [Environment], Occurance, Img, added_time [Added Time], added_by [Added By]  from FishDetails";
 
                 SqlCommand cmd = new SqlCommand(sql, db.con);
 
@@ -86,27 +93,25 @@ namespace Fish.DAL
 
             try
             {
-                String sql = "INSERT INTO FishDetails (ScientificName, MaxLength, CommonLength, AnalSpine, AnalSoftRay, DorsalSpine, DorsalSoftRay, Remark, OrderName, FamilyName, LocalName, Salinity, Location, Occurance, FishName, Img, added_time, added_by) VALUES (@ScientificName, @MaxLength, @CommonLength, @AnalSpine, @AnalSoftRay, @DorsalSpine, @DorsalSoftRay, @Remark, @OrderName, @FamilyName, @LocalName, @Salinity,@FishName, @Location, @Occurance, @Img, @added_time, @added_by)";
+                String sql = "INSERT INTO FishDetails (Species, ShortDescription, Biology, Measurement, OrderName, FamilyName, LocalName, Distribution, Environment, FishBaseName, Occurance, Img, added_time, added_by) " +
+                "VALUES (@Species, @ShortDescription, @Biology, @Measurement, @OrderName, @FamilyName, @LocalName, @Distribution, @Environment, @FishBaseName," +
+                "@Occurance, @Img, @added_time, @added_by)";
                 SqlCommand cmd = new SqlCommand(sql, db.con);
 
-                cmd.Parameters.AddWithValue("@ScientificName", p.ScientificName);
-                cmd.Parameters.AddWithValue("@MaxLength", p.MaxLength);
-                cmd.Parameters.AddWithValue("@CommonLength", p.CommonLength);
-                cmd.Parameters.AddWithValue("@AnalSpine", p.AnalSpine);
-                cmd.Parameters.AddWithValue("@AnalSoftRay", p.AnalSoftRay);
-                cmd.Parameters.AddWithValue("@DorsalSpine", p.DorsalSpine);
-                cmd.Parameters.AddWithValue("@DorsalSoftRay", p.DorsalSoftRay);
-                cmd.Parameters.AddWithValue("@Remark", p.Remark);
+                cmd.Parameters.AddWithValue("@Species", p.Species);
+                cmd.Parameters.AddWithValue("@ShortDescription", p.ShortDescription);
+                cmd.Parameters.AddWithValue("@Biology", p.Biology);
+                cmd.Parameters.AddWithValue("@Measurement", p.Measurement);
                 cmd.Parameters.AddWithValue("@OrderName", p.OrderName);
                 cmd.Parameters.AddWithValue("@FamilyName", p.FamilyName);
+                cmd.Parameters.AddWithValue("@Distribution", p.Distribution);
                 cmd.Parameters.AddWithValue("@LocalName", p.LocalName);
-                cmd.Parameters.AddWithValue("@Salinity", p.Salinity);
+                cmd.Parameters.AddWithValue("@Environment", p.Environment);
+                cmd.Parameters.AddWithValue("@FishBaseName", p.FishBaseName);
+                cmd.Parameters.AddWithValue("@Occurance", p.Occurance);
                 cmd.Parameters.AddWithValue("@Img", p.Img);
                 cmd.Parameters.AddWithValue("@added_time", p.added_time);
                 cmd.Parameters.AddWithValue("@added_by", p.added_by);
-                cmd.Parameters.AddWithValue("@Location", p.Location);
-                cmd.Parameters.AddWithValue("@FishName", p.FishName);
-                cmd.Parameters.AddWithValue("@Occurance", p.Occurance);
 
                 db.con.Open();
 
@@ -145,28 +150,29 @@ namespace Fish.DAL
                 if (MessageBox.Show("Click YES to save the changes", "CONFIRM", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
 
-                    String sql = "UPDATE Product SET ScientificName=@ScientificName, MaxLength=@MaxLength, CommonLength=@CommonLength, AnalSpine=@AnalSpine, AnalSoftRay=@AnalSoftRay, DorsalSpine=@DorsalSpine, DorsalSoftRay=@DorsalSoftRay, Remark=@Remark, OrderName=@OrderName, FamilyName=@FamilyName, LocalName=@LocalName ,Img = @Img,added_time=@added_time,added_by=@added_by, Salinity=@Salinity, Location=@Location, FishName=@FishName  WHERE FishID=@FishID";
+                    String sql = "UPDATE FishDetails SET Species=@Species, ShortDescription=@ShortDescription, Biology=@Biology, Measurement=@Measurement, " +
+                        " OrderName=@OrderName, FamilyName=@FamilyName, LocalName=@LocalName, Distribution=@Distribution," +
+                        " Environment=@Environment ,FishBaseName = @FishBaseName ,added_time=@added_time,added_by=@added_by, Occurance=@Occurance, Img=@Img Where FishID=@FishID";
 
 
                     SqlCommand cmd = new SqlCommand(sql, db.con);
 
-                    cmd.Parameters.AddWithValue("@ScientificName", p.ScientificName);
-                    cmd.Parameters.AddWithValue("@MaxLength", p.MaxLength);
-                    cmd.Parameters.AddWithValue("@CommonLength", p.CommonLength);
-                    cmd.Parameters.AddWithValue("@AnalSpine", p.AnalSpine);
-                    cmd.Parameters.AddWithValue("@AnalSoftRay", p.AnalSoftRay);
-                    cmd.Parameters.AddWithValue("@DorsalSpine", p.DorsalSpine);
-                    cmd.Parameters.AddWithValue("@DorsalSoftRay", p.DorsalSoftRay);
-                    cmd.Parameters.AddWithValue("@Remark", p.Remark);
+                    cmd.Parameters.AddWithValue("@FishID", p.FishID);
+                    cmd.Parameters.AddWithValue("@Species", p.Species);
+                    cmd.Parameters.AddWithValue("@ShortDescription", p.ShortDescription);
+                    cmd.Parameters.AddWithValue("@Biology", p.Biology);
+                    cmd.Parameters.AddWithValue("@Measurement", p.Measurement);
                     cmd.Parameters.AddWithValue("@OrderName", p.OrderName);
                     cmd.Parameters.AddWithValue("@FamilyName", p.FamilyName);
                     cmd.Parameters.AddWithValue("@LocalName", p.LocalName);
-                    cmd.Parameters.AddWithValue("@Salinity", p.Salinity);
+                    cmd.Parameters.AddWithValue("@Distribution", p.Distribution);
+                    cmd.Parameters.AddWithValue("@Environment", p.Environment);
+                    cmd.Parameters.AddWithValue("@FishBaseName", p.FishBaseName);
+                    cmd.Parameters.AddWithValue("@Occurance", p.Occurance);
                     cmd.Parameters.AddWithValue("@Img", p.Img);
                     cmd.Parameters.AddWithValue("@added_time", p.added_time);
                     cmd.Parameters.AddWithValue("@added_by", p.added_by);
-                    cmd.Parameters.AddWithValue("@Location", p.Location);
-                    cmd.Parameters.AddWithValue("@FishName", p.FishName);
+
 
                     db.con.Open();
 
@@ -253,10 +259,10 @@ namespace Fish.DAL
 
                 if (dt.Rows.Count > 0)
                 {
-                    p.FishName = dt.Rows[0]["FishName"].ToString();
-                    p.ScientificName = dt.Rows[0]["ScientificName"].ToString();
-                    p.Img = dt.Rows[0]["Img"].ToString();
-                    p.Salinity = dt.Rows[0]["Salinity"].ToString();
+                   // p.FishName = dt.Rows[0]["FishName"].ToString();
+                    //p.ScientificName = dt.Rows[0]["ScientificName"].ToString();
+                    //p.Img = dt.Rows[0]["Img"].ToString();
+                    //p.Salinity = dt.Rows[0]["Salinity"].ToString();
                 }
             }
             catch (Exception ex)
@@ -489,6 +495,88 @@ namespace Fish.DAL
             return dt;
         }
         #endregion
+
+
+        public void ConnecttoFirebase()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"bfar-testproj.json";
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+
+            firestoreDatabase = FirestoreDb.Create("bfar-testproj");
+            MessageBox.Show("Connection Success");
+        }
+
+
+
+        
+
+        public async void AddFishtoFirebaseAsync(FishBLL fishdata)
+        {
+            string paths = System.Windows.Forms.Application.StartupPath.Substring(0, System.Windows.Forms.Application.StartupPath.Length - 10);
+            Console.WriteLine(fishdata.Img.ToString());
+            string imagePath = paths + "\\Images\\Product\\" + fishdata.Img.ToString();
+            Console.WriteLine(imagePath);
+
+            var stream = File.Open(imagePath, FileMode.Open);
+
+            
+            var task = new FirebaseStorage("bfar-testproj.appspot.com")
+                     .Child("data")
+                     .Child("random")
+                     .Child(fishdata.Img.ToString() +".png")
+                     .PutAsync(stream);
+
+            task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progress: {e.Percentage} %");
+
+           
+            
+            
+
+            try
+            {
+                DocumentReference usercollection = firestoreDatabase.Collection("FishList").Document(fishdata.FishID.ToString());
+                Dictionary<string, object> userdata = new Dictionary<string, object>()
+            {
+                    { nameof(fishdata.FishID).ToString() , fishdata.FishID.ToString()},
+                    { nameof(fishdata.Species).ToString() , fishdata.Species.ToString()},
+                     { nameof(fishdata.ShortDescription).ToString() , fishdata.ShortDescription.ToString()},
+                    { nameof(fishdata.Biology).ToString() , fishdata.Biology.ToString()},
+                    { nameof(fishdata.Measurement).ToString() , fishdata.Measurement.ToString()},
+                    { nameof(fishdata.OrderName).ToString() , fishdata.OrderName.ToString()},
+                    { nameof(fishdata.FamilyName).ToString() , fishdata.FamilyName.ToString()},
+                    { nameof(fishdata.LocalName).ToString() , fishdata.LocalName.ToString()},
+                    { nameof(fishdata.Distribution).ToString() , fishdata.Distribution.ToString()},
+                    { nameof(fishdata.Environment).ToString() , fishdata.Environment.ToString()},
+                    { nameof(fishdata.FishBaseName).ToString() , fishdata.FishBaseName.ToString()},
+                    { nameof(fishdata.Occurance).ToString() , fishdata.Occurance.ToString()},
+                    { nameof(fishdata.Img).ToString(),  await task},
+                   
+
+                /*
+            { nameof(userlist.UserID).ToString() , userlist.UserID.ToString()},
+            { nameof(userlist.Added_By).ToString() , userlist.Added_By.ToString() },
+            { nameof(userlist.Added_Date).ToString() , userlist.Added_Date.ToString() },
+            { nameof(userlist.Birth_Date).ToString() , userlist.Birth_Date.ToString() },
+            { nameof(userlist.Gender).ToString() , userlist.Gender.ToString() },
+            { nameof(userlist.Img).ToString() , userlist.Img.ToString() },
+            { nameof(userlist.Name).ToString() , userlist.Name.ToString() },
+            { nameof(userlist.Password).ToString() , userlist.Password.ToString() },
+            { nameof(userlist.Surname).ToString() , userlist.Surname.ToString() },
+            { nameof(userlist.UserName).ToString() , userlist.UserName.ToString() },
+            { nameof(userlist.UserType).ToString() , userlist.UserType }
+            */
+            };
+                Console.WriteLine(nameof(fishdata.FishID).ToString());
+                await usercollection.SetAsync(userdata);
+
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+        }
 
 
 

@@ -1,4 +1,5 @@
-﻿using Project.BLL;
+﻿using Newtonsoft.Json;
+using Project.BLL;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -10,12 +11,17 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using WpfPosApp;
 using WpfPosApp.BLL;
+using Google.Cloud.Firestore;
+
 
 namespace WpfPosApp.DAL
 {
     class userDAL
     {
         MyConnection db = new MyConnection();
+        FirestoreDb firestoreDatabase;
+        UserBLL u = new UserBLL();
+
         #region Select Data from Database
         public DataTable Select()
         {
@@ -187,6 +193,67 @@ namespace WpfPosApp.DAL
 
             return isSuccess;
         }
+
+        #endregion
+
+        #region Datatable to JSON
+
+        public string DataTableToJSONWithJSONNet(UserBLL table)
+        {
+            string JSONString = string.Empty;
+            JSONString = JsonConvert.SerializeObject(table);
+            return JSONString;
+        }
+
+
+
+
+
+        #endregion
+
+        #region firebase integration
+
+        public void ConnecttoFirebase()
+        {
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"bfar-testproj.json";
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+
+            firestoreDatabase = FirestoreDb.Create("bfar-testproj");
+            MessageBox.Show("Connection Success");
+        }
+
+
+        public void AddUsertoFirebase(UserBLL userlist)
+        {
+            try
+            {
+                DocumentReference usercollection = firestoreDatabase.Collection("Users").Document(userlist.UserID.ToString());
+                Dictionary<string, object> userdata = new Dictionary<string, object>()
+            {
+                { nameof(userlist.UserID).ToString() , userlist.UserID.ToString()},
+                { nameof(userlist.Added_By).ToString() , userlist.Added_By.ToString() },
+                { nameof(userlist.Added_Date).ToString() , userlist.Added_Date.ToString() },
+                { nameof(userlist.Birth_Date).ToString() , userlist.Birth_Date.ToString() },
+                { nameof(userlist.Gender).ToString() , userlist.Gender.ToString() },
+                { nameof(userlist.Img).ToString() , userlist.Img.ToString() },
+                { nameof(userlist.Name).ToString() , userlist.Name.ToString() },
+                { nameof(userlist.Password).ToString() , userlist.Password.ToString() },
+                { nameof(userlist.Surname).ToString() , userlist.Surname.ToString() },
+                { nameof(userlist.UserName).ToString() , userlist.UserName.ToString() },
+                { nameof(userlist.UserType).ToString() , userlist.UserType }
+            };
+                Console.WriteLine(nameof(userlist.UserID).ToString());
+                usercollection.SetAsync(userdata);
+
+
+            } catch (Exception e)
+            {
+                Console.WriteLine(e);
+            }
+
+        }
+
+
 
         #endregion
 

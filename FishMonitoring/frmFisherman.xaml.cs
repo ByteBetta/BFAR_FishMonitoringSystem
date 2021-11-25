@@ -86,14 +86,14 @@ namespace WpfPosApp
 
             if (success == true)
             {
-                MessageBox.Show("Dealer Added Succesfully");
+                MessageBox.Show("Fisherman Added Succesfully");
                 Clear();
                 DataTable dt = dcDal.Select();
                 gridDealer.ItemsSource = dt.DefaultView;
             }
             else
             {
-                MessageBox.Show("Failed to Add New Dealer");
+                MessageBox.Show("Fisherman to Add New Dealer");
 
             }
         }
@@ -197,6 +197,36 @@ namespace WpfPosApp
                 //Show all the Dealer
                 DataTable dt = dcDal.Select();
                 gridDealer.ItemsSource = dt.DefaultView;
+            }
+        }
+
+        private void BtnUpload_Click(object sender, RoutedEventArgs e)
+        {
+            this.dcDal.ConnecttoFirebase();
+            DataTable dt = dcDal.Select();
+
+            try
+            {
+                foreach (DataRow data in dt.Rows)
+                {
+
+
+                    dc.DealID = Convert.ToInt32(data["DealID"]);
+                    dc.name = data["Company Name"].ToString();
+                    dc.person = data["person"].ToString();
+                    dc.email = data["Email"].ToString();
+                    dc.contact = data["Mobile"].ToString();
+                    dc.address = data["Address"].ToString();
+
+
+
+                    dcDal.AddFishtoFirebaseAsync(dc);
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
             }
         }
     }

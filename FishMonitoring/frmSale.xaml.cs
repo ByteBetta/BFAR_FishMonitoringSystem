@@ -34,7 +34,7 @@ namespace WpfPosApp
     {
         MyConnection db = new MyConnection();
         SqlDataReader dr;
-        frmPurchase purchase;
+        frmAddTransaction purchase;
 
 
         string imgLoc = "laptop.png";

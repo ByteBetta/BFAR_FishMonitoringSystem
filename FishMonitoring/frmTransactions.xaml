@@ -47,7 +47,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <DataGrid x:Name="gridTransaction" HorizontalAlignment="Left" Margin="0,124,0,-25" VerticalAlignment="Top" Height="336" Width="743" BorderBrush="#00000000" Background="White" />
+        <DataGrid x:Name="gridTransaction" HorizontalAlignment="Left" Margin="0,124,0,-15" VerticalAlignment="Top" Height="326" Width="743" BorderBrush="#00000000" Background="White" />
         <Label x:Name="lblFilterByDate" Content="Filter By Date(From - To)" Margin="30,82,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148"/>
         <Border Margin="175,79,413,328" Background="#FF5F8DF7" CornerRadius="7"/>
         <Border Margin="335,79,253,328" Background="#FF5F8DF7" CornerRadius="7"/>
@@ -84,6 +84,15 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385"/>
+        <Button x:Name="btnRetrievedData" Content="Retrieved Data" Margin="320,454,0,-49" VerticalAlignment="Top" Width="100" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="BtnRetrievedData_Click">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
 
     </Grid>
 </UserControl>

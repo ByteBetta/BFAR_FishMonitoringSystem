@@ -19,6 +19,16 @@ using System.IO;
 using WpfPosApp.BLL;
 using WpfPosApp.DAL;
 using Microsoft.Win32;
+using FireSharp.Config;
+using FireSharp;
+using System.Drawing;
+using Image = System.Drawing.Image;
+using System.Drawing.Imaging;
+using Color = System.Windows.Media.Color;
+using FirebaseAdmin.Messaging;
+using Newtonsoft.Json;
+using System.Net.Http;
+using Google.Cloud.Firestore;
 
 namespace WpfPosApp
 {
@@ -44,7 +54,7 @@ namespace WpfPosApp
 
 
         bool drag = false;
-        Point start_point = new Point(0, 0);
+       
 
         loginBLL uu = new loginBLL();
         loginDAL udal = new loginDAL();
@@ -394,5 +404,152 @@ namespace WpfPosApp
             frm.LoadUserReport();
             frm.ShowDialog();
         }
+
+
+        FirebaseConfig config = new FirebaseConfig
+        {
+            AuthSecret = "Y3V6p5QzcWzXeKXIpBpsBwcQ4mZkisL7zgzpE3Tj",
+            BasePath = "https://bfar-testproj-default-rtdb.asia-southeast1.firebasedatabase.app/"
+        };
+
+        FirebaseClient client;
+
+        private async void btnUpload_Click(object sender, RoutedEventArgs e)
+        {
+            dal.ConnecttoFirebase();
+            
+            
+            client = new FirebaseClient(config);
+            DataTable dt = dal.Select();
+
+            //Console.WriteLine(dal.DataTableToJSONWithJSONNet(dt));
+            try
+            {
+               foreach (DataRow data in dt.Rows)
+                {
+
+                    string paths = System.Windows.Forms.Application.StartupPath.Substring(0, System.Windows.Forms.Application.StartupPath.Length - 10);
+                    string imagePath = paths + "\\Images\\" + data["Img"].ToString();
+
+                    Image img = new Bitmap(imagePath);
+                    MemoryStream ms = new MemoryStream();
+                    img.Save(ms, ImageFormat.Jpeg);
+
+                    byte[] a = ms.GetBuffer();
+
+                    string output = Convert.ToBase64String(a);
+                    
+                    u.UserID = Convert.ToInt32(data["UserID"]);
+                    u.Name = data["Name"].ToString();
+                    u.Surname = data["Surname"].ToString();
+                    u.UserName = data["UserName"].ToString();
+                    u.Password = data["Password"].ToString();
+                    u.UserType = data["UserType"].ToString();
+                    u.Gender = data["Gender"].ToString();
+                    u.Birth_Date = data["Birth_Date"].ToString();
+                    u.Img = output;
+                    u.Added_Date = DateTime.Now;
+
+                    //Getting username of logged in user
+                    string loggedUsr = frmLogin.loggedIn;
+                    loginBLL usr = udal.GetIDFromUsername(loggedUsr);
+
+                    u.Added_By = usr.UserID;
+
+                    dal.AddUsertoFirebase(u);
+
+                    await client.SetAsync("Test/" + data["UserID"], u);
+                }
+
+                Console.WriteLine("Success");
+            }
+            catch { } 
+        }
+
+
+        private async void test(object sender, RoutedEventArgs e)
+        {
+            string to = "";
+            FirestoreDb firestoreDatabase;
+            string path = AppDomain.CurrentDomain.BaseDirectory + @"bfar-testproj.json";
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", path);
+
+            firestoreDatabase = FirestoreDb.Create("bfar-testproj");
+            MessageBox.Show("Connection Success");
+
+            CollectionReference citiesRef = firestoreDatabase.Collection("devices");
+            Query query = citiesRef.WhereEqualTo("userId", 1074);
+            QuerySnapshot querySnapshot = await query.GetSnapshotAsync();
+            foreach (DocumentSnapshot documentSnapshot in querySnapshot.Documents)
+            {
+                Console.WriteLine("Document {0} returned by queryuserid", documentSnapshot.Id);
+                to = documentSnapshot.Id;
+            }
+
+            var task = this.NotifyAsync(to, "Testing Message", "Sir ian pasabi kung nareceived mo itong message");
+     
+            await task;
+           
+
+
+        }
+
+        public async Task<bool> NotifyAsync(string to, string title, string body)
+        {
+            try
+            {
+                // Get the server key from FCM console
+                var serverKey = string.Format("key={0}", "AAAAunU-lBc:APA91bGgf6ETDyPEUltiC1r4IFvoXz8a20Gf2SxdOvQ-ahkkqkrIHKzd9xJtbkLfRcpEAPcTfaJwTsnIwolCgjjVvGvoRJmuN8VZIqBghKev4O6aGZxVY1zVEF_AvNU5k9DnfIdn_fMA");
+
+                // Get the sender id from FCM console
+                var senderId = string.Format("id={0}", "800830952471");
+
+                var data = new
+                {
+                    to, // Recipient device token
+                    notification = new { title, body }
+                };
+
+                // Using Newtonsoft.Json
+                var jsonBody = JsonConvert.SerializeObject(data);
+
+                using (var httpRequest = new HttpRequestMessage(HttpMethod.Post, "https://fcm.googleapis.com/fcm/send"))
+                {
+                    httpRequest.Headers.TryAddWithoutValidation("Authorization", serverKey);
+                    httpRequest.Headers.TryAddWithoutValidation("Sender", senderId);
+                    httpRequest.Content = new StringContent(jsonBody, Encoding.UTF8, "application/json");
+
+                    using (var httpClient = new HttpClient())
+                    {
+                        var result = await httpClient.SendAsync(httpRequest);
+
+                        if (result.IsSuccessStatusCode)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            // Use result.StatusCode to handle failure
+                            // Your custom error handler here
+                            //_logger.LogError($"Error sending notification. Status Code: {result.StatusCode}");
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+               // _logger.LogError($"Exception thrown in Notify Service: {ex}");
+            }
+
+            return false;
+        }
+
     }
-}
+
+
+
+
+
+
+
+    }

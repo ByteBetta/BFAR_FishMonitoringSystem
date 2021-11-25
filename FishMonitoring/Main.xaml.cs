@@ -39,6 +39,8 @@ namespace WpfPosApp
         frmSale sal;
         string imgLoc = "user.png";
 
+        bool tabisOpen = false;
+
         public static string transactionType;
 
         public Main()
@@ -65,9 +67,18 @@ namespace WpfPosApp
 
         private void BtnOpenMenu_Click(object sender, RoutedEventArgs e)
         {
+            frmFishDetails frmFish = new frmFishDetails();
             btnOpenMenu.Visibility = Visibility.Collapsed;
             btnCloseMenu.Visibility = Visibility.Visible;
             logoBorder.Visibility = Visibility.Visible;
+            if(tabisOpen == false)
+            {
+                tabisOpen = true;
+            } else
+            {
+                tabisOpen = false;
+            }
+         
         }
 
         private void BtnCloseMenu_Click(object sender, RoutedEventArgs e)
@@ -118,11 +129,11 @@ namespace WpfPosApp
        
         }
 
-        private void frmEmployee_Click(object sender, MouseButtonEventArgs e)
+        private void frmAddTransactions(object sender, MouseButtonEventArgs e)
         {
-            frmEmployee employees = new frmEmployee();
+            frmAddTransaction purchase = new frmAddTransaction(cash, this);
             pnlMain.Children.Clear();
-            pnlMain.Children.Add(employees);
+            pnlMain.Children.Add(purchase);
         }
 
         private void BtnCtg_Click(object sender, MouseButtonEventArgs e)
@@ -248,7 +259,7 @@ namespace WpfPosApp
 
         private void BtnPurchase_Click(object sender, RoutedEventArgs e)
         {
-            frmPurchase purchase = new frmPurchase(cash, this);
+            frmAddTransaction purchase = new frmAddTransaction(cash, this);
             pnlMain.Children.Clear();
             pnlMain.Children.Add(purchase); 
         }
@@ -294,6 +305,41 @@ namespace WpfPosApp
             pnlMain.Children.Clear();
             pnlMain.Children.Add(frmVessels);
            
+        }
+
+        private void ListViewItem_Selected_3(object sender, RoutedEventArgs e)
+        {
+            frmCategories categories = new frmCategories();
+            pnlMain.Children.Clear();
+            pnlMain.Children.Add(categories);
+        }
+
+        private void ListViewItem_Selected_4(object sender, RoutedEventArgs e)
+        {
+             frmDealers deal = new frmDealers();
+            pnlMain.Children.Clear();
+            pnlMain.Children.Add(deal);
+        }
+
+        private void ListViewItem_Selected_5(object sender, RoutedEventArgs e)
+        {
+            frmTransactions t = new frmTransactions();
+            pnlMain.Children.Clear();
+            pnlMain.Children.Add(t);
+        }
+
+        private void ListViewItem_Selected_6(object sender, RoutedEventArgs e)
+        {
+            frmRecords rec = new frmRecords();
+            pnlMain.Children.Clear();
+            pnlMain.Children.Add(rec);
+        }
+
+        private void ListViewItem_Selected_7(object sender, RoutedEventArgs e)
+        {
+            frmAddTransaction purchase = new frmAddTransaction(cash, this);
+            pnlMain.Children.Clear();
+            pnlMain.Children.Add(purchase);
         }
     }
 }

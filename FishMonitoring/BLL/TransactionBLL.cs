@@ -12,5 +12,8 @@ namespace Project.BLL
         public int TransactionID { get; set; }
         public int DealID { get; set; }
         public DateTime transactiondate { get; set; }
+        public string transno { get; set; }
+        public string remark { get; set; }
+        public DataTable transactionDetails { get; set; }
     }
 }

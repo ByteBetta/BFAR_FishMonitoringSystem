@@ -33,8 +33,8 @@
         </StackPanel>
 
 
-        <StackPanel x:Name="pnl1" HorizontalAlignment="Left" Height="299" Margin="128,143,0,0" VerticalAlignment="Top" Width="476"  Background="White"/>
-        
+        <StackPanel x:Name="pnl1" HorizontalAlignment="Left" Height="299" Margin="148,143,0,0" VerticalAlignment="Top" Width="456"  Background="White"/>
+
         <StackPanel x:Name="pnlTodaySales"  HorizontalAlignment="Left" Height="100" Margin="92,5,0,0" VerticalAlignment="Top" Width="280">
             <StackPanel.Background>
                 <LinearGradientBrush StartPoint="0,1" EndPoint="0.5,0" MappingMode="RelativeToBoundingBox">

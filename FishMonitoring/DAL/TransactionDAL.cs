@@ -29,7 +29,7 @@ namespace Project.DAL
            
                 
                 //SQL Query to Insert Transactions
-                string sql = "INSERT INTO tblTransaction (DealID, transaction_date) VALUES (@DealID, @transaction_date); SELECT @@IDENTITY;";
+                string sql = "INSERT INTO tblTransaction (DealID, transaction_date,transno, remark) VALUES (@DealID, @transaction_date, @transno, @remark); SELECT @@IDENTITY;";
 
                 //Sql Commandto pass the value in sql query
                 SqlCommand cmd = new SqlCommand(sql, db.con);
@@ -37,10 +37,12 @@ namespace Project.DAL
                 //Passing the value to sql query using cmd
                 cmd.Parameters.AddWithValue("@DealID", t.DealID); 
                 cmd.Parameters.AddWithValue("@transaction_date", t.transactiondate);
+                cmd.Parameters.AddWithValue("@transno", t.transno);
+                cmd.Parameters.AddWithValue("@remark", t.remark);
 
-                // cmd.Parameters.AddWithValue("@added_by", t.added_by);
-            
-                //Open Database Connection
+            // cmd.Parameters.AddWithValue("@added_by", t.added_by);
+
+            //Open Database Connection
                 db.con.Open();
 
                 //Execute the Query
@@ -121,7 +123,7 @@ namespace Project.DAL
             try
             {
                 //Write the SQL Query to Display all Transactions
-                string sql = "SELECT id [ID], type [Type], DealCustID, grandTotal [Grand Total], transaction_date [Transaction Time], tax [TAX], discount [Discount] FROM tblTransaction";
+                string sql = "SELECT id [ID], DealID [Fisherman], transaction_date [Transaction Time], transno [Transaction Number] FROM tblTransaction";
 
                 //SQLCommand to Execute Query
                 SqlCommand cmd = new SqlCommand(sql, db.con);
