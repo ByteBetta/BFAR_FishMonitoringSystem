@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace Project.DAL
 
             try
             {
-                string sql = "INSERT INTO TransDetails (Species, transno, weight, length, added_date, vessels, fisherman, quantity) VALUES ( @Species, @transno, @weight, @length, @added_date, @vessels, @fisherman, @quantity)";
+                string sql = "INSERT INTO TransDetails (Species, transno, weight, length, added_date, vessels, fisherman, quantity, UID, gearUsed, landingSite) VALUES ( @Species, @transno, @weight, @length, @added_date, @vessels, @fisherman, @quantity, @UID, @gearUsed, @landingSite)";
 
                 SqlCommand cmd = new SqlCommand(sql, db.con);
 
@@ -35,6 +36,10 @@ namespace Project.DAL
                 cmd.Parameters.AddWithValue("@vessels", td.vessels);
                 cmd.Parameters.AddWithValue("@fisherman", td.fisherman);
                 cmd.Parameters.AddWithValue("@quantity", td.quantity);
+                cmd.Parameters.AddWithValue("@UID", td.UID);
+                cmd.Parameters.AddWithValue("@gearUsed", td.gearUsed);
+                cmd.Parameters.AddWithValue("@landingSite", td.landingSite);
+
 
                 db.con.Open();
 
@@ -61,5 +66,40 @@ namespace Project.DAL
             return isSuccess;
         }
         #endregion
+
+        public DataTable DisplayAllTransactions()
+        {
+
+            //Create DataTable to hold the dataform database temporarily
+            DataTable dt = new DataTable();
+            try
+            {
+                //Write the SQL Query to Display all Transactions
+                string sql = "SELECT TransDetID [ID], fisherman [Fisherman], added_date [Transaction Time], transno [Transaction Number] FROM TransDetails";
+
+                //SQLCommand to Execute Query
+                SqlCommand cmd = new SqlCommand(sql, db.con);
+
+                //SqlDataAdapter to Hold The Data from DataBase
+                SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+
+                //Open Database Connection
+
+                db.con.Open();
+                adapter.Fill(dt);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                db.con.Close();
+            }
+
+
+            return dt;
+
+        }
     }
 }

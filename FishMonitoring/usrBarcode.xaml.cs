@@ -30,12 +30,8 @@ namespace WpfPosApp
         {
 
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
-            var barcode = new fBarcode();
-            barcode.TopLevel = false;
-            host.Child = barcode;
-
-            this.gridLoad.Children.Add(host);
-            barcode.Show();
+            
+       
 
         }
     }

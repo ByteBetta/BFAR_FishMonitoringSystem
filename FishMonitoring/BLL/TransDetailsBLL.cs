@@ -9,7 +9,7 @@ namespace Project.BLL
   
     class TransDetailsBLL
     {
-        public int UID { get; set; }
+        public string UID { get; set; }
         public int FishID { get; set; }
         public string weight { get; set; }
         public decimal length { get; set; }
@@ -22,8 +22,6 @@ namespace Project.BLL
         public string gearUsed { get; set; }
         public string vessels { get; set; }
         public string fisherman { get; set; }
-        public string fishingeffort { get; set; }
-        public string fishingarea { get; set; }
         public int noofboxes { get; set; }
         public int totalweightboxes { get; set; }
         public int noSofBoxes { get; set; }

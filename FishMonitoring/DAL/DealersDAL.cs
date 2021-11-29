@@ -374,13 +374,16 @@ namespace WpfPosApp.DAL
             };
                 Console.WriteLine(nameof(fisherman.DealID).ToString());
                 await usercollection.SetAsync(userdata);
-
+               
 
             }
+            
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
+
+            MessageBox.Show("Uploading Success");
 
         }
 

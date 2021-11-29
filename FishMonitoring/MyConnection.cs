@@ -20,8 +20,8 @@ namespace WpfPosApp
         private int productstock;
         private int critical;
         private string conn;
-        
-      
+
+
         public MyConnection()
         {
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["connstring"].ConnectionString);
@@ -42,7 +42,6 @@ namespace WpfPosApp
             DateTime dt = DateTime.Now;
             dt = dt.AddDays(-1);
             string s2 = dt.ToString("yyyy-MM-dd HH:mm:ss");
-
             cn = new SqlConnection(conn);
             cn.ConnectionString = conn;
             cn.Open();
@@ -62,7 +61,6 @@ namespace WpfPosApp
             DateTime dtm = DateTime.Now;
             dtm = dtm.AddDays(-30);
             string st2 = dtm.ToString("yyyy-MM-dd HH:mm:ss");
-
             cn = new SqlConnection(conn);
             cn.ConnectionString = conn;
             cn.Open();
@@ -99,7 +97,6 @@ namespace WpfPosApp
              cn.Close();
              return productline;
          }
-
          public double ProductStock()
          {
              cn = new SqlConnection(conn);
@@ -110,7 +107,6 @@ namespace WpfPosApp
              cn.Close();
              return productstock;
          }
-
          public double CriticalProduct()
          {
              cn = new SqlConnection(conn);

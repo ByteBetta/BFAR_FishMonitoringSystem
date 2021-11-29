@@ -244,7 +244,7 @@ namespace WpfPosApp.DAL
             };
                 Console.WriteLine(nameof(userlist.UserID).ToString());
                 usercollection.SetAsync(userdata);
-
+                MessageBox.Show("Uploading Success");
 
             } catch (Exception e)
             {

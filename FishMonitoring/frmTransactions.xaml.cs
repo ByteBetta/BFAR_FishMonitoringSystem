@@ -47,7 +47,7 @@ namespace WpfPosApp
 
         }
 
-        TransactionDAL tdal = new TransactionDAL();
+        TransDetailsDAL tdal = new TransDetailsDAL();
         DealersDAL ddal = new DealersDAL();
 
         private void btnShowAll_Click(object sender, RoutedEventArgs e)
@@ -83,7 +83,7 @@ namespace WpfPosApp
             //Get the Value from ComboBox
             string type = (e.AddedItems[0] as ComboBoxItem).Content as string;
 
-            DataTable dt = tdal.DisplayTransactionByType(type);
+            DataTable dt = tdal.DisplayAllTransactions();
             gridTransaction.ItemsSource = dt.DefaultView;
        
        }
@@ -100,7 +100,7 @@ namespace WpfPosApp
                 string s2 = dtpPicker2.SelectedDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
                 //Write the SQL Query to Display all Transactions
-                string sql = "SELECT id [ID], DealID [Fisherman], transaction_date [Transaction Time], transno [Transaction Number] FROM tblTransaction WHERE transaction_date between '" + s1 + "' and '" + s2 + "'";
+                string sql = "SELECT TransDetID [ID], fisherman [Fisherman], vessels [vessels], added_date [Transaction Time], transno [Transaction Number] FROM TransDetails WHERE added_date between '" + s1 + "' and '" + s2 + "'";
 
                 //SQLCommand to Execute Query
                 SqlCommand cmd = new SqlCommand(sql, db.con);
@@ -162,42 +162,71 @@ namespace WpfPosApp
                 TransDetailsBLL transDetailsBLL = new TransDetailsBLL();
                 transDetailsBLL.quantity = 1;
                 Console.WriteLine("Document data for {0} document:", documentSnapshot.Id);
-                Dictionary<string, object> city = documentSnapshot.ToDictionary();
-                foreach (KeyValuePair<string, object> pair in city)
+                transDetailsBLL.UID = documentSnapshot.Id;
+
+                string sql = "SELECT COUNT(*) FROM TransDetails WHERE UID = '" + documentSnapshot.Id + "'" ;
+
+                //SQLCommand to Execute Query
+                SqlCommand cmd = new SqlCommand(sql, db.con);
+
+                //SqlDataAdapter to Hold The Data from DataBase
+                db.con.Open();
+                int UserExist = (int)cmd.ExecuteScalar();
+                db.con.Close();
+                if (UserExist > 0)
                 {
-                    if(nameof(transDetailsBLL.Species) == pair.Key.ToString())
+                    //Username exist
+                }
+                else
+                {
+                    Dictionary<string, object> city = documentSnapshot.ToDictionary();
+                    foreach (KeyValuePair<string, object> pair in city)
                     {
-                        transDetailsBLL.Species = pair.Value.ToString();
+                        if (nameof(transDetailsBLL.Species) == pair.Key.ToString())
+                        {
+                            transDetailsBLL.Species = pair.Value.ToString();
+                        }
+                        if (nameof(transDetailsBLL.length) == pair.Key.ToString().ToLower())
+                        {
+                            transDetailsBLL.length = int.Parse(pair.Value.ToString());
+                        }
+                        if (nameof(transDetailsBLL.weight) == pair.Key.ToString().ToLower())
+                        {
+                            transDetailsBLL.weight = pair.Value.ToString();
+                        }
+                        if (nameof(transDetailsBLL.added_date) == pair.Key.ToString())
+                        {
+                            transDetailsBLL.added_date = Convert.ToDateTime(pair.Value);
+                        }
+                        if (nameof(transDetailsBLL.fisherman) == pair.Key.ToString())
+                        {
+                            transDetailsBLL.fisherman = pair.Value.ToString();
+                        }
+                        if (nameof(transDetailsBLL.vessels) == pair.Key.ToString())
+                        {
+                            transDetailsBLL.vessels = pair.Value.ToString();
+                        }
+                        if (nameof(transDetailsBLL.transno) == pair.Key.ToString())
+                        {
+                            transDetailsBLL.transno = pair.Value.ToString();
+                        }
+                        if (nameof(transDetailsBLL.gearUsed) == pair.Key.ToString())
+                        {
+                            transDetailsBLL.gearUsed = pair.Value.ToString();
+                        }
+                        if (nameof(transDetailsBLL.landingSite) == pair.Key.ToString())
+                        {
+                            transDetailsBLL.landingSite = pair.Value.ToString();
+                        }
                     }
-                    if (nameof(transDetailsBLL.length) == pair.Key.ToString().ToLower() )
-                    {
-                        transDetailsBLL.length = int.Parse(pair.Value.ToString());
-                    }
-                    if (nameof(transDetailsBLL.weight) == pair.Key.ToString().ToLower())
-                    {
-                        transDetailsBLL.weight = pair.Value.ToString();
-                    }
-                    if (nameof(transDetailsBLL.added_date) == pair.Key.ToString())
-                    {
-                        transDetailsBLL.added_date = Convert.ToDateTime(pair.Value);
-                    }
-                    if (nameof(transDetailsBLL.fisherman) == pair.Key.ToString())
-                    {
-                        transDetailsBLL.fisherman = pair.Value.ToString();
-                    }
-                    if (nameof(transDetailsBLL.vessels) == pair.Key.ToString())
-                    {
-                        transDetailsBLL.vessels = pair.Value.ToString();
-                    }
-                    if (nameof(transDetailsBLL.transno) == pair.Key.ToString())
-                    {
-                        transDetailsBLL.transno = pair.Value.ToString();
-                    }
+
+                    TransDetailsDAL tdal = new TransDetailsDAL();
+                    tdal.InsertTransDetails(transDetailsBLL);
+                    Console.WriteLine("");
+                    MessageBox.Show("Retrival Success");
                 }
 
-                TransDetailsDAL tdal = new TransDetailsDAL();
-                tdal.InsertTransDetails(transDetailsBLL);
-                Console.WriteLine("");
+                
             }
 
           

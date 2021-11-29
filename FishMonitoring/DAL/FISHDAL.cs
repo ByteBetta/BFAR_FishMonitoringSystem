@@ -496,6 +496,7 @@ namespace Fish.DAL
         }
         #endregion
 
+        
 
         public void ConnecttoFirebase()
         {
@@ -569,7 +570,7 @@ namespace Fish.DAL
                 Console.WriteLine(nameof(fishdata.FishID).ToString());
                 await usercollection.SetAsync(userdata);
 
-
+                MessageBox.Show("Uploading Success");
             }
             catch (Exception e)
             {

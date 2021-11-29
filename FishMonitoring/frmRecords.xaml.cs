@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace WpfPosApp
 {
     /// <summary>
@@ -31,7 +32,7 @@ namespace WpfPosApp
         frmTransactions f;
 
         FishDAL fdal = new FishDAL();
-
+        string[] SuggestionValues;
         public frmRecords()
         {
             InitializeComponent();
@@ -46,14 +47,14 @@ namespace WpfPosApp
             dtpPicker1sd.SelectedDate = DateTime.Now;
             dtpPicker2sd.SelectedDate = DateTime.Now.AddDays(+1);
 
-
+            txtSearch.TextChanged += txtSearch_TextChanged;
             DataTable fdd = fdal.Select();
-     
+
+             SuggestionValues = fdd
+                    .AsEnumerable()
+                    .Select<System.Data.DataRow, String>(x => x.Field<String>("Species"))
+                    .ToArray();
             //Specify DataSource for Category ComboBox
-            cmbSelectClass.ItemsSource = fdd.DefaultView;
-            //Specify Display Member and Value Member for Combobox
-            cmbSelectClass.DisplayMemberPath = "Fish Name";
-            cmbSelectClass.SelectedValuePath = "Fish Name";
 
 
         }
@@ -94,12 +95,12 @@ namespace WpfPosApp
                     adapter.Fill(dt);
                     gridTopItems.ItemsSource = dt.DefaultView;
                 }
-               
+
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-               
+
             }
             finally
             {
@@ -112,15 +113,15 @@ namespace WpfPosApp
         {
             try {
 
-            pnlChart.Children.Clear();
-            if(cmbTopSelect.Text == String.Empty)
-            {
-                System.Windows.Forms.MessageBox.Show("Please Select Type From The DropDown List.", "Warning", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
-                return;
-            }
-            LoadRecord();
-           //LoadChartTopSelling();
-            } catch(Exception ex)
+                pnlChart.Children.Clear();
+                if (cmbTopSelect.Text == String.Empty)
+                {
+                    System.Windows.Forms.MessageBox.Show("Please Select Type From The DropDown List.", "Warning", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
+                    return;
+                }
+                LoadRecord();
+                //LoadChartTopSelling();
+            } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -129,81 +130,92 @@ namespace WpfPosApp
 
         public void fishReport()
         {
-            
-            //try
-            //{
-            
-                System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
-                var ch = new frmTopItemsChart(this);
-           
+
+            try
+            {
+
+            System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
+            var ch = new frmTopItemsChart(this);
+
             ch.TopLevel = false;
-                host.Child = ch;
-          
-            this.lineChart.Children.Add(host);
-         
+            host.Child = ch;
+
+
+
 
             ch.Show();
 
-                string s1 = dateForFish1.SelectedDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
-                string s2 = dateForFish2.SelectedDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            string s1 = dateForFish1.SelectedDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
+            string s2 = dateForFish2.SelectedDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
-            string fname = cmbSelectClass.SelectedValue.ToString();
+            string fname = txtSearch.Text;
 
-                SqlDataAdapter da = new SqlDataAdapter();
-                cn.Open();
-
-
-               
-                da = new SqlDataAdapter("SELECT FishName, quantity as Quantity, weight as Weight, Date FROM vwFishCatchCount WHERE Fishname = '" + fname + "' AND added_date between '" + s1 + "' and '" + s2 + "' group by  FishName, weight, quantity, Date order by quantity desc", cn);
+            SqlDataAdapter da = new SqlDataAdapter();
+            cn.Open();
 
 
-             
-                DataSet ds = new DataSet();
-                da.Fill(ds, "Species");
+
+            da = new SqlDataAdapter("SELECT Species, AVG(weight) as Weight, AVG(length) as Length, MAX(weight) as MWeight, MAX(length) as MLength, MIN(weight) as LWeight, MIN(length) as LLength FROM dbo.TransDetails WHERE Species = '" + fname + "' AND added_date between '" + s1 + "' and '" + s2 + "' group by  Species", cn);
+            DataTable ds = new DataTable();
+            DataTable image = new DataTable();
+            da.Fill(ds);
+            da = new SqlDataAdapter("SELECT Img FROM dbo.FishDetails WHERE Species = '" + fname + "'", cn);
+            da.Fill(image);
+
+             cn.Close();
+            if(ds != null)
+                {
+                    if(ds.Rows.Count > 0)
+                    {
+                        foreach (DataRow dataRow in ds.Rows)
+                        {
+                            foreach(DataRow dr in image.Rows)
+                            {
+                                string paths = System.Windows.Forms.Application.StartupPath.Substring(0, (System.Windows.Forms.Application.StartupPath.Length - 10));
+                                string imagePath = paths + "\\Images\\Product\\" + dr["Img"];
+                                imgBox.ImageSource = new BitmapImage(new Uri(imagePath));
+                                
+                            }
+                            averagelegnth.Content = dataRow["Length"];
+                            averageweight.Content = dataRow["Weight"];
+                            lblll.Content = dataRow["LLength"];
+                            lbllw.Content = dataRow["LWeight"];
+                            lblhl.Content = dataRow["MLength"];
+                            lblhw.Content = dataRow["MWeight"];
+
+                            foreach (var item in dataRow.ItemArray)
+                            {
+                                Console.WriteLine(item);
+                            }
 
 
-                DataTable datee = new DataTable();
-                da.Fill(datee);
+                        }
+                    } else
+                    {
+                        averagelegnth.Content = 0;
+                        averageweight.Content = 0;
+                        lblblt.Content =0;
+                        lbllw.Content = 0;
+                        lblhl.Content = 0;
+                        lblhw.Content = 0;
+                    }
+                }
+            
+
+            
 
 
             
-            ch.chart1.Series[0].XValueType = ChartValueType.DateTime;
-                ch.chart1.ChartAreas[0].AxisX.LabelStyle.Format = "yyyy-MM-dd";
-                ch.chart1.ChartAreas[0].AxisX.Interval = 1;
-                ch.chart1.ChartAreas[0].AxisX.IntervalType = DateTimeIntervalType.Weeks;
-                ch.chart1.ChartAreas[0].AxisX.IntervalOffset = 1;
-
-                ch.chart1.Series[0].XValueType = ChartValueType.DateTime;
-                DateTime minDate = dateForFish1.SelectedDate.Value;
-                DateTime maxDate = dateForFish2.SelectedDate.Value;
-            ch.chart1.ChartAreas[0].AxisX.Minimum = minDate.ToOADate();
-                ch.chart1.ChartAreas[0].AxisX.Maximum = maxDate.ToOADate();
-
-          
-
-            ch.chart1.Series[0].LegendText = "Stat";
-            ch.chart1.Series[0].ChartType = SeriesChartType.Line;
-            ch.chart1.Series[0].IsValueShownAsLabel = true;
-
-            foreach (DataRow row in datee.Rows)
-            {
-                ch.chart1.Series[0].Points.AddXY(row["Date"],row["Quantity"]);
-                Console.WriteLine(row["Date"]);
-            }
-
-
-
-            cn.Close();
 
 
 
 
-            /*  }
+             }
               catch (Exception ex)
               {
                   MessageBox.Show(ex.Message);
               }
-              */
+              
         }
 
         public void LoadChartTopSelling()
@@ -253,7 +265,7 @@ namespace WpfPosApp
 
                 cn.Close();
 
-            }catch(Exception ex)
+            } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -276,7 +288,7 @@ namespace WpfPosApp
 
                 SqlDataAdapter da = new SqlDataAdapter();
                 cn.Open();
-                
+
                 da = new SqlDataAdapter("select fishdata.Full_Name, sum(c.total_price) as Total from TransDetails as c inner join Product as fishdata on c.FishID = fishdata.FishID where type like 'Sale' and added_date between '" + s1 + "' and '" + s2 + "' group by fishdata.Full_Name order by Total DESC", cn);
 
                 DataSet ds = new DataSet();
@@ -298,7 +310,7 @@ namespace WpfPosApp
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            } 
+            }
         }
 
         private void btnPrintSD_Click(object sender, RoutedEventArgs e)
@@ -334,7 +346,7 @@ namespace WpfPosApp
                 SqlCommand cm = new SqlCommand(sqlsum, db.con);
                 lblTotal.Content = Double.Parse(cm.ExecuteScalar().ToString()).ToString("#,##0.00");
 
-                
+
             }
             catch (Exception ex)
             {
@@ -380,11 +392,34 @@ namespace WpfPosApp
 
         private void btnShowFishData(object sender, RoutedEventArgs e)
         {
-            lineChart.Children.Clear();
+            //lineChart.Children.Clear();
             fishReport();
         }
 
+        private string _currentInput = "";
+        private string _currentSuggestion = "";
+        private string _currentText = "";
 
+        private int _selectionStart;
+        private int _selectionLength;
+        private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            var input = txtSearch.Text;
+            if (input.Length > _currentInput.Length && input != _currentSuggestion)
+            {
+                _currentSuggestion = SuggestionValues.FirstOrDefault(x => x.StartsWith(input));
+                if (_currentSuggestion != null)
+                {
+                    _currentText = _currentSuggestion;
+                    _selectionStart = input.Length;
+                    _selectionLength = _currentSuggestion.Length - input.Length;
 
+                    txtSearch.Text = _currentText;
+                    txtSearch.Select(_selectionStart, _selectionLength);
+                }
+            }
+            _currentInput = input;
+
+        }
     }
 }
