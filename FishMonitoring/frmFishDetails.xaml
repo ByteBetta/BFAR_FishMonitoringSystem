@@ -8,6 +8,7 @@
     xmlns:Custom="clr-namespace:MahApps.Metro.IconPacks;assembly=MahApps.Metro.IconPacks.Material" xmlns:d1="http://schemas.microsoft.com/expression/blend/2008" x:Class="WpfPosApp.frmFishDetails"
         mc:Ignorable="d d1"
         Height="687.304" Width="782.25">
+
     <Grid Background="Transparent" Loaded="Grid_Loaded" Margin="0,0,-100,0">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="5*"/>
@@ -22,7 +23,7 @@
                 <DropShadowEffect Direction="-90" Opacity="0.1"/>
             </Border.Effect>
         </Border>
-        <TextBox x:Name="txtFishID" TextAlignment="Center" HorizontalAlignment="Center" Height="23" Margin="153,265,-54,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="48" RenderTransformOrigin="0.5,0.5" Grid.Column="1"></TextBox>
+        <Label x:Name="txtFishID"  HorizontalAlignment="Center" Height="23" Margin="153,265,-54,0"  VerticalAlignment="Top" Width="48" RenderTransformOrigin="0.5,0.5" Grid.Column="1"></Label>
 
 
         <Label x:Name="lblManufactor" Content="Fish Name" HorizontalAlignment="Left" Margin="-66,55,0,0" VerticalAlignment="Top"/>
@@ -75,7 +76,9 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <DataGrid x:Name="grid_Product" Margin="-74,35,-117,0" VerticalAlignment="Top" Height="264" BorderThickness="1" SelectionChanged="grid_Product_SelectionChanged" BorderBrush="#00000000" Background="White" Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="100"  IsReadOnly="True" CanUserReorderColumns="False" HeadersVisibility="All" RowHeight="100"/>
+
+        <DataGrid x:Name="grid_Product" Margin="-74,35,-117,0" VerticalAlignment="Top" Height="220" BorderThickness="1" SelectionChanged="grid_Product_SelectionChanged" BorderBrush="#00000000" Background="White" Grid.Row="1" Grid.ColumnSpan="2" ColumnWidth="100"  IsReadOnly="True" CanUserReorderColumns="False" HeadersVisibility="All" RowHeight="100"/>
+
         <Button x:Name="btnInsert" Content="Insert"  RenderTransformOrigin="0.518,0.451" BorderThickness="1" Click="btnInsert_Click" Margin="250,308,375,13" Height="35" Width="110" Background="#FF5E89FB" Grid.Row="1">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -114,9 +117,9 @@
             </Button.Template>
         </Button>
 
-        <Border HorizontalAlignment="Left" Margin="85,0,-117,68" VerticalAlignment="Bottom" Width="179"  Height="226" BorderThickness="1" CornerRadius="20,20,20,20" BorderBrush="#FFD1D1D1" Grid.Column="1" RenderTransformOrigin="0.509,0.389">
+        <Border Margin="85,0,-117,68" VerticalAlignment="Bottom"  Height="226" BorderThickness="1" CornerRadius="20,20,20,20" BorderBrush="#FFD1D1D1" Grid.Column="1" RenderTransformOrigin="0.509,0.389">
             <Border.Background>
-                <ImageBrush x:Name="imgBox" ImageSource="https://i.ibb.co/w4kK8gp/laptop.png" Stretch="Uniform" />
+                <ImageBrush x:Name="imgBox" ImageSource="pack://application:,,,/Images/Fish.png" Stretch="Uniform" />
             </Border.Background>
         </Border>
         <Label x:Name="lblImage" Content="Image" HorizontalAlignment="Left" Margin="418,273,0,0" VerticalAlignment="Top"/>
@@ -148,7 +151,7 @@
             </TextBox.Resources>
         </TextBox>
         <Label x:Name="lblDescription_Copy" Content="Measurement" HorizontalAlignment="Left" Margin="-66,172,0,0" VerticalAlignment="Top" Height="31" Width="83"/>
-        <TextBox x:Name="txtMeasurement" HorizontalAlignment="Left" Height="30" Margin="25,173,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <TextBox x:Name="txtMeasurement" HorizontalAlignment="Left"  Height="36" Margin="25,173,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>
@@ -190,6 +193,49 @@
         </Button>
 
         <Custom:PackIconMaterial  Kind="Upload" Foreground="#FFF9F9F9" Width="14" Height="14" Margin="161,316,-28,0" Grid.Row="1" Grid.Column="1"/>
+        <Button x:Name="btnPrev" Content="First"  RenderTransformOrigin="0.518,0.451" BorderThickness="1" Click="FirstButton_Click" Margin="113,268,512,53" Height="35" Width="110" Background="#FF5E89FB" Grid.Row="1">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d1:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="Previos" Content="Prev"  RenderTransformOrigin="0.518,0.451" BorderThickness="1" Click="PreviousButton_Click" Margin="228,268,397,53" Height="35" Width="110" Background="#FF5E89FB" Grid.Row="1">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d1:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
+        <Label x:Name='PageInfo' Margin="352,268,260,58" Grid.Row="1" />
+
+        <Button x:Name="Next" Content="Next"  RenderTransformOrigin="0.518,0.451" BorderThickness="1" Click="NextButton_Click" Margin="488,268,137,53" Height="35" Width="110" Background="#FF5E89FB" Grid.Row="1">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d1:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Button x:Name="LastButton" Content="Last"  RenderTransformOrigin="0.518,0.451" BorderThickness="1" Click="LastButton_Click" Margin="603,268,22,53" Height="35" Width="110" Background="#FF5E89FB" Grid.Row="1">
+            <Button.Template>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d1:DesignUseLayoutRounding="True">
+                        <ContentPresenter ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" ContentStringFormat="{TemplateBinding ContentStringFormat}" HorizontalAlignment="Center" UseLayoutRounding="True" VerticalAlignment="Center" d1:DesignUseLayoutRounding="True"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Border Margin="97,327,-109,330" Background="#FF5F8DF7" CornerRadius="5" Grid.Column="1" Grid.RowSpan="2">
+            <ComboBox x:Name='NumberOfRecords'
+                              SelectionChanged='NumberOfRecords_SelectionChanged' Margin="5,2,0,0" VerticalAlignment="Stretch" BorderBrush="White" HorizontalAlignment="Left" Width="154"/>
+        </Border>
 
 
     </Grid>

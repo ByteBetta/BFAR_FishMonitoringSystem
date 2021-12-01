@@ -306,6 +306,8 @@
     <Compile Include="BLL\CategoriesBLL.cs" />
     <Compile Include="BLL\DealCustBLL.cs" />
     <Compile Include="BLL\DealersBLL.cs" />
+    <Compile Include="BLL\gearsBLL.cs" />
+    <Compile Include="BLL\landingSiteBLL.cs" />
     <Compile Include="BLL\loginBLL.cs" />
     <Compile Include="BLL\FishBLL.cs" />
     <Compile Include="BLL\TransactionBLL.cs" />
@@ -321,8 +323,11 @@
     <Compile Include="DAL\CategoriesDAL.cs" />
     <Compile Include="DAL\DealCustDAL.cs" />
     <Compile Include="DAL\DealersDAL.cs" />
+    <Compile Include="DAL\gearDAL.cs" />
+    <Compile Include="DAL\LandingSiteDAL.cs" />
     <Compile Include="DAL\loginDAL.cs" />
     <Compile Include="DAL\FISHDAL.cs" />
+    <Compile Include="DAL\Paging.cs" />
     <Compile Include="DAL\startup.cs" />
     <Compile Include="DAL\TransactionDAL.cs" />
     <Compile Include="DAL\TransDetailsDAL.cs" />
@@ -344,6 +349,12 @@
     </Compile>
     <Compile Include="frmDataReport.Designer.cs">
       <DependentUpon>frmDataReport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmgearUsed.xaml.cs">
+      <DependentUpon>frmgearUsed.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmlandingSite.xaml.cs">
+      <DependentUpon>frmlandingSite.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmVessels.xaml.cs">
       <DependentUpon>frmVessels.xaml</DependentUpon>
@@ -576,6 +587,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmgearUsed.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmlandingSite.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmVessels.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -714,6 +733,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Dapper">
+      <Version>2.0.123</Version>
+    </PackageReference>
     <PackageReference Include="Firebase.Notification">
       <Version>1.0.0</Version>
     </PackageReference>

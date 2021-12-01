@@ -50,9 +50,9 @@ namespace WpfPosApp
 
         public void MyDashboard()
         {
-            lblUnit.Content = dbcon.DailySales().ToString("$#,##0.00");
-            lblLastMonthUnit.Content = dbcon.MonthlySales().ToString("$#,##0.00");
-            lblTotalSalesUnit.Content = dbcon.TotalSales().ToString("$#,##0.00");
+            lblUnit.Content = dbcon.DailySales().ToString();
+            lblLastMonthUnit.Content = dbcon.MonthlySales().ToString();
+            lbldfish.Content = dbcon.mostDominantFish().ToString();
            
            // lblProductStockUnit.Content = dbcon.ProductStock().ToString("#,##0");
          //   lblCriticalUnits.Content = dbcon.CriticalProduct().ToString("#,##0");

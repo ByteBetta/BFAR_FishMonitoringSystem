@@ -1,4 +1,5 @@
-﻿using Fish.BLL;
+﻿using Dapper;
+using Fish.BLL;
 using Fish.DAL;
 using Project.BLL;
 using Project.DAL;
@@ -28,6 +29,20 @@ namespace WpfPosApp
     /// </summary>
     public partial class frmFishDetails : UserControl
     {
+        CategoriesDAL cdal = new CategoriesDAL();
+        DealersDAL ddal = new DealersDAL();
+        FishBLL fishdata = new FishBLL();
+        FishDAL fishdal = new FishDAL();
+        loginDAL udal = new loginDAL();
+
+        private int numberOfRecPerPage; //Initialize our Variable, Classes and the List
+
+        static Paging PagedTable = new Paging();
+
+        static FishDAL fishlist = new FishDAL();
+
+        IList<FishBLL> myList = fishlist.GetData();
+
         MyConnection db = new MyConnection();
 
         SqlCommand cmd;
@@ -55,24 +70,91 @@ namespace WpfPosApp
         public frmFishDetails()
         {
             InitializeComponent();
-            DisplayData();
+            //DisplayData();
             Colors();
+
+            
+
+
+            PagedTable.PageIndex = 1; //Sets the Initial Index to a default value
+
+            int[] RecordsToShow = { 10, 20, 30, 50, 100 }; //This Array can be any number groups
+
+            foreach (int RecordGroup in RecordsToShow)
+            {
+                NumberOfRecords.Items.Add(RecordGroup); //Fill the ComboBox with the Array
+            }
+
+            NumberOfRecords.SelectedItem = 10; //Initialize the ComboBox
+
+            numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem); //Convert the 
+                                                                                //Combox Output to type int
+
+            DataTable firstTable = PagedTable.SetPaging(myList, numberOfRecPerPage); //Fill a 
+                                                                                     //DataTable with the First set based on the numberOfRecPerPage
+
+            grid_Product.ItemsSource = firstTable.DefaultView; //Fill the dataGrid with the 
+                                                           //DataTable created previousl
+
+
         }
 
-        CategoriesDAL cdal = new CategoriesDAL();
-        DealersDAL ddal = new DealersDAL();
-        FishBLL fishdata = new FishBLL();
-        FishDAL fishdal = new FishDAL();
-        loginDAL udal = new loginDAL();
+        public string PageNumberDisplay()
+        {
+            int PagedNumber = numberOfRecPerPage * (PagedTable.PageIndex + 1);
+            if (PagedNumber > myList.Count)
+            {
+                PagedNumber = myList.Count;
+            }
+            return "Showing " + PagedNumber + " of " + myList.Count; //This dramatically 
+                                                                     //reduced the number of times I had to write this string statement
+        }
+
+
+        private void NextButton_Click(object sender, RoutedEventArgs e)
+        {
+            grid_Product.ItemsSource = PagedTable.Next(myList, numberOfRecPerPage).DefaultView;
+            PageInfo.Content = PageNumberDisplay();
+        }
+
+        private void PreviousButton_Click(object sender, RoutedEventArgs e)
+        {
+            grid_Product.ItemsSource = PagedTable.Previous(myList, numberOfRecPerPage).DefaultView;
+            PageInfo.Content = PageNumberDisplay();
+        }
+
+        private void FirstButton_Click(object sender, RoutedEventArgs e)
+        {
+            grid_Product.ItemsSource = PagedTable.First(myList, numberOfRecPerPage).DefaultView;
+            PageInfo.Content = PageNumberDisplay();
+        }
+
+        private void LastButton_Click(object sender, RoutedEventArgs e)
+        {
+            grid_Product.ItemsSource = PagedTable.Last(myList, numberOfRecPerPage).DefaultView;
+            PageInfo.Content = PageNumberDisplay();
+        }
+
+        private void NumberOfRecords_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            numberOfRecPerPage = Convert.ToInt32(NumberOfRecords.SelectedItem);
+            grid_Product.ItemsSource = PagedTable.First(myList, numberOfRecPerPage).DefaultView;
+            PageInfo.Content = PageNumberDisplay();
+        }
+
+
+
 
         private void DisplayData()
-        {
+        {   
+            /*
             db.con.Open();
             DataTable dt = new DataTable();
             adapt = new SqlDataAdapter("select FishID [FishID], Species [Species Name], OrderName [Order Name], FamilyName [Family Name], LocalName [Local Name], FishBaseName [Fish Name], ShortDescription [Description], Biology [Biology], Measurement [Measurement], Distribution [Distribution], Environment [Environment], Occurance, Img, added_time [Added Time], added_by [Added By]  from FishDetails", db.con);
             adapt.Fill(dt);
             grid_Product.ItemsSource = dt.DefaultView;
             db.con.Close();
+            */
         }
 
      
@@ -119,7 +201,9 @@ namespace WpfPosApp
             txtLocalName.Foreground = bbrush;
             txtOccurrence.Foreground = bbrush;
             cmbFamilyName.Foreground = wbrush;
-            
+            NumberOfRecords.Foreground = bbrush;
+
+
         }
 
         private void grid_Product_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -130,20 +214,20 @@ namespace WpfPosApp
                 DataRowView row_selected = gd.SelectedItem as DataRowView;
                 if (row_selected != null)
                 {
-                  
-                    txtFishID.Text = row_selected[0].ToString();
+
+                    txtFishID.Content = row_selected[0].ToString();
                     txtSpeciesName.Text = row_selected[1].ToString();
-                    txtOrderName.Text = row_selected[2].ToString();
+                    txtOrderName.Text = row_selected["OrderName"].ToString();
                     cmbFamilyName.Text = row_selected[3].ToString();
-                    txtLocalName.Text = row_selected[4].ToString();
-                    txtFishName.Text = row_selected[5].ToString();
-                    txtShortDescription.Text = row_selected[6].ToString();
-                    txtBiology.Text = row_selected[7].ToString();
-                    txtMeasurement.Text = row_selected[8].ToString();
-                    txtDistribution.Text = row_selected[9].ToString();
-                    txtEnvironment.Text = row_selected[10].ToString();
+                    txtLocalName.Text = row_selected["LocalName"].ToString();
+                    txtFishName.Text = row_selected["FishBaseName"].ToString();
+                    txtShortDescription.Text = row_selected["ShortDescription"].ToString();
+                    txtBiology.Text = row_selected["Biology"].ToString();
+                    txtMeasurement.Text = row_selected["Measurement"].ToString();
+                    txtDistribution.Text = row_selected["Distribution"].ToString();
+                    txtEnvironment.Text = row_selected["Environment"].ToString();
                     txtOccurrence.Text = row_selected[11].ToString();
-                    imgLoc = row_selected[12].ToString();
+                    imgLoc = row_selected["Img"].ToString();
 
                     //Update the Value of Global Variable rowheaderImage
                     rowHeaderImage = imgLoc;
@@ -165,15 +249,27 @@ namespace WpfPosApp
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }
+            } 
         }
 
         private void btnInsert_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                cmd = new SqlCommand("Select count(*) from FishDetails where Species= @Species", db.con);
+                cmd.Parameters.AddWithValue("@Species", this.txtSpeciesName.Text);
+                db.con.Open();
+                var result = (int)cmd.ExecuteScalar();
+                db.con.Close();
+                if (result != 0)
+                {
+                    MessageBox.Show("Species Already Exist");
+                } else
+                {
+             
                 if (imgLoc != "")
                 {
+
                     fishdata.Species = txtSpeciesName.Text;
                     fishdata.ShortDescription = txtShortDescription.Text;
                     fishdata.Biology = txtBiology.Text;
@@ -200,16 +296,27 @@ namespace WpfPosApp
 
                 if (success == true)
                 {
+
+                    
+                    fishdal.ConnecttoFirebase();
+                   
                     MessageBox.Show("Fish Added Succesfully.");
                     ClearData();
-                    DataTable dt = fishdal.Select();
-                    grid_Product.ItemsSource = dt.DefaultView;
+                   
+                    DataTable firstTable = PagedTable.SetPaging(myList, numberOfRecPerPage);
+                    grid_Product.ItemsSource = firstTable.DefaultView;
+
+
+                    int holder = Convert.ToInt32(fishdal.GetFishIDFromName(fishdata.Species).FishID);
+                    fishdata.FishID = holder;
+                    fishdal.AddFishtoFirebaseAsync(fishdata);
 
                 }
                 else
                 {
                     MessageBox.Show("Error Adding Fish. Try Again!");
                 }
+            }
             }
             catch (Exception ex)
             {
@@ -224,7 +331,7 @@ namespace WpfPosApp
             {
                 if (imgLoc != "")
                 {
-                    fishdata.FishID = int.Parse(txtFishID.Text);
+                    fishdata.FishID = int.Parse(txtFishID.Content.ToString());
                     fishdata.Species = txtSpeciesName.Text;
                     fishdata.ShortDescription = txtShortDescription.Text;
                     fishdata.Biology = txtBiology.Text;
@@ -251,9 +358,10 @@ namespace WpfPosApp
                 {
                     MessageBox.Show("Fish Data Updated Succesfully.");
                     ClearData();
-
-                    DataTable dt = fishdal.Select();
+                    myList = fishlist.GetData();
+                    DataTable dt = PagedTable.SetPaging(myList, numberOfRecPerPage);
                     grid_Product.ItemsSource = dt.DefaultView;
+                    this.fishdal.updateFirestore(fishdata);
 
                 }
                 else
@@ -269,15 +377,16 @@ namespace WpfPosApp
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            fishdata.FishID = int.Parse(txtFishID.Text);
-
+            fishdata.FishID = int.Parse(txtFishID.Content.ToString());
+            
             bool success = fishdal.Delete(fishdata);
 
             if (success == true)
             {
                 MessageBox.Show("Fish Data Deleted Succesfully.");
                 ClearData();
-                DataTable dt = fishdal.Select();
+                myList = fishlist.GetData();
+                DataTable dt = PagedTable.SetPaging(myList, numberOfRecPerPage);
                 grid_Product.ItemsSource = dt.DefaultView;
             }
             else
@@ -290,59 +399,60 @@ namespace WpfPosApp
 
         private void txtSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
-            db.con.Open();
-            DataTable dt = new DataTable();
-            adapt = new SqlDataAdapter("select * from FishDetails where Species like '" + txtSearch.Text + "%'", db.con);
-            adapt.Fill(dt);
-            grid_Product.ItemsSource = dt.DefaultView;
-            db.con.Close();
+            try
+            {
+                db.con.Open();
+                String sql = "select * from FishDetails where Species like '" + txtSearch.Text + "%'";
+                IList<FishBLL> dataholder = db.con.Query<FishBLL>(sql).ToList();
+                myList = dataholder;
+                DataTable firstTable = PagedTable.SetPaging(myList, numberOfRecPerPage);
+                grid_Product.ItemsSource = firstTable.DefaultView;
+                db.con.Close();
+                PageInfo.Content = PageNumberDisplay();
+            } catch (Exception err)
+            {
+                MessageBox.Show(err.ToString());
+            }
+
+
         }
 
         private void Grid_Loaded(object sender, RoutedEventArgs e)
         {
-            //Creating DAta Table to hold the categories from Database
-            DataTable categoriesDT = cdal.Select();
-            //Specify DataSource for Category ComboBox
-            cmbFamilyName.ItemsSource = categoriesDT.DefaultView;
-            //Specify Display Member and Value Member for Combobox
-            cmbFamilyName.DisplayMemberPath = "Title";
-            cmbFamilyName.SelectedValuePath = "Title";
-
-
-            
-
-            DataTable dt = fishdal.Select();
+            myList = fishlist.GetData();
+            DataTable dt = PagedTable.SetPaging(myList, numberOfRecPerPage);
             grid_Product.ItemsSource = dt.DefaultView;
         }
 
         private void btnSelect_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.Forms.OpenFileDialog open = new System.Windows.Forms.OpenFileDialog();
+            using (System.Windows.Forms.OpenFileDialog open = new System.Windows.Forms.OpenFileDialog()) {
 
-            open.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.PNG; *gifs;)|*.jpg; *.jpeg; *.png; *.PNG; *gifs";
+                open.Filter = "Image Files (*.jpg; *.jpeg; *.png; *.PNG; *gifs;)|*.jpg; *.jpeg; *.png; *.PNG; *gifs";
 
-            if (open.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                if (open.CheckFileExists)
+                if (open.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    imgBox.ImageSource = new BitmapImage(new Uri(open.FileName));
+                    if (open.CheckFileExists)
+                    {
+                        imgBox.ImageSource = new BitmapImage(new Uri(open.FileName));
 
-                    string ext = System.IO.Path.GetExtension(open.FileName);
+                        string ext = System.IO.Path.GetExtension(open.FileName);
 
-                    Random random = new Random();
-                    int RandInt = random.Next(0, 1000);
+                        Random random = new Random();
+                        int RandInt = random.Next(0, 1000);
 
-                    imgLoc = "Fish" + RandInt + ext;
+                        imgLoc = txtSpeciesName.Text + "-Image" + ext;
 
-                    sourcePath = open.FileName;
+                        sourcePath = open.FileName;
 
-                    string paths = System.Windows.Forms.Application.StartupPath.Substring(0, System.Windows.Forms.Application.StartupPath.Length - 10);
+                        string paths = System.Windows.Forms.Application.StartupPath.Substring(0, System.Windows.Forms.Application.StartupPath.Length - 10);
 
-                    destinationPath = paths + "\\Images\\Product\\" + imgLoc;
+                        destinationPath = paths + "\\Images\\Product\\" + imgLoc;
 
-                    File.Copy(sourcePath, destinationPath);
+                        File.Copy(sourcePath, destinationPath);
 
 
+                    }
                 }
             }
         }
@@ -368,12 +478,10 @@ namespace WpfPosApp
             {
                 foreach (DataRow data in dt.Rows)
                 {
-
-
                     fishdata.FishID = Convert.ToInt32(data["FishID"]);
                     fishdata.Species = data["Species"].ToString();
                     fishdata.Img = data["Img"].ToString();
-                    fishdata.ShortDescription = data["Description"].ToString();
+                    fishdata.ShortDescription = data["ShortDescription"].ToString();
                     fishdata.Biology = data["Biology"].ToString();
                     fishdata.Measurement = data["Measurement"].ToString();
                     fishdata.OrderName = data["Order Name"].ToString();
@@ -381,13 +489,9 @@ namespace WpfPosApp
                     fishdata.LocalName = data["Local Name"].ToString();
                     fishdata.Distribution = data["Distribution"].ToString();
                     fishdata.Environment = data["Environment"].ToString();
-                    fishdata.FishBaseName = data["Fish Name"].ToString();
-                    fishdata.Occurance = data["Occurance"].ToString();
-
-
-
+                    fishdata.FishBaseName = data["FishBase Name"].ToString();
+                    fishdata.Occurance = data["Occurrence"].ToString();
                     fishdal.AddFishtoFirebaseAsync(fishdata);
-
                 }
             }
             catch (Exception ex)

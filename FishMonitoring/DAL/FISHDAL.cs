@@ -16,6 +16,10 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using Firebase.Storage;
 using Image = System.Drawing.Image;
+using System.Reflection;
+using Dapper;
+using System.Windows.Media.Imaging;
+using System.Threading;
 
 namespace Fish.DAL
 {
@@ -31,7 +35,7 @@ namespace Fish.DAL
             DataTable dt = new DataTable();
             try
             {
-                String sql = "select FishID [FishID], Species [Species], OrderName [Order Name], FamilyName [Family Name], LocalName [Local Name], FishBaseName [Fish Name], ShortDescription [Description], Biology [Biology], Measurement [Measurement], Distribution [Distribution], Environment [Environment], Occurance, Img, added_time [Added Time], added_by [Added By]  from FishDetails";
+                const String sql = "select FishID [FishID], Species [Species], OrderName [Order Name], FamilyName [Family Name], LocalName [Local Name], FishBaseName [FishBase Name], ShortDescription [ShortDescription], Biology [Biology], Measurement [Measurement], Distribution [Distribution], Environment [Environment], Occurrence [Occurrence], Img, added_time [Added Time], added_by [Added By]  from FishDetails";
 
                 SqlCommand cmd = new SqlCommand(sql, db.con);
 
@@ -93,9 +97,10 @@ namespace Fish.DAL
 
             try
             {
-                String sql = "INSERT INTO FishDetails (Species, ShortDescription, Biology, Measurement, OrderName, FamilyName, LocalName, Distribution, Environment, FishBaseName, Occurance, Img, added_time, added_by) " +
+                
+                String sql = "INSERT INTO FishDetails (Species, ShortDescription, Biology, Measurement, OrderName, FamilyName, LocalName, Distribution, Environment, FishBaseName, Occurrence, Img, added_time, added_by) " +
                 "VALUES (@Species, @ShortDescription, @Biology, @Measurement, @OrderName, @FamilyName, @LocalName, @Distribution, @Environment, @FishBaseName," +
-                "@Occurance, @Img, @added_time, @added_by)";
+                "@Occurrence, @Img, @added_time, @added_by)";
                 SqlCommand cmd = new SqlCommand(sql, db.con);
 
                 cmd.Parameters.AddWithValue("@Species", p.Species);
@@ -108,7 +113,7 @@ namespace Fish.DAL
                 cmd.Parameters.AddWithValue("@LocalName", p.LocalName);
                 cmd.Parameters.AddWithValue("@Environment", p.Environment);
                 cmd.Parameters.AddWithValue("@FishBaseName", p.FishBaseName);
-                cmd.Parameters.AddWithValue("@Occurance", p.Occurance);
+                cmd.Parameters.AddWithValue("@Occurrence", p.Occurance);
                 cmd.Parameters.AddWithValue("@Img", p.Img);
                 cmd.Parameters.AddWithValue("@added_time", p.added_time);
                 cmd.Parameters.AddWithValue("@added_by", p.added_by);
@@ -152,7 +157,7 @@ namespace Fish.DAL
 
                     String sql = "UPDATE FishDetails SET Species=@Species, ShortDescription=@ShortDescription, Biology=@Biology, Measurement=@Measurement, " +
                         " OrderName=@OrderName, FamilyName=@FamilyName, LocalName=@LocalName, Distribution=@Distribution," +
-                        " Environment=@Environment ,FishBaseName = @FishBaseName ,added_time=@added_time,added_by=@added_by, Occurance=@Occurance, Img=@Img Where FishID=@FishID";
+                        " Environment=@Environment ,FishBaseName = @FishBaseName ,added_time=@added_time,added_by=@added_by, Occurrence=@Occurrence, Img=@Img Where FishID=@FishID";
 
 
                     SqlCommand cmd = new SqlCommand(sql, db.con);
@@ -168,7 +173,7 @@ namespace Fish.DAL
                     cmd.Parameters.AddWithValue("@Distribution", p.Distribution);
                     cmd.Parameters.AddWithValue("@Environment", p.Environment);
                     cmd.Parameters.AddWithValue("@FishBaseName", p.FishBaseName);
-                    cmd.Parameters.AddWithValue("@Occurance", p.Occurance);
+                    cmd.Parameters.AddWithValue("@Occurrence", p.Occurance);
                     cmd.Parameters.AddWithValue("@Img", p.Img);
                     cmd.Parameters.AddWithValue("@added_time", p.added_time);
                     cmd.Parameters.AddWithValue("@added_by", p.added_by);
@@ -221,6 +226,7 @@ namespace Fish.DAL
                     if (rows > 0)
                     {
                         isSuccess = true;
+                        this.deleteDatainFirestore(p.FishID);
                     }
                     else
                     {
@@ -279,7 +285,7 @@ namespace Fish.DAL
 
 
         #endregion
-        #region Method to get Product ID Base on Product Name
+        #region Method to get Fish ID Base on Fish Name
         public FishBLL GetFishIDFromName(string FishName)
         {
             //Create an object of DealCustBll 
@@ -288,7 +294,7 @@ namespace Fish.DAL
 
             try
             {
-                string sql = "SELECT FishID FROM FishDetails WHERE FishName='" + FishName + "'";
+                string sql = "SELECT FishID FROM FishDetails WHERE Species='" + FishName + "'";
                 //Create SQL Data Adapter
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, db.con);
 
@@ -516,27 +522,22 @@ namespace Fish.DAL
             string paths = System.Windows.Forms.Application.StartupPath.Substring(0, System.Windows.Forms.Application.StartupPath.Length - 10);
             Console.WriteLine(fishdata.Img.ToString());
             string imagePath = paths + "\\Images\\Product\\" + fishdata.Img.ToString();
-            Console.WriteLine(imagePath);
 
-            var stream = File.Open(imagePath, FileMode.Open);
 
-            
-            var task = new FirebaseStorage("bfar-testproj.appspot.com")
-                     .Child("data")
-                     .Child("random")
-                     .Child(fishdata.Img.ToString() +".png")
-                     .PutAsync(stream);
-
-            task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progress: {e.Percentage} %");
-
-           
-            
-            
-
-            try
+            using (var stream = File.Open(imagePath, FileMode.Open))
             {
-                DocumentReference usercollection = firestoreDatabase.Collection("FishList").Document(fishdata.FishID.ToString());
-                Dictionary<string, object> userdata = new Dictionary<string, object>()
+                var task = new FirebaseStorage("bfar-testproj.appspot.com")
+                         .Child("data")
+                         .Child("random")
+                         .Child(fishdata.Img.ToString() + ".png")
+                         .PutAsync(stream);
+
+                task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progress: {e.Percentage} %");
+
+                try
+                {
+                    DocumentReference usercollection = firestoreDatabase.Collection("FishList").Document(fishdata.FishID.ToString());
+                    Dictionary<string, object> userdata = new Dictionary<string, object>()
             {
                     { nameof(fishdata.FishID).ToString() , fishdata.FishID.ToString()},
                     { nameof(fishdata.Species).ToString() , fishdata.Species.ToString()},
@@ -551,35 +552,92 @@ namespace Fish.DAL
                     { nameof(fishdata.FishBaseName).ToString() , fishdata.FishBaseName.ToString()},
                     { nameof(fishdata.Occurance).ToString() , fishdata.Occurance.ToString()},
                     { nameof(fishdata.Img).ToString(),  await task},
-                   
 
-                /*
-            { nameof(userlist.UserID).ToString() , userlist.UserID.ToString()},
-            { nameof(userlist.Added_By).ToString() , userlist.Added_By.ToString() },
-            { nameof(userlist.Added_Date).ToString() , userlist.Added_Date.ToString() },
-            { nameof(userlist.Birth_Date).ToString() , userlist.Birth_Date.ToString() },
-            { nameof(userlist.Gender).ToString() , userlist.Gender.ToString() },
-            { nameof(userlist.Img).ToString() , userlist.Img.ToString() },
-            { nameof(userlist.Name).ToString() , userlist.Name.ToString() },
-            { nameof(userlist.Password).ToString() , userlist.Password.ToString() },
-            { nameof(userlist.Surname).ToString() , userlist.Surname.ToString() },
-            { nameof(userlist.UserName).ToString() , userlist.UserName.ToString() },
-            { nameof(userlist.UserType).ToString() , userlist.UserType }
-            */
             };
-                Console.WriteLine(nameof(fishdata.FishID).ToString());
-                await usercollection.SetAsync(userdata);
+                    Console.WriteLine(nameof(fishdata.FishID).ToString());
+                    await usercollection.SetAsync(userdata);
 
-                MessageBox.Show("Uploading Success");
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
+                    MessageBox.Show("Uploading Success");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
             }
 
         }
 
 
+        public IList<FishBLL> GetData()
+        {
+            const String sql = "select FishID [FishID], Species [Species], OrderName [OrderName], FamilyName [FamilyName], LocalName [LocalName], FishBaseName [FishBaseName], ShortDescription [ShortDescription], Biology [Biology], Measurement [Measurement], Distribution [Distribution], Environment [Environment], Occurrence [Occurrence], Img, added_time [Added Time], added_by [Added By]  from FishDetails";
+            db.con.Open();
+            IList<FishBLL> dataholder = db.con.Query<FishBLL>(sql).ToList();
+            db.con.Close();
+            return dataholder;
+        }
+
+        public void deleteDatainFirestore(int id)
+        {
+            this.ConnecttoFirebase();
+            DocumentReference docref = firestoreDatabase.Collection("FishList").Document(id.ToString());
+            docref.DeleteAsync();
+            MessageBox.Show("Delete Success");
+        }
+
+        public async void updateFirestore(FishBLL fishdata)
+        {
+            this.ConnecttoFirebase();
+            string paths = System.Windows.Forms.Application.StartupPath.Substring(0, System.Windows.Forms.Application.StartupPath.Length - 10);
+            Console.WriteLine(fishdata.Img.ToString());
+            string imagePath = paths + "\\Images\\Product\\" + fishdata.Img.ToString();
+
+
+            using (var stream = File.Open(imagePath, FileMode.Open))
+            {
+                var task = new FirebaseStorage("bfar-testproj.appspot.com")
+                         .Child("data")
+                         .Child("random")
+                         .Child(fishdata.Img.ToString() + ".png")
+                         .PutAsync(stream);
+
+                task.Progress.ProgressChanged += (s, e) => Console.WriteLine($"Progress: {e.Percentage} %");
+
+                try
+                {
+                    DocumentReference usercollection = firestoreDatabase.Collection("FishList").Document(fishdata.FishID.ToString());
+                    Dictionary<string, object> userdata = new Dictionary<string, object>()
+            {
+                    { nameof(fishdata.FishID).ToString() , fishdata.FishID.ToString()},
+                    { nameof(fishdata.Species).ToString() , fishdata.Species.ToString()},
+                     { nameof(fishdata.ShortDescription).ToString() , fishdata.ShortDescription.ToString()},
+                    { nameof(fishdata.Biology).ToString() , fishdata.Biology.ToString()},
+                    { nameof(fishdata.Measurement).ToString() , fishdata.Measurement.ToString()},
+                    { nameof(fishdata.OrderName).ToString() , fishdata.OrderName.ToString()},
+                    { nameof(fishdata.FamilyName).ToString() , fishdata.FamilyName.ToString()},
+                    { nameof(fishdata.LocalName).ToString() , fishdata.LocalName.ToString()},
+                    { nameof(fishdata.Distribution).ToString() , fishdata.Distribution.ToString()},
+                    { nameof(fishdata.Environment).ToString() , fishdata.Environment.ToString()},
+                    { nameof(fishdata.FishBaseName).ToString() , fishdata.FishBaseName.ToString()},
+                    { nameof(fishdata.Occurance).ToString() , fishdata.Occurance.ToString()},
+                    { nameof(fishdata.Img).ToString(),  await task},
+
+            };
+                    Console.WriteLine(nameof(fishdata.FishID).ToString());
+                    await usercollection.UpdateAsync(userdata);
+
+                    MessageBox.Show("Uploading Success");
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                }
+            }
+        }
 
     }
+
+
+
 }
+

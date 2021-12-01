@@ -88,10 +88,7 @@ namespace WpfPosApp
             logoBorder.Visibility = Visibility.Collapsed;
 
         }
-
-
-
-
+        
         private void frmUser_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
             frmUser user = new frmUser();
@@ -138,7 +135,7 @@ namespace WpfPosApp
 
         private void BtnCtg_Click(object sender, MouseButtonEventArgs e)
         {
-            frmCategories categories = new frmCategories();
+            frmgearUsed categories = new frmgearUsed();
             pnlMain.Children.Clear();
             pnlMain.Children.Add(categories);
         }
@@ -160,9 +157,9 @@ namespace WpfPosApp
 
         private void frmInventory_Click(object sender, MouseButtonEventArgs e)
         {
-            frmInventory i = new frmInventory();
+            frmlandingSite frmlandingSite = new frmlandingSite();
             pnlMain.Children.Clear();
-            pnlMain.Children.Add(i);
+            pnlMain.Children.Add(frmlandingSite);
         }
 
         private void frmTransactions_Click(object sender, MouseButtonEventArgs e)
@@ -309,7 +306,7 @@ namespace WpfPosApp
 
         private void ListViewItem_Selected_3(object sender, RoutedEventArgs e)
         {
-            frmCategories categories = new frmCategories();
+            frmgearUsed categories = new frmgearUsed();
             pnlMain.Children.Clear();
             pnlMain.Children.Add(categories);
         }
@@ -340,6 +337,13 @@ namespace WpfPosApp
             frmAddTransaction purchase = new frmAddTransaction(cash, this);
             pnlMain.Children.Clear();
             pnlMain.Children.Add(purchase);
+        }
+
+        private void ListViewItem_Selected_8(object sender, RoutedEventArgs e)
+        {
+            frmlandingSite frmlandingSite = new frmlandingSite();
+            pnlMain.Children.Clear();
+            pnlMain.Children.Add(frmlandingSite);
         }
     }
 }

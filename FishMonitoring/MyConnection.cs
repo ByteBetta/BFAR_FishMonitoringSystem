@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace WpfPosApp
 {
     class MyConnection
@@ -15,6 +16,7 @@ namespace WpfPosApp
         SqlCommand cm = new SqlCommand();
         private double dailysales;
         private double monthlysales;
+        private string dominantfish;
         private double totalsales;
         private int productline;
         private int productstock;
@@ -56,7 +58,7 @@ namespace WpfPosApp
 
         public double MonthlySales()
         {
-            /*
+            
             string trans_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             DateTime dtm = DateTime.Now;
             dtm = dtm.AddDays(-30);
@@ -64,26 +66,46 @@ namespace WpfPosApp
             cn = new SqlConnection(conn);
             cn.ConnectionString = conn;
             cn.Open();
-            cm = new SqlCommand("select isnull(sum(grandTotal), 0) as grandTotal from tblTransaction where transaction_date between '" + st2 + "' and '" + trans_date + "' and type like 'Sale'", cn);
+            cm = new SqlCommand("Select COUNT(*) as totalFish  from TransDetails where added_date between '" + st2 + "' and '" + trans_date + "'", cn);
             monthlysales = double.Parse(cm.ExecuteScalar().ToString());
             cn.Close();
             return monthlysales;
-            */
-            return 0;
+         
         }
 
         public double TotalSales()
         {
             /*
+            DateTime dtm = DateTime.Now;
             cn = new SqlConnection(conn);
             cn.ConnectionString = conn;
             cn.Open();
+
             cm = new SqlCommand("select isnull(sum(grandTotal), 0) as grandTotal from tblTransaction where type like 'Sale'", cn);
             totalsales = double.Parse(cm.ExecuteScalar().ToString());
             cn.Close();
             return totalsales;
             */
             return 0;
+            
+        }
+
+        public string mostDominantFish()
+        {
+            
+            string trans_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+            DateTime dtm = DateTime.Now;
+            dtm = dtm.AddDays(-30);
+            string st2 = dtm.ToString("yyyy-MM-dd HH:mm:ss");
+            cn = new SqlConnection(conn);
+            cn.ConnectionString = conn;
+            cn.Open();
+            cm = new SqlCommand("Select TOP (1) Species, Count(Species) as Number from TransDetails where added_date between '" + st2 + "' and '" + trans_date + "'" + " Group by Species ORDER by Number desc", cn);
+            
+            dominantfish = cm.ExecuteScalar().ToString();
+            cn.Close();
+            Console.WriteLine(dominantfish);
+            return dominantfish;
         }
 
 
