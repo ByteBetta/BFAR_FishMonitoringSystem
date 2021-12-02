@@ -19,7 +19,9 @@ namespace WpfPosApp
         private string dominantfish;
         private double totalsales;
         private int productline;
-        private int productstock;
+        private int fishnumber;
+        private int fishermannumber;
+        private string vesselcount;
         private int critical;
         private string conn;
 
@@ -39,7 +41,7 @@ namespace WpfPosApp
 
         public double DailySales()
         {
-            /*
+            
             string transaction_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             DateTime dt = DateTime.Now;
             dt = dt.AddDays(-1);
@@ -47,12 +49,11 @@ namespace WpfPosApp
             cn = new SqlConnection(conn);
             cn.ConnectionString = conn;
             cn.Open();
-            cm = new SqlCommand("select isnull(sum(grandTotal), 0) as grandTotal from tblTransaction where transaction_date between '" + s2 + "' and '" + transaction_date + "' and type like 'Sale'", cn);
+            cm = new SqlCommand("Select COUNT(*) as totalFish  from TransDetails where added_date between '" + s2 + "' and '" + transaction_date + "'", cn);
             dailysales = double.Parse(cm.ExecuteScalar().ToString());
             cn.Close();
             return dailysales;
-            */
-            return 0;
+            
         }
 
 
@@ -88,6 +89,40 @@ namespace WpfPosApp
             */
             return 0;
             
+        }
+
+        public int numberSpecies()
+        {
+            cn = new SqlConnection(conn);
+            cn.ConnectionString = conn;
+            cn.Open();
+            cm = new SqlCommand("SELECT Count(*) FROM FishDetails", cn);
+            fishnumber = int.Parse(cm.ExecuteScalar().ToString());
+            cn.Close();
+            return fishnumber;
+        }
+
+        public int fisherman()
+        {
+            cn = new SqlConnection(conn);
+            cn.ConnectionString = conn;
+            cn.Open();
+            cm = new SqlCommand("SELECT Count(*) FROM Fisherman", cn);
+            fishermannumber = int.Parse(cm.ExecuteScalar().ToString());
+            cn.Close();
+            return fishermannumber;
+        }
+
+        public string vessel()
+        {
+            cn = new SqlConnection(conn);
+            cn.ConnectionString = conn;
+            cn.Open();
+            cm = new SqlCommand("SELECT TOP 1 Count(vessels), vessels FROM TransDetails group by vessels order by Count(vessels) desc", cn);
+            vesselcount = cm.ExecuteScalar().ToString();
+            cn.Close();
+            return vesselcount;
+           
         }
 
         public string mostDominantFish()

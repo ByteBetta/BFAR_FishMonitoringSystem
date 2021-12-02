@@ -53,10 +53,13 @@ namespace WpfPosApp
             lblUnit.Content = dbcon.DailySales().ToString();
             lblLastMonthUnit.Content = dbcon.MonthlySales().ToString();
             lbldfish.Content = dbcon.mostDominantFish().ToString();
-           
+            lblSpeciesList.Content = dbcon.numberSpecies().ToString();
+            lblvessel.Content = dbcon.vessel().ToString();
+            lblUnit.Content = dbcon.DailySales();
+            lblfisherman.Content = dbcon.fisherman();
            // lblProductStockUnit.Content = dbcon.ProductStock().ToString("#,##0");
-         //   lblCriticalUnits.Content = dbcon.CriticalProduct().ToString("#,##0");
-            
+           //   lblCriticalUnits.Content = dbcon.CriticalProduct().ToString("#,##0");
+
         }
 
 

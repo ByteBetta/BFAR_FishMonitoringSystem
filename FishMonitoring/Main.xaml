@@ -133,12 +133,7 @@
                             <TextBlock x:Name="dshText" Text="Dashboard" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
-                    <ListViewItem Height="50" Selected="ListViewItem_Selected_7">
-                        <StackPanel Orientation="Horizontal" MouseLeftButtonUp="frmAddTransactions">
-                            <materialDesign:PackIcon x:Name="empIcn" Kind="TransferDown" Width="22" Height="22" Margin="11, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" Visibility="Visible"/>
-                            <TextBlock x:Name="transtxt" Text="Add Transaction" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
-                        </StackPanel>
-                    </ListViewItem>
+                  
                     <ListViewItem Height="50" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal" MouseLeftButtonUp="frmUser_MouseLeftButtonUp">
                             <materialDesign:PackIcon x:Name="usrIcn" Kind="User" Width="22" Height="22" Margin="11, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3"/>
@@ -154,7 +149,7 @@
                     <ListViewItem Height="50" Selected="ListViewItem_Selected_3">
                         <StackPanel x:Name="Categories" Orientation="Horizontal" MouseLeftButtonUp="BtnCtg_Click">
                             <iconPacks:PackIconFontAwesome Kind="CogSolid" x:Name="ctgIcn" Width="23" Height="22" Margin="10, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3" />
-                            <TextBlock x:Name="ctgTxt" Text="Categories" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
+                            <TextBlock x:Name="ctgTxt" Text="Gear List" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="50" Selected="ListViewItem_Selected_4">
@@ -172,7 +167,7 @@
                     <ListViewItem Height="50" Selected="ListViewItem_Selected_8">
                         <StackPanel x:Name="Inventory" Orientation="Horizontal" MouseLeftButtonUp="frmInventory_Click">
                             <iconPacks:PackIconMaterial x:Name="invIcn" Kind="Mapbox" Width="18" Height="18" Margin="12, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3"/>
-                            <TextBlock x:Name="invTxt" Text=" Inventory" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
+                            <TextBlock x:Name="invTxt" Text=" Landing Site" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
                     <ListViewItem Height="50" Selected="ListViewItem_Selected_5">

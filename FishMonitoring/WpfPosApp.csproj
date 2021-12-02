@@ -539,6 +539,7 @@
     <EmbeddedResource Include="Report2.rdlc" />
     <EmbeddedResource Include="Report3.rdlc" />
     <EmbeddedResource Include="Report4.rdlc" />
+    <EmbeddedResource Include="Report5.rdlc" />
     <EmbeddedResource Include="rptDealCust.rdlc" />
     <EmbeddedResource Include="rptDealers.rdlc" />
     <EmbeddedResource Include="rptEmployee.rdlc">

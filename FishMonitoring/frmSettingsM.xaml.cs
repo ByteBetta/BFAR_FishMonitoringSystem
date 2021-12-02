@@ -41,8 +41,6 @@ namespace WpfPosApp
             m.lblloggedUsr.Foreground = pbrush;
             m.dshIcn.Foreground = pbrush;
             m.dshText.Foreground = pbrush;
-            m.empIcn.Foreground = pbrush;
-            m.transtxt.Foreground = pbrush;
             m.usrIcn.Foreground = pbrush;
             m.usrTxt.Foreground = pbrush;
             m.ctgIcn.Foreground = pbrush;
@@ -69,8 +67,6 @@ namespace WpfPosApp
             m.lblloggedUsr.Foreground = pbrush;
             m.dshIcn.Foreground = pbrush;
             m.dshText.Foreground = pbrush;
-            m.empIcn.Foreground = pbrush;
-            m.transtxt.Foreground = pbrush;
             m.usrIcn.Foreground = pbrush;
             m.usrTxt.Foreground = pbrush;
             m.ctgIcn.Foreground = pbrush;

@@ -44,7 +44,7 @@
 
             <TabItem Header="Most Catch Fish" Margin="-2,1,-2,-6" BorderBrush="Transparent" BorderThickness="0" Background="White">
                 <Grid Background="White" Margin="3,-3,4,-8">
-                    <DataGrid x:Name="gridTopItems" HorizontalAlignment="Left" Margin="0,101,0,0" VerticalAlignment="Top" Height="373" Width="595" BorderBrush="White" Background="White"/>
+                    <DataGrid x:Name="gridTopItems" HorizontalAlignment="Left" Margin="0,101,0,0" VerticalAlignment="Top" Height="373" Width="548" BorderBrush="White" Background="White"/>
                     <StackPanel HorizontalAlignment="Left" Height="34" Margin="0,16,0,0" VerticalAlignment="Top" Width="958" Background="White">
                         <materialDesign:PackIcon Kind="ArrowTopBoldCircle" Width="34" Height="30" Margin="10, 5, 0, 0" VerticalAlignment="Center" Foreground="#FF5B88FF"/>
                         <Label x:Name="label" Content="Top Catch Fishes" FontSize="14" Margin="70,-35,515,0" FontWeight="Bold" Height="26" Background="White"/>
@@ -68,7 +68,7 @@
                         VerticalAlignment="Center"
                         HorizontalAlignment="Center"
                         Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385"/>
-                    <Button x:Name="btnPrint" Content="    Print Report" Margin="838,65,0,0" VerticalAlignment="Top" Width="125" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnPrintAll_Click">
+                    <Button x:Name="btnPrint" Visibility="Hidden" Content="    Print Report" Margin="838,65,0,0" VerticalAlignment="Top" Width="125" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnPrintAll_Click">
                         <Button.Template>
                             <ControlTemplate TargetType="{x:Type Button}">
                                 <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
@@ -77,7 +77,7 @@
                             </ControlTemplate>
                         </Button.Template>
                     </Button>
-                    <StackPanel x:Name="pnlChart" HorizontalAlignment="Left" Height="374" Margin="611,101,0,0" VerticalAlignment="Top" Width="355" Background="White"/>
+                    <StackPanel x:Name="pnlChart" HorizontalAlignment="Left" Height="353" Margin="588,116,0,0" VerticalAlignment="Top" Width="316" Background="White"/>
 
                     <Custom:PackIconMaterial Margin="853,73,110,393" Kind="Printer"
                         VerticalAlignment="Center"
@@ -86,7 +86,6 @@
                     <Border Margin="498,66,317,385" Background="#FF5F8DF7" CornerRadius="7">
                         <ComboBox x:Name="cmbTopSelect" HorizontalAlignment="Left" Height="28" VerticalAlignment="Top" Width="138" Foreground="White" BorderBrush="White" BorderThickness="0" Margin="10,0,0,0">
                             <ComboBoxItem Content="Sort BY Quantity"/>
-                            <ComboBoxItem Content="Sort BY Weight"/>
                         </ComboBox>
                     </Border>
                 </Grid>
@@ -154,7 +153,7 @@
                         <Label x:Name="lbltest" Content="Fish Line Graph" FontSize="14" Margin="72,0,459,0" FontWeight="Bold" Height="26"/>
                         <materialDesign:PackIcon Kind="Graph" Width="34" Height="30" Margin="10, -24, 0, 0" VerticalAlignment="Center" Foreground="#FF5B88FF"/>
                     </StackPanel>
-                    <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="455,71,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="186" BorderThickness="1" TextChanged="txtSearch_TextChanged" BorderBrush="#33000000" Grid.Column="1">
+                    <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="30" Margin="455,65,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="186" BorderThickness="1" TextChanged="txtSearch_TextChanged" BorderBrush="#33000000" Grid.Column="1">
                         <TextBox.Resources>
                             <Style TargetType="{x:Type Border}">
                                 <Setter Property="CornerRadius" Value="4"/>
@@ -199,7 +198,7 @@
                     <Label x:Name="lblblt_Copy" Content="Species" Margin="460,32,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
                     <Border HorizontalAlignment="Left" Margin="1,0,0,66" VerticalAlignment="Bottom" Width="247"  Height="250" BorderThickness="1" CornerRadius="20,20,20,20" BorderBrush="#FFD1D1D1" Grid.Column="1" RenderTransformOrigin="0.509,0.389">
                         <Border.Background>
-                            <ImageBrush x:Name="imgBox" ImageSource="https://i.ibb.co/w4kK8gp/laptop.png" Stretch="Uniform" />
+                            <ImageBrush x:Name="imgBox" ImageSource="pack://application:,,,/Images/Fish.png" Stretch="Uniform" />
                         </Border.Background>
                     </Border>
                     <Label x:Name="lblblt_Copy1" Content="Average Weight" Margin="317,144,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
@@ -215,9 +214,16 @@
                     <Label x:Name="averagelegnth" Content="0" Margin="470,173,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
                     <Label x:Name="lblhl" Content="0" Margin="470,271,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
                     <Label x:Name="lblll" Content="0" Margin="468,364,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
+                    <Label x:Name="lblblt_Copy4" Content="Volume" Margin="618,144,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
+                    <Label x:Name="tblVolume" Content="0" Margin="618,173,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
+                    <Label x:Name="lblblt_Copy6" Content="Top Gear Used" Margin="618,241,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
+                    <Label x:Name="tblgear" Content="" Margin="618,266,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
+                    <Label x:Name="lblblt_Copy7" Content="Top Vessel" Margin="616,334,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
+                    <Label x:Name="tblvessel" Content="" Margin="616,371,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148" Grid.Column="1"/>
                 </Grid>
 
             </TabItem>
+
         </TabControl>
 
 

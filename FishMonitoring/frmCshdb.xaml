@@ -10,30 +10,6 @@
           >
     <!--  mc:Ignorable="d" Height="800" Width="1184" Loaded="UserControl_Loaded" Foreground="Black" -->
     <Grid Width="1164" Height="632" Margin="10,24,10,144">
-        <Border CornerRadius="5" Background="White" Margin="796,143,88,144">
-            <Border.Effect>
-                <DropShadowEffect Direction="-90" Opacity="0.1"/>
-            </Border.Effect>
-        </Border>
-        <Border CornerRadius="5" Background="White" Margin="92,143,586,190">
-            <Border.Effect>
-                <DropShadowEffect Direction="-90" Opacity="0.1"/>
-            </Border.Effect>
-        </Border>
-        <StackPanel x:Name="pnl1_Copy" HorizontalAlignment="Left" Height="345" Margin="801,143,0,0" VerticalAlignment="Top" Width="268" Background="White">
-            <Label x:Name="lblPieTitle" Content="Yearly Catch Chart" Margin="144,0,15,0" Foreground="#E5000000"/>
-            <Wpf:PieChart x:Name="PieChart1" DataClick="Chart_OnDataClick" Series="{Binding SeriesCollection}" LegendLocation="Bottom" InnerRadius="100" Margin="3,20,1,0" Height="266">
-                <Wpf:PieChart.ChartLegend>
-                    <Wpf:DefaultLegend BulletSize="20"></Wpf:DefaultLegend>
-                </Wpf:PieChart.ChartLegend>
-                <Wpf:PieChart.DataTooltip>
-                    <Wpf:DefaultTooltip BulletSize="20"></Wpf:DefaultTooltip>
-                </Wpf:PieChart.DataTooltip>
-            </Wpf:PieChart>
-        </StackPanel>
-
-
-        <StackPanel x:Name="pnl1" HorizontalAlignment="Left" Height="299" Margin="148,143,0,0" VerticalAlignment="Top" Width="456"  Background="White"/>
 
         <StackPanel x:Name="pnlTodaySales"  HorizontalAlignment="Left" Height="100" Margin="92,5,0,0" VerticalAlignment="Top" Width="280">
             <StackPanel.Background>
@@ -93,8 +69,8 @@
             <iconPacks:PackIconFontAwesome Kind="CubesSolid" Width="AUTO" Height="30" Margin="22,25,228,10" VerticalAlignment="Center" Foreground="#FFFFF5E7" HorizontalAlignment="Stretch" />
 
         </StackPanel>
-        <Label x:Name="lblProductLine" Content="Top Fisherman" HorizontalAlignment="Left" Margin="108,590,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Label x:Name="lblProductLineUnit" Content="0" HorizontalAlignment="Left" Margin="223,563,0,0" VerticalAlignment="Top" FontSize="20" Foreground="White"/>
+        <Label x:Name="lblProductLine" Content="Top Vessels" HorizontalAlignment="Left" Margin="108,590,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label x:Name="lblvessel" Content="0" HorizontalAlignment="Left" Margin="223,563,0,0" VerticalAlignment="Top" FontSize="20" Foreground="White"/>
         <StackPanel  HorizontalAlignment="Left" Height="100" Margin="445,527,0,0" VerticalAlignment="Top" Width="280">
             <StackPanel.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0.1,0">
@@ -108,7 +84,7 @@
             <iconPacks:PackIconUnicons Kind="TruckLoading" Width="Auto" Height="30" Margin="20,25,225,10" VerticalAlignment="Center" Foreground="#FFFFF5E7" HorizontalAlignment="Stretch" />
         </StackPanel>
         <Label x:Name="lblProductStock" Content="Species List" HorizontalAlignment="Left" Margin="465,590,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Label x:Name="lblProductStockUnit" Content="0" HorizontalAlignment="Left" Margin="578,564,0,0" FontSize="20" Foreground="White" Height="35" VerticalAlignment="Top"/>
+        <Label x:Name="lblSpeciesList" Content="0" HorizontalAlignment="Left" Margin="578,564,0,0" FontSize="20" Foreground="White" Height="35" VerticalAlignment="Top"/>
         <StackPanel  HorizontalAlignment="Left" Height="98" Margin="796,527,0,0" VerticalAlignment="Top" Width="280">
             <StackPanel.Background>
                 <LinearGradientBrush EndPoint="1,0" StartPoint="0.1,0">
@@ -122,7 +98,7 @@
             <materialDesign:PackIcon Kind="TrendingDown" Width="Auto" Height="30" Margin="20,25,225,10" VerticalAlignment="Center" Foreground="White" HorizontalAlignment="Stretch" />
 
         </StackPanel>
-        <Label x:Name="lblCritical" Content="Critical Fish" HorizontalAlignment="Left" Margin="816,590,0,0" VerticalAlignment="Top" Foreground="White"/>
-        <Label x:Name="lblCriticalUnits" Content="0" HorizontalAlignment="Left" Margin="932,564,0,0" VerticalAlignment="Top" FontSize="20" Foreground="White"/>
+        <Label x:Name="lblCritical" Content="Number of Fisherman" HorizontalAlignment="Left" Margin="816,590,0,0" VerticalAlignment="Top" Foreground="White"/>
+        <Label x:Name="lblfisherman" Content="0" HorizontalAlignment="Left" Margin="932,564,0,0" VerticalAlignment="Top" FontSize="20" Foreground="White"/>
     </Grid>
 </UserControl>

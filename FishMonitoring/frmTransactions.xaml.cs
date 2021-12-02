@@ -223,10 +223,11 @@ namespace WpfPosApp
                     TransDetailsDAL tdal = new TransDetailsDAL();
                     tdal.InsertTransDetails(transDetailsBLL);
                     Console.WriteLine("");
-                    MessageBox.Show("Retrival Success");
+                   
                 }
+                MessageBox.Show("Retrival Success");
 
-                
+
             }
 
           

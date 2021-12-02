@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using Color = System.Windows.Media.Color;
 
 namespace WpfPosApp
 {
@@ -37,15 +38,17 @@ namespace WpfPosApp
         {
             InitializeComponent();
             cn = new SqlConnection(db.MyCon());
-            dtpPicker1.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            dtpPicker2.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            dtpPicker1sd.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            dtpPicker2sd.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            dtpPicker1.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            dtpPicker2.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            dtpPicker1sd.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            dtpPicker2sd.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
 
             dtpPicker1.SelectedDate = DateTime.Now;
             dtpPicker2.SelectedDate = DateTime.Now.AddDays(+1);
             dtpPicker1sd.SelectedDate = DateTime.Now;
             dtpPicker2sd.SelectedDate = DateTime.Now.AddDays(+1);
+            dateForFish1.SelectedDate = DateTime.Now;
+            dateForFish2.SelectedDate = DateTime.Now.AddDays(+1);
 
             txtSearch.TextChanged += txtSearch_TextChanged;
             DataTable fdd = fdal.Select();
@@ -120,7 +123,7 @@ namespace WpfPosApp
                     return;
                 }
                 LoadRecord();
-                //LoadChartTopSelling();
+                LoadChartTopSelling();
             } catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
@@ -155,13 +158,15 @@ namespace WpfPosApp
 
 
 
-            da = new SqlDataAdapter("SELECT Species, AVG(weight) as Weight, AVG(length) as Length, MAX(weight) as MWeight, MAX(length) as MLength, MIN(weight) as LWeight, MIN(length) as LLength FROM dbo.TransDetails WHERE Species = '" + fname + "' AND added_date between '" + s1 + "' and '" + s2 + "' group by  Species", cn);
+            da = new SqlDataAdapter("SELECT Count(Species) as volume, Species, AVG(weight) as Weight, AVG(length) as Length, MAX(weight) as MWeight, MAX(length) as MLength, MIN(weight) as LWeight, MIN(length) as LLength FROM dbo.TransDetails WHERE Species = '" + fname + "' AND added_date between '" + s1 + "' and '" + s2 + "' group by  Species", cn);
             DataTable ds = new DataTable();
             DataTable image = new DataTable();
+            DataTable gearUsed = new DataTable();
             da.Fill(ds);
             da = new SqlDataAdapter("SELECT Img FROM dbo.FishDetails WHERE Species = '" + fname + "'", cn);
             da.Fill(image);
-
+            da = new SqlDataAdapter("SELECT TOP 3 gearUsed FROM dbo.TransDetails WHERE Species = '" + fname + "' AND added_date between '" + s1 + "' and '" + s2 + "' group by  gearUsed", cn);
+            da.Fill(gearUsed);
              cn.Close();
             if(ds != null)
                 {
@@ -176,17 +181,19 @@ namespace WpfPosApp
                                 imgBox.ImageSource = new BitmapImage(new Uri(imagePath));
                                 
                             }
-                            averagelegnth.Content = dataRow["Length"];
-                            averageweight.Content = dataRow["Weight"];
-                            lblll.Content = dataRow["LLength"];
-                            lbllw.Content = dataRow["LWeight"];
-                            lblhl.Content = dataRow["MLength"];
-                            lblhw.Content = dataRow["MWeight"];
-
-                            foreach (var item in dataRow.ItemArray)
+                            averagelegnth.Content = dataRow["Length"] + " cm";
+                            averageweight.Content = dataRow["Weight"] + " kg";
+                            lblll.Content = dataRow["LLength"] + " cm";
+                            lbllw.Content = dataRow["LWeight"] + " kg";
+                            lblhl.Content = dataRow["MLength"] + " cm";
+                            lblhw.Content = dataRow["MWeight"] + " kg";
+                            tblVolume.Content = dataRow["volume"];
+                            foreach (DataRow dr in gearUsed.Rows)
                             {
-                                Console.WriteLine(item);
+                                tblgear.Content += dr["gearUsed"].ToString() + Environment.NewLine;
+
                             }
+
 
 
                         }
@@ -222,6 +229,11 @@ namespace WpfPosApp
         {
             try
             {
+                Title title = new Title();
+                System.Drawing.FontFamily family = new System.Drawing.FontFamily("Arial");
+                title.Font = new Font(family, 14);
+                title.Text = "Top 10 Species";
+
                 System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
                 var ch = new frmTopItemsChart(this);
                 ch.TopLevel = false;
@@ -239,28 +251,23 @@ namespace WpfPosApp
 
                 if (cmbTopSelect.Text == "Sort BY Quantity")
                 {
-                    da = new SqlDataAdapter("SELECT top 20  FishName, isnull(sum(quantity),0) as Quantity, isnull(sum(weight),0) as Weight  FROM vwFishCatchCount WHERE added_date between '" + s1 + "' and '" + s2 + "' group by  FishName order by FishName desc", cn);
+                    da = new SqlDataAdapter("SELECT top 10 ROW_NUMBER() OVER(ORDER BY isnull(SUM(quantity),0) DESC ) AS #, Species [Full Name], isnull(SUM(quantity),0) as Quantity FROM vwFishCatchCount WHERE added_date between '" + s1 + "' and '" + s2 + "' group by Species order by isnull(SUM(quantity),0) desc", cn);
 
                 }
-                else if (cmbTopSelect.Text == "Sort BY Weight")
-                {
-                    da = new SqlDataAdapter("SELECT top 20  FishName, isnull(sum(weight),0) as Quantity, isnull(sum(weight),0) as Weight  FROM vwFishCatchCount WHERE added_date between '" + s1 + "' and '" + s2 + "' group by  FishName order by FishName desc", cn);
 
-                }
                 DataSet ds = new DataSet();
                 da.Fill(ds, "Top Catch Species");
                 ch.chart1.DataSource = ds.Tables["Top Catch Species"];
                 Series series = ch.chart1.Series[0];
                 series.ChartType = SeriesChartType.Doughnut;
+                
+                ch.chart1.Titles.Add(title);
 
                 series.Name = "Top Species";
                 var chart = ch.chart1;
-                chart.Series[0].XValueMember = "FishName";
+                chart.Series[0].XValueMember = "Full Name";
                 if (cmbTopSelect.Text == "Sort BY Quantity") { chart.Series[0].YValueMembers = "quantity"; }
-                if (cmbTopSelect.Text == "Sort BY Weight") { chart.Series[0].YValueMembers = "Weight"; }
-
                 chart.Series[0].IsValueShownAsLabel = true;
-                if (cmbTopSelect.Text == "Sort BY Weight") { chart.Series[0].LabelFormat = "{#,##0.00}"; }
                 if (cmbTopSelect.Text == "Sort BY Quantity") { chart.Series[0].LabelFormat = "{#,##0}"; }
 
                 cn.Close();
@@ -369,13 +376,8 @@ namespace WpfPosApp
             {
                 f.LoadTopSelling("SELECT top 10 ROW_NUMBER() OVER(ORDER BY  qty DESC ) AS #, FishID, Full_Name, isnull(sum(qty),0) as QTY, isnull(sum(total_price),0) as Total  FROM vwFishCatchCount WHERE added_date between '" + s1 + "' and '" + s2 + "' and type like 'Sale' group by FishID, Full_Name, qty order by qty desc", "From :" + s1 + " To: " + s2, "TOP SELLING ITEMS SORT BY QTY");
 
-
             }
-            else if (cmbTopSelect.Text == "Sort BY Total Amount")
-            {
-                f.LoadTopSelling("SELECT top 10 ROW_NUMBER() OVER(ORDER BY  qty DESC ) AS #, FishID, Full_Name, isnull(sum(qty),0) as QTY, isnull(sum(total_price),0) as Total  FROM vwFishCatchCount WHERE added_date between '" + s1 + "' and '" + s2 + "' and type like 'Sale' group by FishID, Full_Name, qty order by Total desc", "From :" + s1 + " To: " + s2, "TOP SELLING ITEMS SORT BY TOTAL AMOUNT");
 
-            }
 
             f.ShowDialog();
         }
@@ -421,5 +423,7 @@ namespace WpfPosApp
             _currentInput = input;
 
         }
+
+       
     }
 }
