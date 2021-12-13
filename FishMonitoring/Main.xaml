@@ -75,7 +75,13 @@
                                 <ImageBrush x:Name="imageBox" Stretch="UniformToFill" />
                             </Border.Background>
                         </Border>
-                        <Label x:Name="lbllogged" Content="Hi, " Margin="70, -40, 0, 0" Foreground="#FF8090C7"/>
+                      
+                        <Label x:Name="lbllogged"  Margin="70, -40, 0, 0"  Foreground="#FF8090C7">
+                            <Label.Content>
+                                <AccessText TextWrapping="Wrap" Text="xxxxx"/>
+                            </Label.Content>    
+                        </Label>
+                       
                         <Button x:Name="btnProfile" Content="My Profile" Margin="0, 2, 0, 0" Click="btnProfile_Click"/>
                         <Button x:Name="btnSettings" Content="Settings" Click="btnSettings_Click"/>
                         <Separator/>
@@ -88,10 +94,10 @@
 
 
             <Label x:Name="label1" Content="" HorizontalAlignment="Left" Margin="406,10,0,0" VerticalAlignment="Top" Foreground="#00000000"/>
-        
+
             <Border CornerRadius="60" BorderThickness="1" Width="35" Margin="1120,8,214,8" Background="Transparent" BorderBrush="#00F0F0F0"/>
-            
-            <Label x:Name="lblHeyLogged" Content="" Margin="1261,12,62,12" Foreground="#FF5E86DC" FontSize="13" FontWeight="Bold"/>
+
+            <Label x:Name="lblHeyLogged" Content="" Margin="1209,10,0,14" Foreground="#FF5E86DC" FontSize="13" FontWeight="Bold" HorizontalAlignment="Left" Width="83"/>
 
         </Grid>
 
@@ -133,7 +139,7 @@
                             <TextBlock x:Name="dshText" Text="Dashboard" FontSize="12" VerticalAlignment="Center" Margin="20 10" Foreground="#FF7389C3"/>
                         </StackPanel>
                     </ListViewItem>
-                  
+
                     <ListViewItem Height="50" Selected="ListViewItem_Selected">
                         <StackPanel Orientation="Horizontal" MouseLeftButtonUp="frmUser_MouseLeftButtonUp">
                             <materialDesign:PackIcon x:Name="usrIcn" Kind="User" Width="22" Height="22" Margin="11, 0,0,0" VerticalAlignment="Center" Foreground="#FF7389C3"/>

@@ -266,6 +266,32 @@ SELECT UserID, Name, Surname, UserName, Password, UserType, Gender, Birth_Date, 
             </xs:sequence>
           </xs:complexType>
         </xs:element>
+        <xs:element name="ChartReport" msprop:Generator_TableClassName="ChartReportDataTable" msprop:Generator_TableVarName="tableChartReport" msprop:Generator_RowChangedName="ChartReportRowChanged" msprop:Generator_TablePropName="ChartReport" msprop:Generator_RowDeletingName="ChartReportRowDeleting" msprop:Generator_RowChangingName="ChartReportRowChanging" msprop:Generator_RowEvHandlerName="ChartReportRowChangeEventHandler" msprop:Generator_RowDeletedName="ChartReportRowDeleted" msprop:Generator_RowClassName="ChartReportRow" msprop:Generator_UserTableName="ChartReport" msprop:Generator_RowEvArgName="ChartReportRowChangeEvent">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Volume" msprop:Generator_ColumnVarNameInTable="columnVolume" msprop:Generator_ColumnPropNameInRow="Volume" msprop:Generator_ColumnPropNameInTable="VolumeColumn" msprop:Generator_UserColumnName="Volume" type="xs:int" minOccurs="0" />
+              <xs:element name="date" msprop:Generator_ColumnVarNameInTable="columndate" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_UserColumnName="date" type="xs:dateTime" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ChartReportMonthly" msprop:Generator_TableClassName="ChartReportMonthlyDataTable" msprop:Generator_TableVarName="tableChartReportMonthly" msprop:Generator_TablePropName="ChartReportMonthly" msprop:Generator_RowDeletingName="ChartReportMonthlyRowDeleting" msprop:Generator_RowChangingName="ChartReportMonthlyRowChanging" msprop:Generator_RowEvHandlerName="ChartReportMonthlyRowChangeEventHandler" msprop:Generator_RowDeletedName="ChartReportMonthlyRowDeleted" msprop:Generator_UserTableName="ChartReportMonthly" msprop:Generator_RowChangedName="ChartReportMonthlyRowChanged" msprop:Generator_RowEvArgName="ChartReportMonthlyRowChangeEvent" msprop:Generator_RowClassName="ChartReportMonthlyRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="date" msprop:Generator_ColumnVarNameInTable="columndate" msprop:Generator_ColumnPropNameInRow="date" msprop:Generator_ColumnPropNameInTable="dateColumn" msprop:Generator_UserColumnName="date" type="xs:string" minOccurs="0" />
+              <xs:element name="Volume" msprop:Generator_ColumnVarNameInTable="columnVolume" msprop:Generator_ColumnPropNameInRow="Volume" msprop:Generator_ColumnPropNameInTable="VolumeColumn" msprop:Generator_UserColumnName="Volume" type="xs:int" minOccurs="0" />
+              <xs:element name="MonthNumber" msprop:Generator_ColumnVarNameInTable="columnMonthNumber" msprop:Generator_ColumnPropNameInRow="MonthNumber" msprop:Generator_ColumnPropNameInTable="MonthNumberColumn" msprop:Generator_UserColumnName="MonthNumber" type="xs:int" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="accomplishmentReport" msprop:Generator_TableClassName="accomplishmentReportDataTable" msprop:Generator_TableVarName="tableaccomplishmentReport" msprop:Generator_TablePropName="accomplishmentReport" msprop:Generator_RowDeletingName="accomplishmentReportRowDeleting" msprop:Generator_RowChangingName="accomplishmentReportRowChanging" msprop:Generator_RowEvHandlerName="accomplishmentReportRowChangeEventHandler" msprop:Generator_RowDeletedName="accomplishmentReportRowDeleted" msprop:Generator_UserTableName="accomplishmentReport" msprop:Generator_RowChangedName="accomplishmentReportRowChanged" msprop:Generator_RowEvArgName="accomplishmentReportRowChangeEvent" msprop:Generator_RowClassName="accomplishmentReportRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="gearused" msprop:Generator_ColumnVarNameInTable="columngearused" msprop:Generator_ColumnPropNameInRow="gearused" msprop:Generator_ColumnPropNameInTable="gearusedColumn" msprop:Generator_UserColumnName="gearused" type="xs:string" minOccurs="0" />
+              <xs:element name="noofboatslanded" msprop:Generator_ColumnVarNameInTable="columnnoofboatslanded" msprop:Generator_ColumnPropNameInRow="noofboatslanded" msprop:Generator_ColumnPropNameInTable="noofboatslandedColumn" msprop:Generator_UserColumnName="noofboatslanded" type="xs:string" minOccurs="0" />
+              <xs:element name="totalboatscatch" msprop:Generator_ColumnVarNameInTable="columntotalboatscatch" msprop:Generator_ColumnPropNameInRow="totalboatscatch" msprop:Generator_ColumnPropNameInTable="totalboatscatchColumn" msprop:Generator_UserColumnName="totalboatscatch" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
       </xs:choice>
     </xs:complexType>
     <xs:unique name="Constraint1" msdata:PrimaryKey="true">

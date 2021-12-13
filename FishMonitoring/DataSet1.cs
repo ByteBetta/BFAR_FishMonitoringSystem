@@ -4,6 +4,18 @@
 
     partial class DataSet1
     {
+        partial class accomplishmentReportDataTable
+        {
+        }
+
+        partial class ChartReportMonthlyDataTable
+        {
+        }
+
+        partial class ChartReportDataTable
+        {
+        }
+
         partial class transactionDTDataTable
         {
         }

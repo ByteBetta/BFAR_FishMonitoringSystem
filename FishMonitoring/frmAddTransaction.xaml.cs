@@ -278,7 +278,7 @@ namespace WpfPosApp
                 string dealersName = txtDCName.Text;
                 DealersBLL dc = dDAL.getIDofFisherman(dealersName);
 
-                transaction.DealID = dc.DealID;
+               // transaction.DealID = dc.DealID;
                 transaction.transactiondate = DateTime.Now;
                 transaction.transno = lblTransNoUnit.Content.ToString();
                 transaction.remark = txtRemark.ToString();
@@ -289,7 +289,7 @@ namespace WpfPosApp
                 {
                     int TransactionID = -1;
                     //Create a boolean value and insert transaction
-                    bool w = tDAL.Insert_Transaction(transaction, out TransactionID);
+                    //bool w = tDAL.Insert_Transaction(transaction, out TransactionID);
 
                     //Use for loop to insert Transaction Details
                     for (int i = 0; i < transactionDT.Rows.Count; i++)
@@ -314,7 +314,7 @@ namespace WpfPosApp
                         //Insert Transaction Details inside the database
                         bool y = tdDAL.InsertTransDetails(transactionDetail);
 
-                        success = w && y;
+                      //  success = w && y;
                     }
 
                     if (success == true)

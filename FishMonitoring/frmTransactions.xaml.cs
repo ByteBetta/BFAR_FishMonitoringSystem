@@ -47,7 +47,7 @@ namespace WpfPosApp
 
         }
 
-        TransDetailsDAL tdal = new TransDetailsDAL();
+        TransactionDAL tdal = new TransactionDAL();
         DealersDAL ddal = new DealersDAL();
 
         private void btnShowAll_Click(object sender, RoutedEventArgs e)
@@ -100,7 +100,7 @@ namespace WpfPosApp
                 string s2 = dtpPicker2.SelectedDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
                 //Write the SQL Query to Display all Transactions
-                string sql = "SELECT TransDetID [ID], fisherman [Fisherman], vessels [vessels], added_date [Transaction Time], transno [Transaction Number] FROM TransDetails WHERE added_date between '" + s1 + "' and '" + s2 + "'";
+                string sql = "SELECT tblTransaction.transno, Login.UserName,  tblTransaction.gearUsed, tblTransaction.landingSite, tblTransaction.vessels FROM tblTransaction INNER JOIN Login ON tblTransaction.added_by = Login.UserID WHERE tblTransaction.transaction_date between '" + s1 + "' and '" + s2 + "'" ;
 
                 //SQLCommand to Execute Query
                 SqlCommand cmd = new SqlCommand(sql, db.con);
@@ -139,19 +139,80 @@ namespace WpfPosApp
 
             Query allrecords = firestoreDatabase.Collection("records");
             QuerySnapshot allrecordssnapshot = await allrecords.GetSnapshotAsync();
+
             foreach (DocumentSnapshot documentSnapshot in allrecordssnapshot.Documents)
             {
-                
-                Console.WriteLine("Document data for {0} document:", documentSnapshot.Id);
-                Dictionary<string, object> city = documentSnapshot.ToDictionary();
-                foreach (KeyValuePair<string, object> pair in city)
+                string sql = "SELECT COUNT(*) FROM tblTransaction WHERE transno = '" + documentSnapshot.Id + "'";
+
+                //SQLCommand to Execute Query
+                SqlCommand cmd = new SqlCommand(sql, db.con);
+
+                //SqlDataAdapter to Hold The Data from DataBase
+                db.con.Open();
+                int idExist = (int)cmd.ExecuteScalar();
+                db.con.Close();
+                if (idExist > 0)
                 {
-                    Console.WriteLine("{0}: {1}", pair.Key, pair.Value);
-                   
-                   
+
                 }
-                Console.WriteLine("");
+                else
+                {
+                    TransactionBLL tbll = new TransactionBLL();
+                    tbll.transno = documentSnapshot.Id;
+                    tbll.remark = "";
+                    Console.WriteLine("Document data for {0} document:", documentSnapshot.Id);
+                    Dictionary<string, object> city = documentSnapshot.ToDictionary();
+                    foreach (KeyValuePair<string, object> pair in city)
+                    {
+                        if (nameof(tbll.added_by) == pair.Key.ToString().ToLower())
+                        {
+                            tbll.added_by = int.Parse(pair.Value.ToString());
+                        }
+                        if ("Boat" == pair.Key.ToString())
+                        {
+                            tbll.vessels = pair.Value.ToString();
+                        }
+                        if ("Date" == pair.Key.ToString())
+                        {
+                            tbll.transactiondate = Convert.ToDateTime(pair.Value.ToString());
+                        }
+                        if ("Fisherman" == pair.Key.ToString())
+                        {
+                            tbll.fisherman = pair.Value.ToString();
+                        }
+                        if ("GearUsed" == pair.Key.ToString())
+                        {
+                            tbll.gearUsed = pair.Value.ToString();
+                        }
+                        if ("LandingSite" == pair.Key.ToString())
+                        {
+                            tbll.landingSite = pair.Value.ToString();
+                        }
+                        if ("NumberofBoxes" == pair.Key.ToString())
+                        {
+                            tbll.totalBox = Convert.ToDecimal(pair.Value.ToString());
+                        }
+                        if ("NumberofBoxesSample" == pair.Key.ToString())
+                        {
+                            tbll.totalSampleBox = Convert.ToDecimal(pair.Value.ToString());
+                        }
+                        if ("TotalSampleWeight" == pair.Key.ToString())
+                        {
+                            tbll.totalSampleWeightBox = Convert.ToDecimal(pair.Value.ToString());
+                        }
+                        if ("TotalWeight" == pair.Key.ToString())
+                        {
+                            tbll.totalWeightBox = Convert.ToDecimal(pair.Value.ToString());
+                        }
+                    }
+
+                    TransactionDAL ttdal = new TransactionDAL();
+                    ttdal.Insert_Transaction(tbll);
+                    Console.WriteLine("");
+
+                }
             }
+
 
             Query allfishdata = firestoreDatabase.Collection("fishdata");
             QuerySnapshot allfishdatalist = await allfishdata.GetSnapshotAsync();
@@ -225,12 +286,14 @@ namespace WpfPosApp
                     Console.WriteLine("");
                    
                 }
-                MessageBox.Show("Retrival Success");
+               
 
 
             }
 
-          
+            MessageBox.Show("Retrival Success");
+
+
 
 
 

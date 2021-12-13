@@ -41,7 +41,7 @@
             this.panel1.Controls.Add(this.btnClose);
             this.panel1.Location = new System.Drawing.Point(0, 0);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(858, 29);
+            this.panel1.Size = new System.Drawing.Size(1066, 35);
             this.panel1.TabIndex = 4;
             // 
             // btnClose
@@ -51,26 +51,30 @@
             this.btnClose.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.btnClose.FlatAppearance.BorderSize = 0;
             this.btnClose.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnClose.Location = new System.Drawing.Point(829, 6);
+            this.btnClose.Location = new System.Drawing.Point(1032, 0);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(16, 16);
+            this.btnClose.Size = new System.Drawing.Size(31, 32);
             this.btnClose.TabIndex = 1;
             this.btnClose.UseVisualStyleBackColor = false;
             this.btnClose.Click += new System.EventHandler(this.BtnClose_Click);
             // 
             // reportViewer1
             // 
-            this.reportViewer1.Location = new System.Drawing.Point(12, 49);
+            this.reportViewer1.AutoSize = true;
+            this.reportViewer1.DocumentMapWidth = 1;
+            this.reportViewer1.Location = new System.Drawing.Point(9, 47);
+            this.reportViewer1.Margin = new System.Windows.Forms.Padding(0);
             this.reportViewer1.Name = "reportViewer1";
             this.reportViewer1.ServerReport.BearerToken = null;
-            this.reportViewer1.Size = new System.Drawing.Size(833, 389);
+            this.reportViewer1.Size = new System.Drawing.Size(1057, 416);
             this.reportViewer1.TabIndex = 3;
+            this.reportViewer1.Load += new System.EventHandler(this.reportViewer1_Load);
             // 
             // frmRecordsReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(858, 450);
+            this.ClientSize = new System.Drawing.Size(1075, 472);
             this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.reportViewer1);
@@ -79,6 +83,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 

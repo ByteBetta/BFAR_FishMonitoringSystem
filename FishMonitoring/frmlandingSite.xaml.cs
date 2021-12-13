@@ -72,7 +72,7 @@ namespace WpfPosApp
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             //Get the values from Categroy Form
-            c.title = txtlandingTitle.Text;
+            c.title = txtlandingTitle.Text.Trim();
             c.description = txtlandingDescription.Text;
             c.added_date = DateTime.Now;
 
@@ -124,7 +124,7 @@ namespace WpfPosApp
         {
             //Get the Values from the CAtegory form
             c.landingSiteID = int.Parse(txtlandingSiteID.Text);
-            c.title = txtlandingTitle.Text;
+            c.title = txtlandingTitle.Text.Trim();
             c.description = txtlandingDescription.Text;
             c.added_date = DateTime.Now;
             //Getting ID in Added by field

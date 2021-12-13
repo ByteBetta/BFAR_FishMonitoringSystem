@@ -17,19 +17,23 @@
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
+        <Field Name="date">
+          <DataField>date</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
         <Field Name="Volume">
           <DataField>Volume</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="date">
-          <DataField>date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+        <Field Name="MonthNumber">
+          <DataField>MonthNumber</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>DataSet1</rd:DataSetName>
         <rd:SchemaPath>D:\Projects\BFAR-FishMonitoring\BFAR_FishMonitoring\WpfPosApp\FishMonitoring\DataSet1.xsd</rd:SchemaPath>
-        <rd:TableName>ChartReport</rd:TableName>
+        <rd:TableName>ChartReportMonthly</rd:TableName>
         <rd:TableAdapterFillMethod />
         <rd:TableAdapterGetDataMethod />
         <rd:TableAdapterName />
@@ -44,10 +48,10 @@
             <Source>Embedded</Source>
             <Value>Logo_BFAR</Value>
             <Sizing>FitProportional</Sizing>
-            <Top>0.43972in</Top>
-            <Left>0.8125in</Left>
-            <Height>1.37501in</Height>
-            <Width>1.72916in</Width>
+            <Top>0.25917in</Top>
+            <Left>0.81125in</Left>
+            <Height>1.26042in</Height>
+            <Width>1.5625in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -152,7 +156,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Text</rd:DefaultName>
-            <Top>0.38417in</Top>
+            <Top>0.25917in</Top>
             <Height>1.05208in</Height>
             <Width>9.58333in</Width>
             <ZIndex>1</ZIndex>
@@ -173,7 +177,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>DAILY FISH REPORT</Value>
+                    <Value>MONTHLY FISH REPORT</Value>
                     <Style>
                       <FontFamily>Times New Roman</FontFamily>
                       <FontWeight>Bold</FontWeight>
@@ -187,21 +191,7 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>                                 For the month of </Value>
-                    <Style>
-                      <FontFamily>times New Roman</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>=Parameters!Month.Value</Value>
-                    <Style>
-                      <FontFamily>times New Roman</FontFamily>
-                      <FontWeight>Normal</FontWeight>
-                    </Style>
-                  </TextRun>
-                  <TextRun>
-                    <Value>,</Value>
+                    <Value>                             For the Year of </Value>
                     <Style>
                       <FontFamily>times New Roman</FontFamily>
                       <FontWeight>Normal</FontWeight>
@@ -228,7 +218,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Motnh</rd:DefaultName>
-            <Top>1.70709in</Top>
+            <Top>1.36681in</Top>
             <Height>0.38542in</Height>
             <Width>9.58333in</Width>
             <ZIndex>2</ZIndex>
@@ -369,10 +359,10 @@
                   </Group>
                   <SortExpressions>
                     <SortExpression>
-                      <Value>=Fields!date.Value</Value>
+                      <Value>=Fields!MonthNumber.Value</Value>
                     </SortExpression>
                   </SortExpressions>
-                  <Label>=Format(Fields!date.Value,"dd-MMM-yyyy")</Label>
+                  <Label>=Fields!date.Value</Label>
                 </ChartMember>
               </ChartMembers>
             </ChartCategoryHierarchy>
@@ -396,11 +386,7 @@
                         <UseValueAsLabel>true</UseValueAsLabel>
                         <Visible>true</Visible>
                       </ChartDataLabel>
-                      <Style>
-                        <Border>
-                          <Width>2pt</Width>
-                        </Border>
-                      </Style>
+                      <Style />
                       <ChartMarker>
                         <Style />
                       </ChartMarker>
@@ -440,7 +426,7 @@
                       <Color>#5c5c5c</Color>
                     </Style>
                     <ChartAxisTitle>
-                      <Caption>Date</Caption>
+                      <Caption>Month</Caption>
                       <Style>
                         <FontSize>9pt</FontSize>
                         <Color>#5c5c5c</Color>
@@ -683,7 +669,7 @@
             </ChartLegends>
             <ChartTitles>
               <ChartTitle Name="Default">
-                <Caption>Fish Volume Daily</Caption>
+                <Caption>Fish Volume Monthly</Caption>
                 <Style>
                   <BackgroundGradientType>None</BackgroundGradientType>
                   <FontSize>9pt</FontSize>
@@ -713,10 +699,10 @@
               </Style>
             </ChartNoDataMessage>
             <DataSetName>DataSet1</DataSetName>
-            <Top>3.48833in</Top>
+            <Top>3.64111in</Top>
             <Left>0.33208in</Left>
-            <Height>2.91666in</Height>
-            <Width>7.08335in</Width>
+            <Height>3in</Height>
+            <Width>7.84377in</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -872,11 +858,45 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>ReportParameter1</rd:DefaultName>
-            <Top>6.52999in</Top>
+            <Top>6.81124in</Top>
             <Left>0.33208in</Left>
             <Height>2.31375in</Height>
-            <Width>2.85417in</Width>
+            <Width>2.84375in</Width>
             <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Type">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!Type.Value</Value>
+                    <Style>
+                      <FontFamily>times New Roman</FontFamily>
+                      <FontSize>14pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Type</rd:DefaultName>
+            <Top>3.19667in</Top>
+            <Height>0.375in</Height>
+            <Width>9.58333in</Width>
+            <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -912,10 +932,6 @@
       <DataType>String</DataType>
       <Nullable>true</Nullable>
       <AllowBlank>true</AllowBlank>
-      <Prompt>ReportParameter1</Prompt>
-    </ReportParameter>
-    <ReportParameter Name="Month">
-      <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="Year">
@@ -962,11 +978,17 @@
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter2</Prompt>
     </ReportParameter>
+    <ReportParameter Name="Type">
+      <DataType>String</DataType>
+      <Nullable>true</Nullable>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter2</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
       <NumberOfColumns>4</NumberOfColumns>
-      <NumberOfRows>3</NumberOfRows>
+      <NumberOfRows>4</NumberOfRows>
       <CellDefinitions>
         <CellDefinition>
           <ColumnIndex>0</ColumnIndex>
@@ -977,11 +999,6 @@
           <ColumnIndex>1</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>Motnh</ParameterName>
-        </CellDefinition>
-        <CellDefinition>
-          <ColumnIndex>2</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>Month</ParameterName>
         </CellDefinition>
         <CellDefinition>
           <ColumnIndex>3</ColumnIndex>
@@ -1027,6 +1044,11 @@
           <ColumnIndex>3</ColumnIndex>
           <RowIndex>2</RowIndex>
           <ParameterName>USER</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>3</RowIndex>
+          <ParameterName>Type</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

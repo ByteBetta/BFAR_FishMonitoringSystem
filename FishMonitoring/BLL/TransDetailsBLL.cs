@@ -22,10 +22,7 @@ namespace Project.BLL
         public string gearUsed { get; set; }
         public string vessels { get; set; }
         public string fisherman { get; set; }
-        public int noofboxes { get; set; }
-        public int totalweightboxes { get; set; }
-        public int noSofBoxes { get; set; }
-        public int twweightsboxes { get; set; }
+     
 
     }
 }

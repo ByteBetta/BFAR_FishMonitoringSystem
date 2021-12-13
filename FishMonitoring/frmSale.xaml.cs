@@ -358,7 +358,7 @@ namespace WpfPosApp
                 {
                     int TransactionID = -1;
                     //Create a boolean value and insert transaction
-                    bool w = tDAL.Insert_Transaction(transaction, out TransactionID);
+                   // bool w = tDAL.Insert_Transaction(transaction, out TransactionID);
 
                     //Use for loop to insert Transaction Details
                     for (int i = 0; i < transactionDT.Rows.Count; i++)
@@ -396,7 +396,7 @@ namespace WpfPosApp
                         //Insert Transaction Details inside the database
                         bool y = tdDAL.InsertTransDetails(transactionDetail);
 
-                        success = w && x && y;
+                     //   success = w && x && y;
                     }
 
                     if (success == true)
