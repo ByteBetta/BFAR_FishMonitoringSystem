@@ -28,7 +28,75 @@
                                  VerticalAlignment="Center"
                                  HorizontalAlignment="Center"
                                  Foreground="Gray" Width="14" Height="14" RenderTransformOrigin="0.5,0.5"/>
-        <DataGrid x:Name="gridTransaction" HorizontalAlignment="Left" Margin="0,124,0,-15" VerticalAlignment="Top" Height="326" Width="743" BorderBrush="#00000000" Background="White" MaxColumnWidth="200" />
+        <DataGrid x:Name="gridTransaction" HorizontalAlignment="Left" IsReadOnly="True" Margin="0,124,0,-15" VerticalAlignment="Top" Height="326" Width="743" BorderBrush="#00000000" Background="White" MaxColumnWidth="200" AutoGenerateColumns="False" SelectionChanged="GridTransaction_SelectionChanged" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Transaction Number" Binding="{Binding transno}"></DataGridTextColumn>
+                <DataGridTextColumn Header="User Name" Binding="{Binding UserName}"></DataGridTextColumn>
+                <DataGridTextColumn Header="First Name" Binding="{Binding firstname}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Last Name" Binding="{Binding lastname}"></DataGridTextColumn>
+                <DataGridTextColumn Header="User Type" Binding="{Binding UserType}"></DataGridTextColumn>
+            </DataGrid.Columns>
+            <DataGrid.RowDetailsTemplate >
+                <DataTemplate >
+                    <Border BorderThickness="0" Background="BlanchedAlmond" Padding="10">
+                        <StackPanel Orientation="Vertical">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Fisherman: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="12" Text="{Binding fisherman}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Transaction Date: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="12" Text="{Binding transaction_date}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Vessel: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="12" Text="{Binding vessels}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Gear: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="12" Text="{Binding gearUsed}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Landing Site: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="12" Text="{Binding landingSite}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Total Box: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="12" Text="{Binding totalBox}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Total Sample Box: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="12" Text="{Binding totalSampleBox}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Total Weight Box: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="12" Text="{Binding totalWeightBox}" VerticalAlignment="Center" />
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="12" Text="Total Sample Weight Box: " VerticalAlignment="Center" />
+                                <TextBlock FontSize="12" Text="{Binding totalSampleWeightBox}" VerticalAlignment="Center" />
+                            </StackPanel>
+
+                            <StackPanel  Orientation="Horizontal">
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock FontSize="12" Text="Species List" VerticalAlignment="Center" />
+                                    <TextBlock FontSize="12" x:Name="txtSpecies" Text="Species: " VerticalAlignment="Center" />
+                                    <TextBlock FontSize="12"   Text="test: " VerticalAlignment="Center" />
+                                </StackPanel>
+                                <StackPanel Orientation="Vertical">
+                                    <TextBlock FontSize="12" Text="weight: " VerticalAlignment="Center" />
+                                    <TextBlock FontSize="12" Text="weight: " VerticalAlignment="Center" />
+                                </StackPanel>
+                            </StackPanel>
+                            
+                        </StackPanel>
+                      
+                    </Border>
+                    
+                </DataTemplate>
+               
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
         <Label x:Name="lblFilterByDate" Content="Filter By Date(From - To)" Margin="30,82,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148"/>
         <Border Margin="175,79,413,328" Background="#FF5F8DF7" CornerRadius="7"/>
         <Border Margin="335,79,253,328" Background="#FF5F8DF7" CornerRadius="7"/>

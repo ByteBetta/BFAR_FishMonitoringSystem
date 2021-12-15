@@ -98,7 +98,7 @@ namespace WpfPosApp
                         System.Windows.Forms.MessageBox.Show("Account is inactive. Unable to Login", "Inactive Account", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Warning);
                         return;
                     }
-                    if (_role == "Admin")
+                    if (_role == "Admin" || _role == "Super Admin")
                     {
 
                         Main m = new Main();

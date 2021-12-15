@@ -100,7 +100,7 @@ namespace WpfPosApp
                 string s2 = dtpPicker2.SelectedDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
                 //Write the SQL Query to Display all Transactions
-                string sql = "SELECT tblTransaction.transno, Login.UserName,  tblTransaction.gearUsed, tblTransaction.landingSite, tblTransaction.vessels FROM tblTransaction INNER JOIN Login ON tblTransaction.added_by = Login.UserID WHERE tblTransaction.transaction_date between '" + s1 + "' and '" + s2 + "'" ;
+                string sql = "SELECT tblTransaction.transno, Login.UserName, tblTransaction.totalBox,  tblTransaction.gearUsed, tblTransaction.landingSite, tblTransaction.vessels FROM tblTransaction INNER JOIN Login ON tblTransaction.added_by = Login.UserID WHERE tblTransaction.transaction_date between '" + s1 + "' and '" + s2 + "'" ;
 
                 //SQLCommand to Execute Query
                 SqlCommand cmd = new SqlCommand(sql, db.con);
@@ -297,6 +297,23 @@ namespace WpfPosApp
 
 
 
+        }
+
+        private void GridTransaction_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                DataGrid gd = (DataGrid)sender;
+                DataRowView row_selected = gd.SelectedItem as DataRowView;
+                if (row_selected != null)
+                {
+                    Console.WriteLine(row_selected["transno"].ToString());
+                }
+            }
+            catch (Exception es)
+            {
+                MessageBox.Show(es.ToString());
+            }
         }
     }
 }

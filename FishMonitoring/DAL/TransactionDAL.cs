@@ -86,7 +86,11 @@ namespace Project.DAL
             try
             {
                 //Write the SQL Query to Display all Transactions
-                string sql = "SELECT tblTransaction.transno, Login.UserName FROM tblTransaction INNER JOIN Login ON tblTransaction.added_by = Login.UserID";
+                string sql = "SELECT " +
+                    " tblTransaction.transno, tblTransaction.totalBox, Login.UserName, Login.Name as firstname, Login.Surname as lastname, " +
+                    " Login.UserType, tblTransaction.fisherman, tblTransaction.transaction_date, tblTransaction.vessels, tblTransaction.gearUsed," +
+                    " tblTransaction.landingSite, tblTransaction.totalSampleBox, tblTransaction.totalWeightBox, tblTransaction.totalSampleWeightBox " +
+                    " FROM tblTransaction INNER JOIN Login ON tblTransaction.added_by = Login.UserID ";
 
                 //SQLCommand to Execute Query
                 SqlCommand cmd = new SqlCommand(sql, db.con);

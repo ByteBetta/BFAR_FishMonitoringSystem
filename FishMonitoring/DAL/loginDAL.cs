@@ -70,7 +70,7 @@ namespace Project.DAL
 
             try
             {
-                string sql = "SELECT UserID FROM Login WHERE UserName='" + username + "'";
+                string sql = "SELECT UserID, UserType FROM Login WHERE UserName='" + username + "'";
 
                 SqlDataAdapter adapter = new SqlDataAdapter(sql, db.con);
                 db.con.Open();
@@ -79,6 +79,7 @@ namespace Project.DAL
                 if (dt.Rows.Count > 0)
                 {
                     u.UserID = int.Parse(dt.Rows[0]["UserID"].ToString());
+                    u.UserType = dt.Rows[0]["UserType"].ToString();
                 }
             }
             catch (Exception ex)

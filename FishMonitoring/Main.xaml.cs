@@ -17,6 +17,7 @@ using LiveCharts.Defaults;
 using LiveCharts.Wpf;
 using System.Data;
 using System.IO;
+using Project.DAL;
 
 namespace WpfPosApp
 {
@@ -91,10 +92,19 @@ namespace WpfPosApp
         
         private void frmUser_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            frmUser user = new frmUser();
-            pnlMain.Children.Clear();
-            pnlMain.Children.Add(user); 
-            
+            Console.WriteLine(getUser().ToString());
+
+            if (getUser().ToString() != "Super Admin")
+            {
+                MessageBox.Show("You dont have permission to open this");
+            }
+            else
+            {
+                frmUser user = new frmUser();
+                pnlMain.Children.Clear();
+                pnlMain.Children.Add(user);
+            }
+
         }
 
 
@@ -284,9 +294,53 @@ namespace WpfPosApp
 
         private void ListViewItem_Selected(object sender, RoutedEventArgs e)
         {
-            frmUser user = new frmUser();
-            pnlMain.Children.Clear();
-            pnlMain.Children.Add(user);
+            Console.WriteLine(getUser().ToString());
+          
+            if(getUser().ToString() != "Super Admin")
+            {
+                MessageBox.Show("You dont have permission to open this");
+            } else
+            {
+                frmUser user = new frmUser();
+                pnlMain.Children.Clear();
+                pnlMain.Children.Add(user);
+            }
+          
+        }
+
+
+        private string getUser()
+        {
+            try
+            {
+                int userid = frmLogin._id;
+
+                dbcon.con.Open();
+                string sqlquery = "SELECT Name, Surname, UserName, UserType, Birth_Date FROM Login WHERE UserID = " + userid.ToString();
+
+                SqlCommand command = new SqlCommand(sqlquery, dbcon.con);
+
+                SqlDataReader sdr = command.ExecuteReader();
+
+                while (sdr.Read())
+                {
+                   
+                
+                    return sdr["UserType"].ToString();
+                }
+                dbcon.con.Close();
+
+                return sdr["UserType"].ToString();
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
+            finally
+            {
+                dbcon.con.Close();
+            }
+
         }
 
         private void ListViewItem_Selected_1(object sender, RoutedEventArgs e)
