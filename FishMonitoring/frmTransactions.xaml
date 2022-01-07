@@ -15,7 +15,7 @@
         </Border>
         <Label Content="Transactions" Margin="58,7,594,402" Foreground="#FF5E89FA" FontSize="14" FontWeight="Bold"/>
 
-        <Button x:Name="btnPrintFiltered" Content="     Print Filtered" Margin="612,79,0,0" VerticalAlignment="Top" Width="120" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnPrintFiltered_Click">
+        <Button x:Name="btnPrintFiltered" Visibility="Hidden" Content="     Print Filtered" Margin="612,79,0,0" VerticalAlignment="Top" Width="120" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="btnPrintFiltered_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
@@ -76,7 +76,7 @@
                                 <TextBlock FontSize="12" Text="Total Sample Weight Box: " VerticalAlignment="Center" />
                                 <TextBlock FontSize="12" Text="{Binding totalSampleWeightBox}" VerticalAlignment="Center" />
                             </StackPanel>
-
+<!--
                             <StackPanel  Orientation="Horizontal">
                                 <StackPanel Orientation="Vertical">
                                     <TextBlock FontSize="12" Text="Species List" VerticalAlignment="Center" />
@@ -88,21 +88,29 @@
                                     <TextBlock FontSize="12" Text="weight: " VerticalAlignment="Center" />
                                 </StackPanel>
                             </StackPanel>
-                            
+                            -->
+
                         </StackPanel>
-                      
+
                     </Border>
-                    
+
                 </DataTemplate>
-               
+
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
-        <Label x:Name="lblFilterByDate" Content="Filter By Date(From - To)" Margin="30,82,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148"/>
-        <Border Margin="175,79,413,328" Background="#FF5F8DF7" CornerRadius="7"/>
-        <Border Margin="335,79,253,328" Background="#FF5F8DF7" CornerRadius="7"/>
-        <DatePicker x:Name="dtpPicker1" x:FieldModifier="public" HorizontalAlignment="Left" Margin="183,79,0,0" VerticalAlignment="Top" Width="137" FirstDayOfWeek="Monday" BorderBrush="White"/>
-        <DatePicker x:Name="dtpPicker2" x:FieldModifier="public" HorizontalAlignment="Left" Margin="345,79,0,0" VerticalAlignment="Top" Width="137" FirstDayOfWeek="Monday" BorderBrush="White"/>
-        <Button x:Name="btnLoad" Content="Load" Margin="507,79,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="BtnLoad_Click">
+        <Label x:Name="lblFilterByDate" Content="Filter By Date(From - To)" Margin="10,83,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="148"/>
+        <Border Margin="149,81,453,326" Background="#FF5F8DF7" CornerRadius="7"/>
+        <Border Margin="293,81,299,326" Background="#FF5F8DF7" CornerRadius="7"/>
+        <DatePicker x:Name="dtpPicker1" x:FieldModifier="public" HorizontalAlignment="Left" Margin="159,81,0,0" VerticalAlignment="Top" Width="127" FirstDayOfWeek="Monday" BorderBrush="White"/>
+        <DatePicker x:Name="dtpPicker2" x:FieldModifier="public" HorizontalAlignment="Left" Margin="298,81,0,0" VerticalAlignment="Top" Width="137" FirstDayOfWeek="Monday" BorderBrush="White"/>
+        <Border Margin="529,80,107,327" Background="#FF5F8DF7" CornerRadius="7">
+            <ComboBox x:Name="cmbUser" HorizontalAlignment="Right" Height="26"  VerticalAlignment="Top" Width="92"  Foreground="White" BorderBrush="White" BorderThickness="0" Margin="0,1,5,0">
+
+            </ComboBox>
+
+
+        </Border>
+        <Button x:Name="btnLoad" Content="Load" Margin="643,79,0,0" VerticalAlignment="Top" Width="100" Height="30" Background="#FF5E89FA" HorizontalAlignment="Left" Click="BtnLoad_Click">
             <Button.Template>
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border BorderBrush="White" BorderThickness="2" Background="{TemplateBinding Background}" CornerRadius="15" UseLayoutRounding="True" d:DesignUseLayoutRounding="True">
@@ -120,7 +128,7 @@
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385"/>
-        <iconPacks:PackIconMaterial Margin="624,87,107,335" Kind="Printer"
+        <iconPacks:PackIconMaterial Margin="659,88,72,334" Kind="Database"
             VerticalAlignment="Center"
             HorizontalAlignment="Center"
             Foreground="White" Width="12" Height="13" RenderTransformOrigin="0.462,0.385"/>
@@ -133,6 +141,7 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <Label x:Name="lblFilterByDate_Copy" Content="Select User: " Margin="452,84,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75"/>
 
     </Grid>
 </UserControl>

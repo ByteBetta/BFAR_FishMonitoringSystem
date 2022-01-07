@@ -957,7 +957,7 @@ namespace WpfPosApp
                 }
                 if (cmblandingsite2.Text != "All Sites")
                 {
-                    landingsite = " c.landingSite = '" + cmblandingsite2.Text + "'";
+                    landingsite = "AND c.landingSite = '" + cmblandingsite2.Text + "'";
                 }
 
                 Console.WriteLine(fisherman);
@@ -1056,7 +1056,7 @@ namespace WpfPosApp
                 }
                 if (cmblandingsite2.Text != "All Sites")
                 {
-                    landingsite = " c.landingSite = '" + cmblandingsite2.Text + "'";
+                    landingsite = "AND c.landingSite = '" + cmblandingsite2.Text + "'";
                 }
 
         

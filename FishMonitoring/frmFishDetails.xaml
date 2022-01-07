@@ -49,7 +49,7 @@
             </TextBox.Resources>
         </TextBox>
 
-        <TextBox  ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" x:Name="txtShortDescription" HorizontalAlignment="Left" Margin="25,264,0,21" TextWrapping="Wrap" Text="" VerticalAlignment="Stretch" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000">
+        <TextBox  ScrollViewer.VerticalScrollBarVisibility="Auto" AcceptsReturn="True" x:Name="txtShortDescription"  Margin="24,256,359,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="351" BorderThickness="1" FontSize="11" BorderBrush="#33000000" Height="63">
             <TextBox.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="4"/>

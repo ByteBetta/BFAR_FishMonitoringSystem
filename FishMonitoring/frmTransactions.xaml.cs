@@ -1,4 +1,5 @@
-﻿using Fish.BLL;
+﻿using Dapper;
+using Fish.BLL;
 using Google.Cloud.Firestore;
 using Project.BLL;
 using Project.DAL;
@@ -20,6 +21,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfPosApp.BLL;
 using WpfPosApp.DAL;
 
 namespace WpfPosApp
@@ -40,10 +42,23 @@ namespace WpfPosApp
         {
             InitializeComponent();
             cn = new SqlConnection(db.MyCon());
-            dtpPicker1.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
-            dtpPicker2.Foreground = new SolidColorBrush(Color.FromRgb(255, 255, 255));
+            dtpPicker1.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
+            dtpPicker2.Foreground = new SolidColorBrush(Color.FromRgb(0, 0, 0));
             dtpPicker1.SelectedDate = DateTime.Now;
-            dtpPicker2.SelectedDate = DateTime.Now.AddDays(+1);            
+            dtpPicker2.SelectedDate = DateTime.Now.AddDays(+1);
+
+            List<string> userdata = new List<string> { "All Users" };
+            db.con.Open();
+            string cmd = "Select UserName from Login";
+            IList<UserBLL> userholder = db.con.Query<UserBLL>(cmd).ToList();
+            db.con.Close();
+
+            foreach (var user in userholder)
+            {
+                userdata.Add(user.UserName);
+            }
+
+            cmbUser.ItemsSource = userdata;
 
         }
 
@@ -89,7 +104,7 @@ namespace WpfPosApp
        }
 
 
-       public void LoadRecord()
+       public void LoadRecord(string user)
         {
             
 
@@ -100,7 +115,13 @@ namespace WpfPosApp
                 string s2 = dtpPicker2.SelectedDate.Value.ToString("yyyy-MM-dd HH:mm:ss");
 
                 //Write the SQL Query to Display all Transactions
-                string sql = "SELECT tblTransaction.transno, Login.UserName, tblTransaction.totalBox,  tblTransaction.gearUsed, tblTransaction.landingSite, tblTransaction.vessels FROM tblTransaction INNER JOIN Login ON tblTransaction.added_by = Login.UserID WHERE tblTransaction.transaction_date between '" + s1 + "' and '" + s2 + "'" ;
+                string sql = "SELECT " +
+                    " tblTransaction.transno, tblTransaction.totalBox, Login.UserName, Login.Name as firstname, Login.Surname as lastname, " +
+                    " Login.UserType, tblTransaction.fisherman, tblTransaction.transaction_date, tblTransaction.vessels, tblTransaction.gearUsed," +
+                    " tblTransaction.landingSite, tblTransaction.totalSampleBox, tblTransaction.totalWeightBox, tblTransaction.totalSampleWeightBox " +
+                    " FROM tblTransaction INNER JOIN Login ON tblTransaction.added_by = Login.UserID " +
+                " WHERE tblTransaction.transaction_date between '" + s1 + "' and '" + s2 + "'" +
+                user.ToString();
 
                 //SQLCommand to Execute Query
                 SqlCommand cmd = new SqlCommand(sql, db.con);
@@ -128,7 +149,20 @@ namespace WpfPosApp
 
         private void BtnLoad_Click(object sender, RoutedEventArgs e)
         {
-            LoadRecord();
+            if(dtpPicker1.Text == String.Empty || dtpPicker2.Text == String.Empty || cmbUser.Text == String.Empty)
+            {
+                System.Windows.Forms.MessageBox.Show("Please Select Items From The DropDown List.", "Warning", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Exclamation);
+            } else
+            {
+                string holder = "";
+                if (cmbUser.Text != "All Users")
+                {
+                    holder = " AND Login.UserName = '" + cmbUser.Text + "'";
+                    LoadRecord(holder);
+                }
+                
+            }
+            
         }
 
         private async void BtnRetrievedData_Click(object sender, RoutedEventArgs e)

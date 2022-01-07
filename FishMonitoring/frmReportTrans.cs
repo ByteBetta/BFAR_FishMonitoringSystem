@@ -54,8 +54,14 @@ namespace WpfPosApp
                 DataSet1 ds = new DataSet1();
                 SqlDataAdapter da = new SqlDataAdapter();
 
+                string execute = "SELECT " +
+                    " tblTransaction.transno, tblTransaction.totalBox, Login.UserName, Login.Name as firstname, Login.Surname as lastname, " +
+                    " Login.UserType, tblTransaction.fisherman, tblTransaction.transaction_date, tblTransaction.vessels, tblTransaction.gearUsed," +
+                    " tblTransaction.landingSite, tblTransaction.totalSampleBox, tblTransaction.totalWeightBox, tblTransaction.totalSampleWeightBox " +
+                    " FROM tblTransaction INNER JOIN Login ON tblTransaction.added_by = Login.UserID " +
+                " WHERE tblTransaction.transaction_date between '" + s1 + "' and '" + s2 + "'";
                 cn.Open();
-                da.SelectCommand = new SqlCommand("SELECT id, type, DealCustID, grandTotal, transaction_date, tax, discount FROM tblTransaction WHERE transaction_date between '" + s1 + "' and '" + s2 + "'", cn);
+                da.SelectCommand = new SqlCommand(execute, cn);
                 da.Fill(ds.Tables["dtTransaction"]);
                 cn.Close();
 
@@ -113,6 +119,11 @@ namespace WpfPosApp
         private void BtnClose_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void reportViewer1_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
