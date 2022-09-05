@@ -14,4 +14,7 @@ Currently the firebase feature not working due to inactivity.
 ## Screenshots
 
 ![App Screenshot](https://github.com/ZoidbergV/BFAR_FishMonitoringSystem/blob/master/FishMonitoring/Images/Screenshot_666.png)
+![App Screenshot](https://github.com/ZoidbergV/BFAR_FishMonitoringSystem/blob/master/FishMonitoring/Images/Screenshot_657.png)
+![App Screenshot](https://github.com/ZoidbergV/BFAR_FishMonitoringSystem/blob/master/FishMonitoring/Images/Screenshot_665.png)
+![App Screenshot](https://github.com/ZoidbergV/BFAR_FishMonitoringSystem/blob/master/FishMonitoring/Images/Screenshot_663.png)
 
