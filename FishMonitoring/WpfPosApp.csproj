@@ -7,7 +7,7 @@
     <ProjectGuid>{31771691-E0A5-4042-B719-669FCAFA05E3}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>WpfPosApp</RootNamespace>
-    <AssemblyName>WpfPosApp</AssemblyName>
+    <AssemblyName>BFAR Fish Monitoring</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -59,18 +59,7 @@
     <Prefer32Bit>false</Prefer32Bit>
     <LangVersion>7.1</LangVersion>
   </PropertyGroup>
-  <PropertyGroup>
-    <ManifestCertificateThumbprint>E6CF1D78202F3A415B3B655118A63F649D3B0F59</ManifestCertificateThumbprint>
-  </PropertyGroup>
-  <PropertyGroup>
-    <ManifestKeyFile>WpfPosApp_TemporaryKey.pfx</ManifestKeyFile>
-  </PropertyGroup>
-  <PropertyGroup>
-    <GenerateManifests>true</GenerateManifests>
-  </PropertyGroup>
-  <PropertyGroup>
-    <SignManifests>true</SignManifests>
-  </PropertyGroup>
+ 
   <ItemGroup>
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
@@ -580,6 +569,7 @@
     <EmbeddedResource Include="rptProduct.rdlc" />
     <EmbeddedResource Include="rptTop.rdlc" />
     <EmbeddedResource Include="rptUser.rdlc" />
+    <Resource Include="216-2166613_transparent-seafood-png-seafood-icon-png-png-download.ico" />
     <Content Include="bfar-testproj.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

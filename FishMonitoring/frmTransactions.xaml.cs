@@ -106,8 +106,6 @@ namespace WpfPosApp
 
        public void LoadRecord(string user)
         {
-            
-
             DataTable dt = new DataTable();
             try
             {

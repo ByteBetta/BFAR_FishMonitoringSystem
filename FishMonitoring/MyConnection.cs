@@ -16,7 +16,7 @@ namespace WpfPosApp
         SqlCommand cm = new SqlCommand();
         private double dailysales;
         private double monthlysales;
-        private string dominantfish;
+        private string dominantfish = "";
         private double totalsales;
         private int productline;
         private int fishnumber;
@@ -24,8 +24,8 @@ namespace WpfPosApp
         private string vesselcount;
         private int critical;
         private string conn;
-
-
+        
+      
         public MyConnection()
         {
             con = new SqlConnection(System.Configuration.ConfigurationManager.ConnectionStrings["connstring"].ConnectionString);
@@ -33,7 +33,7 @@ namespace WpfPosApp
 
         public string MyCon()
         {
-            conn = @"Data Source=JERRALD\SQLEXPRESS01;Initial Catalog=project;Integrated Security=True; MultipleActiveResultSets = True";
+            conn = @"Data Source=LAPTOP-BPIRAN9O\SQLEXPRESS;Initial Catalog=project;Integrated Security=True; MultipleActiveResultSets = True";
             return conn;
         }
 
@@ -46,6 +46,7 @@ namespace WpfPosApp
             DateTime dt = DateTime.Now;
             dt = dt.AddDays(-1);
             string s2 = dt.ToString("yyyy-MM-dd HH:mm:ss");
+
             cn = new SqlConnection(conn);
             cn.ConnectionString = conn;
             cn.Open();
@@ -64,6 +65,7 @@ namespace WpfPosApp
             DateTime dtm = DateTime.Now;
             dtm = dtm.AddDays(-30);
             string st2 = dtm.ToString("yyyy-MM-dd HH:mm:ss");
+
             cn = new SqlConnection(conn);
             cn.ConnectionString = conn;
             cn.Open();
@@ -107,7 +109,7 @@ namespace WpfPosApp
             cn = new SqlConnection(conn);
             cn.ConnectionString = conn;
             cn.Open();
-            cm = new SqlCommand("SELECT Count(*) FROM Fisherman", cn);
+            cm = new SqlCommand("SELECT Count(*) FROM Dealers", cn);
             fishermannumber = int.Parse(cm.ExecuteScalar().ToString());
             cn.Close();
             return fishermannumber;
@@ -125,7 +127,8 @@ namespace WpfPosApp
            
         }
 
-        public string mostDominantFish()
+        /*
+        public  mostDominantFish()
         {
             
             string trans_date = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
@@ -136,13 +139,14 @@ namespace WpfPosApp
             cn.ConnectionString = conn;
             cn.Open();
             cm = new SqlCommand("Select TOP (1) Species, Count(Species) as Number from TransDetails where added_date between '" + st2 + "' and '" + trans_date + "'" + " Group by Species ORDER by Number desc", cn);
-            
-            dominantfish = cm.ExecuteScalar().ToString();
+            Console.WriteLine(cm.ExecuteScalar().ToString());
+            //dominantfish = cm.ExecuteScalar().ToString();
             cn.Close();
             Console.WriteLine(dominantfish);
             return dominantfish;
+          
         }
-
+          */
 
         /*  public double ProductLine()
          {
@@ -154,6 +158,7 @@ namespace WpfPosApp
              cn.Close();
              return productline;
          }
+
          public double ProductStock()
          {
              cn = new SqlConnection(conn);
@@ -164,6 +169,7 @@ namespace WpfPosApp
              cn.Close();
              return productstock;
          }
+
          public double CriticalProduct()
          {
              cn = new SqlConnection(conn);

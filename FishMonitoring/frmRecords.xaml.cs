@@ -335,6 +335,7 @@ namespace WpfPosApp
                         lbllw.Content = 0;
                         lblhl.Content = 0;
                         lblhw.Content = 0;
+                        MessageBox.Show("No Data Available");
                     }
                 }
             
@@ -351,6 +352,7 @@ namespace WpfPosApp
               catch (Exception ex)
               {
                   MessageBox.Show(ex.Message);
+                MessageBox.Show("Invalid Input, Please Complete the Field");
               }
               
         }
